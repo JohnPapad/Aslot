@@ -1,0 +1,35 @@
+@import '../../styles/colors';
+@import '../../styles/texts';
+
+
+
+
+#profileImg{
+    border: 3px solid $primColor;
+}
+
+#username{
+    color: $primColor;
+    font-weight: bold;
+}
+
+#importance{
+    color: $primColor;
+    font-weight: bold;
+    font-size: $fontLG;
+}
+
+#description{
+    font-size: $fontSM;
+}
+
+#reportFooter{
+    color: $primColor;
+    font-weight: bold;
+}
+
+.pointer {
+    &:hover{
+        cursor: pointer;
+    }
+}

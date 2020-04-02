@@ -1,0 +1,15 @@
+@import '../../styles/colors';
+
+
+.importanceOption {
+
+    background-color: white;
+    color: $primColor;
+    font-weight: bold;
+
+    &:hover{
+        cursor: pointer;
+        background-color: $primColor;
+        color: white;
+    }
+}

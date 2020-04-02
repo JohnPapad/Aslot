@@ -1,0 +1,38 @@
+@import "../../../styles/colors";
+@import "../../../styles/gradients";
+@import "../../../styles/texts";
+@import "../../../styles/buttons";
+
+#content{
+    // height: 100vh;
+    padding-top: 15vh;
+    padding-bottom: 3vh;
+    color: $primColorDarker !important;
+
+}
+
+#header {
+    font-size: $fontLG;
+    background-color: $primColor;
+}
+
+#signup_form {
+    background-color: white;
+    font-weight: bold;
+    color: $primColorDarker;
+}
+
+#activeTabStyle {
+    color: $primColorDarker ;
+    font-weight: bold;
+    border-color: $primColor;
+    background-color: white;
+    // border-bottom: none !important;
+}
+
+#inactiveTabStyle  {
+    border-color: $secColor;
+    cursor: pointer;
+    background-color: $primColor;
+    color: $primColorDarker;
+}
