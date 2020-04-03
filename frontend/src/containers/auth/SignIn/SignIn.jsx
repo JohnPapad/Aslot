@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import axios from '../../../services/axiosConfig';
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
-import classes from './SignInForm.module.scss';
+import classes from './SignIn.module.scss';
 import { Card, CardHeader, CardBody, Container, Row, Col, Form, Alert, Button} from 'reactstrap';
 import MyInput from '../../../components/UI/MyInput/MyInput';
 // import Header from '../../components/UI/Header/Header';
@@ -223,9 +223,7 @@ class SignIn extends React.Component {
                         <Col className="align-self-center" xs="9" sm="9" md="8" lg="8" style={{paddingLeft : "1%", paddingRight: "1%"}}>
                             <Card id={classes.login_form}>
                                 <CardHeader id={classes.header}>
-                                    {/* <Header> */}
-                                        Sign In
-                                    {/* </Header> */}
+                                    Είσοδος στην πλατφόρμα
                                 </CardHeader>
 
                                 <CardBody>
@@ -234,14 +232,10 @@ class SignIn extends React.Component {
 
                                     <Form onSubmit={this.submitHandler}>
                                         {formFields}
-                                        {/* <Button className="float-right font-weight-bold" id={classes.submit_btn}>Είσοδος</Button> */}
-                                        {/* <button classes="float-right">
-                                            Sign in
-                                        </button> */}
 
                                         <Button className="float-right mt-3" id={classes.submit_btn}>
                                             <span style={{textShadow: "2px 2px 2px black"}}>
-                                                Sign In
+                                                Είσοδος
                                             </span>
                                         </Button>
                                     </Form>
