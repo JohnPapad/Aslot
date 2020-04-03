@@ -44,7 +44,7 @@ class OpeningHours(models.Model):
         unique_together = ('weekday', 'from_hour', 'to_hour')
     
     def __str__(self): # __str__ for Python 3, __unicode__ for Python 2
-        return u'%s: %s - %s' % (self.get_weekday_display(), self.from_hour, self.to_hour)
+        return "here" # u'%s: %s - %s' % (self.get_weekday_display(), self.from_hour, self.to_hour)
 
 class Item(models.Model):
     name = models.CharField(max_length=40)
