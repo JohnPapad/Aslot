@@ -11,6 +11,9 @@ export default function LocationMap(props) {
     const { handleMapClick } = props;
     const style = { height: mapHeight + 'px' };
 
+    console.log(startingLat);
+    console.log(startingLng);
+
     // If the user has clicked on the map, place a marker
     let marker = null
     if (hasLocation) {

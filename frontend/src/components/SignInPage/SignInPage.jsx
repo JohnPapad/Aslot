@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Row, Col } from 'reactstrap';
 
-import SignInForm from '../../containers/auth/SignInForm/SignInForm';
+import SignInForm from '../../containers/auth/SignIn/SignIn';
 
 import bg_city_img from '../../assets/images/my_city_background.svg';
 import classes from './SignInPage.module.scss';

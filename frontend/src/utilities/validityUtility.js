@@ -93,5 +93,29 @@ export const checkValidity = ( value, rules, name ) => {
         }
     }
 
+    if ( rules.isAddress) {
+        const address = value.split(","); 
+        if (address.length != 2) 
+        {
+            return {report: false, msg: "Εισάγετε σωστή διεύθυνση"};
+        }
+
+        const streetNameNum = address[0].split(" ")
+        if (address.length < 2) 
+        {
+            return {report: false, msg: "Εισάγετε σωστή διεύθυνση"};
+        }
+
+        const streetNum = streetNameNum[streetNameNum.length-1]
+        const pattern = /^\d+$/;
+        if (!pattern.test( streetNum ) )
+        {
+            return {report: false, msg: "Εισάγετε σωστή διεύθυνση"};
+        }
+
+        // const municipality = address[1]
+        // console.log(streetNum, municipality)
+    }
+
     return {report: true, msg: ""};
 }
