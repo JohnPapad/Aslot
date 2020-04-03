@@ -1,7 +1,9 @@
 .App {
-    // width: 100vw;
-    // border: 3px solid red;
-    height: 100vh;
+    // height: 100vh;
+    padding: {
+        top: 13vh;
+        bottom: 3vh;
+    }
     margin: 0;
     padding: 0;
     font-size: calc(5px + 2vmin);

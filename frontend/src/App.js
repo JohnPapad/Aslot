@@ -28,8 +28,8 @@ class App extends Component {
     render() {
 
         return (
-            <Container fluid className="App">
-                <Layout>
+            <div className="App">
+                <Layout >
 
                 <Switch>
                     <Route exact path="/signin" component={SignInPage} />
@@ -61,7 +61,7 @@ class App extends Component {
                 </Switch>
 
                 </Layout>
-            </Container>
+            </div>
         );
     }
 
