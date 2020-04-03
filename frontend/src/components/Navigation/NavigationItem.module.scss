@@ -5,7 +5,7 @@
 
 
 #nav_item {
-    border: 3px solid $secColor;
+    // border: 3px solid $secColor;
     background-color: $primColor;
     font-weight: bold;
 
@@ -17,7 +17,7 @@
 
     .text {
         color: $secColor;
-        font-size: $fontMD;
+        font-size: $fontSM;
     }
 }
 
