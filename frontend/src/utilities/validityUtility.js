@@ -44,7 +44,7 @@ export const checkValidity = ( value, rules, name ) => {
 	}
 	
 	if ( rules.onlyLettersDotsAndSpace ) {
-        const pattern = /^[a-zA-Z\. ]+$/;
+        const pattern = /^[a-zA-Zα-ωΑ-Ω\. ]+$/;
         if (!pattern.test( value ) )
         {
             return {report: false, msg: "It must only contain letters, dots or spaces"}
@@ -56,6 +56,40 @@ export const checkValidity = ( value, rules, name ) => {
         if (!pattern.test( value ) )
         {
             return {report: false, msg: "It must only contain numbers"};
+        }
+    }
+
+    if ( rules.isTel ) {
+        if (value.length != 10)
+        {
+            return {report: false, msg: "Please enter a correct telephone number"};
+        }
+
+        const pattern = /^\d+$/;
+        if (!pattern.test( value ) )
+        {
+            return {report: false, msg: "Please enter a correct telephone number"};
+        }
+    }
+
+    if ( rules.isTimeDur ) {
+        const pattern= /^([0-2][0-9])\:([0-5][0-9])\-([0-2][0-9])\:([0-5][0-9])$/;
+        if (!pattern.test( value ) )
+        {
+            return {report: false, msg: "Please enter correct opening closing times"};
+        }
+    }
+
+    if ( rules.isMinutes ) {
+        const pattern = /^\d+$/;
+        if (!pattern.test( value ) )
+        {
+            return {report: false, msg: "It must be minutes"};
+        }
+
+        if (value.length > 2)
+        {
+            return {report: false, msg: "It must be minutes"};
         }
     }
 
