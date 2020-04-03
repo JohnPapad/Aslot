@@ -1,0 +1,23 @@
+@import "../../../styles/colors";
+@import "../../../styles/gradients";
+@import "../../../styles/texts";
+@import "../../../styles/buttons";
+
+
+
+#header {
+    font-size: $fontLG;
+    background-color: $primColor;
+}
+
+#signup_form {
+    margin: {
+        bottom: 3vh;
+    }
+    color: $primColorDarker !important;
+    background-color: white;
+    font-weight: bold;
+    color: $primColorDarker;
+}
+
+
