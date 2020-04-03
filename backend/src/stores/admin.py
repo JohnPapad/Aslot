@@ -2,8 +2,6 @@ from django.contrib import admin
 
 from .models import *
 
-print("GAMW TI MANA SOU")
-
 class StoreAdmin(admin.ModelAdmin):
     list_display = (
         'address',
