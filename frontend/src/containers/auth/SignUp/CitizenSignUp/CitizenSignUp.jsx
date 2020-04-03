@@ -21,7 +21,7 @@ import LocationMap from '../../../../components/UI/LocationMap/LocationMap';
 import { checkValidity } from '../../../../utilities/validityUtility';
 import { formatDate } from '../../../../utilities/dateUtility';
 
-class CitizenSignUp extends React.Component {
+class SignUp extends React.Component {
 
     state = {
         startingLat: 38.075331037,
@@ -31,12 +31,57 @@ class CitizenSignUp extends React.Component {
         hasLocation: false,
 
         formControls: {
+
+            brandname: {
+                rules: {
+                    required: true,
+                    onlyLettersDotsAndSpace: true,
+                    minLength: 2,
+                    maxLength: 15
+                },
+                id: "signup_shop_name",
+                name: "Επωνυμία επιχείρησης",
+                value: '',
+                type: "text",
+                placeholder: "πχ Φαρμακείο Παπαδόπουλου",
+                feedback: null,
+                validity: ''
+            },
+
+            tel: {
+                rules: {
+                    required: true,
+                    isTel: true
+                },
+                id: "signup_shop_tel",
+                name: "Τηλέφωνο επιχείρησης",
+                value: '',
+                type: "text",
+                placeholder: "πχ 2106543987",
+                feedback: null,
+                validity: ''
+            },
+
+            hours: {
+                rules: {
+                    required: true,
+                    isTimeDur: true
+                },
+                id: "signup_shop_hours",
+                name: "Ωράριο λειτουργίας",
+                value: '',
+                type: "text",
+                placeholder: "πχ 8:00-18:00",
+                feedback: null,
+                validity: ''
+            },
+
             email: {
                 rules: {
                     required: true,
                     isEmail: true
                 },
-                id: "signup_user_email",
+                id: "signup_shop_email",
                 name: "Email",
                 value: '',
                 type: "text",
@@ -52,8 +97,8 @@ class CitizenSignUp extends React.Component {
                     minLength: 8,
                     maxLength: 15
                 },
-                id: "signup_user_pwd",
-                name: "Password",
+                id: "signup_shop_pwd",
+                name: "Κωδικός πρόσβασης",
                 value: '',
                 type: "password",
                 placeholder: 'Password',
@@ -66,8 +111,8 @@ class CitizenSignUp extends React.Component {
                     required: true,
                     mustMatch: "password"
                 },
-                id: "signup_user_pwd_rep",
-                name: "Confirm Password",
+                id: "signup_user_shop_rep",
+                name: "Επιβεβαίωση κωδικού πρόσβασης",
                 value: '',
                 type: "password",
                 placeholder: 'Confirm Password',
@@ -75,64 +120,48 @@ class CitizenSignUp extends React.Component {
                 validity: ''
             },
 
-            username: {
-                rules: {
-                    required: true,
-                    onlyLettersDotsAndSpace: true,
-                    minLength: 2,
-                    maxLength: 15
-                },
-                id: "signup_user_username",
-                name: "Username",
-                value: '',
-                type: "text",
-                placeholder: "username",
-                feedback: null,
-                validity: ''
-            },
+            // first_name: {
+            //     rules: {
+            //         required: true,
+            //         onlyLetters: true,
+            //         minLength: 2,
+            //         maxLength: 20
+            //     },
+            //     id: "signup_shop_user_name",
+            //     name: "Όνομα ιδιοκτήτη",
+            //     value: '',
+            //     type: "text",
+            //     placeholder: "owner's name",
+            //     feedback: null,
+            //     validity: ''
+            // },
 
-            first_name: {
-                rules: {
-                    required: true,
-                    onlyLetters: true,
-                    minLength: 2,
-                    maxLength: 20
-                },
-                id: "signup_user_name",
-                name: "Name",
-                value: '',
-                type: "text",
-                placeholder: "Name",
-                feedback: null,
-                validity: ''
-            },
-
-            last_name: {
-                rules: {
-                    required: true,
-                    onlyLetters: true,
-                    minLength: 2,
-                    maxLength: 20
-                },
-                id: "signup_user_surname",
-                name: "Surname",
-                value: '',
-                type: "text",
-                placeholder: "Surname",
-                feedback: null,
-                validity: ''
-            },
+            // last_name: {
+            //     rules: {
+            //         required: true,
+            //         onlyLetters: true,
+            //         minLength: 2,
+            //         maxLength: 20
+            //     },
+            //     id: "signup_shop_user_surname",
+            //     name: "Επώνυμο ιδιοκτήτη",
+            //     value: '',
+            //     type: "text",
+            //     placeholder: "owner's surname",
+            //     feedback: null,
+            //     validity: ''
+            // },
 
             municipality: {
                 rules: {
                     required: true,
                     address: true,
                 },
-                id: "signup_user_munipalicty",
-                name: "Municipality",
-                value: 'Municipality of Likovrisi - Pefki',
+                id: "signup_shop_munipalicty",
+                name: "Δήμος",
+                value: 'Δήμος Αθηνών',
                 type: "text",
-                placeholder: "",
+                placeholder: "Δήμος",
                 feedback: null,
                 validity: ''
             },
@@ -142,28 +171,44 @@ class CitizenSignUp extends React.Component {
                     required: true,
                     address: true,
                 },
-                id: "signup_user_address",
-                name: "Address",
+                id: "signup_shop_address",
+                name: "Διεύθυνση",
                 value: '',
                 type: "text",
-                placeholder: "StreetName Number",
+                placeholder: "Οδός Αριθμός",
                 feedback: null,
                 validity: ''
             },
 
-            birthDate: {
+            time_slot_dur: {
                 rules: {
                     required: true,
-                    date: true
+                    isMinutes: true
                 },
-                id: "signup_user_date",
-                name: "Date of birth",
+                id: "signup_shop_time_slot_dur",
+                name: "Διάρκεια χρονοθυρίδας (σε λεπτά)",
                 value: '',
-                type: "date",
-                placeholder: "dd/mm/yyyy",
+                type: "text",
+                placeholder: "πχ 10",
                 feedback: null,
                 validity: ''
-            }
+            },
+
+            persons_per_slot: {
+                rules: {
+                    required: true,
+                    isNumeric: true
+                },
+                id: "signup_shop_persons_per_slot",
+                name: "Μέγιστος αριθμός ατόμων ανά χρονοθυρίδα",
+                value: '',
+                type: "text",
+                placeholder: "πχ 2",
+                feedback: null,
+                validity: ''
+            },
+
+
         }
     }
 
@@ -309,7 +354,7 @@ class CitizenSignUp extends React.Component {
 
         formData = {
             ...formData,
-            userType: "citizen",
+            shop_type: "pharmacy",
             lat: this.state.selectedLat,
             lng: this.state.selectedLng
         };
@@ -372,6 +417,7 @@ class CitizenSignUp extends React.Component {
                     const locData = data.features[0].properties.geocoding;
                     const strNumber = locData.housenumber ? ' ' + locData.housenumber : '';
                     // Coordinates are given in reverse order from API
+                    console.log(locData)
                     this.setState(
                         produce(draft => {
                             draft.formControls.address.value = locData.street ? locData.street + strNumber : draft.formControls.address.value;
@@ -460,7 +506,7 @@ class CitizenSignUp extends React.Component {
                         </Row>
                         
                         <LocationMap   
-                            mapHeight={document.documentElement.clientHeight * 0.65}
+                            mapHeight={document.documentElement.clientHeight * 0.7}
             
                             startingLat={this.state.startingLat}
                             startingLng={this.state.startingLng}
@@ -491,4 +537,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(withErrorHandler(withRouter(CitizenSignUp), axios));
+export default connect(null, mapDispatchToProps)(withErrorHandler(withRouter(SignUp), axios));
