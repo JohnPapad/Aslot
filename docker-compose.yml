@@ -4,7 +4,7 @@ services:
     build: ./backend
     volumes:
       - ./backend:/app/backend
-    restart: always
+    #restart: always
     privileged: true
     ports:
       - "8000:8000"
@@ -16,10 +16,10 @@ services:
       - db
     links:
       - db
-    command: >
-        sh -c "python3 manage.py migrate
-        && python3 manage.py makemigrations
-        && python3 manage.py runserver 0.0.0.0:8000"
+    # command: >
+    #     sh -c "python3 manage.py migrate
+    #     && python3 manage.py makemigrations
+    #     && python3 manage.py runserver 0.0.0.0:8000"
   db:
     image: postgres:10.12
     volumes:
