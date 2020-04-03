@@ -7,13 +7,15 @@ import { Route, Redirect, Switch, withRouter } from 'react-router-dom';
 import { CitizenRoute } from './routes/CitizenRoute';
 import { AuthorityRoute } from './routes/AuthorityRoute';
 
+import { authAPI } from './services/authApi';
+import axios from './services/axiosConfig';
+
 import { Container, Row, Col } from 'reactstrap';
 import SignInPage from './components/SignInPage/SignInPage';
 import SignUp from './containers/auth/SignUp/SignUp';
 // import LogOut from './containers/auth/LogOut/LogOut';
-// import LandingPage from './containers/LandingPage/LandingPage';
-import { authAPI } from './services/authApi';
-import axios from './services/axiosConfig';
+import LandingPage from './containers/LandingPage/LandingPage';
+
 import Report from './containers/Report/Report';
 import LogOut from './containers/auth/LogOut/LogOut';
 import CreateReportPage from './components/CreateReportPage/CreateReportPage';
@@ -36,6 +38,8 @@ class App extends Component {
                     <Route exact path="/reportform" component={CreateReportPage} />
                     <Route exact path="/feed" component={Feed} />
                     <Route exact path="/logout" component={LogOut} />
+
+                    <Route exact path="/" component={LandingPage} />
                     {/* <Route exact path="/register" component={Register} />
                     <Route exact path="/browse" component={BrowseAuctions} />
 
