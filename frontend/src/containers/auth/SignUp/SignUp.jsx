@@ -152,30 +152,30 @@ class SignUp extends React.Component {
             //     validity: ''
             // },
 
-            municipality: {
-                rules: {
-                    required: true,
-                    address: true,
-                },
-                id: "signup_shop_munipalicty",
-                name: "Δήμος",
-                value: 'Δήμος Αθηνών',
-                type: "text",
-                placeholder: "Δήμος",
-                feedback: null,
-                validity: ''
-            },
+            // municipality: {
+            //     rules: {
+            //         required: true,
+            //         address: true,
+            //     },
+            //     id: "signup_shop_munipalicty",
+            //     name: "Δήμος",
+            //     value: 'Δήμος Αθηνών',
+            //     type: "text",
+            //     placeholder: "Δήμος",
+            //     feedback: null,
+            //     validity: ''
+            // },
 
             address: {
                 rules: {
                     required: true,
-                    address: true,
+                    isAddress: true,
                 },
                 id: "signup_shop_address",
                 name: "Διεύθυνση",
                 value: '',
                 type: "text",
-                placeholder: "Οδός Αριθμός",
+                placeholder: "Οδός Αριθμός, Δήμος",
                 feedback: null,
                 validity: ''
             },
@@ -392,7 +392,9 @@ class SignUp extends React.Component {
     
     updateMap = () => {
         const { formControls } = this.state;
-        const query = formControls.address.value + ' ' + formControls.municipality.value;
+        const query = formControls.address.value.replace(/,/g, '');  //+ ' ' + formControls.municipality.value;
+        console.log("query", query)
+
         nominatimApi.getGeoLocation(axios, query)
             .then(data => {
                 if (data && data.features.length > 0) {
@@ -415,13 +417,14 @@ class SignUp extends React.Component {
             .then(data => {
                 if (data && data.features.length > 0) {
                     const locData = data.features[0].properties.geocoding;
-                    const strNumber = locData.housenumber ? ' ' + locData.housenumber : '';
+                    const strNumber = locData.housenumber ? locData.housenumber : '';
                     // Coordinates are given in reverse order from API
                     console.log(locData)
+                    const addressVal = locData.street ? locData.street + ' ' + strNumber + ', ' + locData.city : '';
                     this.setState(
                         produce(draft => {
-                            draft.formControls.address.value = locData.street ? locData.street + strNumber : draft.formControls.address.value;
-                            draft.formControls.municipality.value = locData.county ? locData.county : draft.formControls.municipality.value;
+                            draft.formControls.address.value = addressVal;
+                            // draft.formControls.municipality.value = locData.city ? locData.city : '';
 
                             draft.selectedLat = e.latlng.lat.toFixed(9);
                             draft.selectedLng = e.latlng.lng.toFixed(9);
@@ -429,7 +432,15 @@ class SignUp extends React.Component {
                         })
                     );
 
-                    
+                    const res = checkValidity(addressVal, this.state.formControls.address.rules);
+                    if (res.report) 
+                    {
+                        this.setFormField('address', null, 'is-valid', null);
+                    }
+                    else 
+                    {
+                        this.setFormField('address', res.msg, "is-invalid", null);
+                    }
                 }
             });
     }
@@ -500,7 +511,7 @@ class SignUp extends React.Component {
                                     />
                                 </Col>
 
-                                <Col>
+                                {/* <Col>
                                     <MyInput
                                         id={formControls.municipality.id}
                                         name={formControls.municipality.name}
@@ -512,7 +523,7 @@ class SignUp extends React.Component {
                                         changed={(event) => this.inputChangedHandler(event, 'municipality')}
                                         blurred={this.updateMap}
                                     />
-                                </Col>
+                                </Col> */}
                             </Row>
                             
                             <LocationMap   
