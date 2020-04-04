@@ -9,7 +9,7 @@ import MyBtn from '../../../components/UI/MyBtn/MyBtn';
 export default function Inventory(props) {
 
     return (
-        <div className="p-4"> 
+        <div className={"pr-4 pb-4"}> 
             <Card style={{width: "15vw"}} id={props.selected ? styles.item_hl : styles.item}>
                 <CardImg top width="100%" src="https://www.exclusivehomedesign.it/wp-content/uploads/2018/07/noPhoto.png" alt="Item Img" style={{width: "100%", height: "18vh"}} alt="Shop Photo" className="img-fluid rounded"/>
                 <CardBody className="p-2">
