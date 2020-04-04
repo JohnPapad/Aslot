@@ -21,12 +21,12 @@ class SignIn extends React.Component {
         this.state = {
             //modalIsOpen: true,
             formControls: {
-                username: {
+                email: {
                     rules: {
                         required: true
                     },
-                    id: "login_username",
-                    name: "Username",
+                    id: "login_email",
+                    name: "Email",
                     value: '',
                     type: "text",
                     placeholder: "",
@@ -82,9 +82,9 @@ class SignIn extends React.Component {
                 draft.formControls.password.feedback = null;
                 draft.formControls.password.validity = "is-invalid";
           
-                draft.formControls.username.value = '';
-                draft.formControls.username.feedback = null;
-                draft.formControls.username.validity = "is-invalid";
+                draft.formControls.email.value = '';
+                draft.formControls.email.feedback = null;
+                draft.formControls.email.validity = "is-invalid";
             })
         );
     }
@@ -211,23 +211,26 @@ class SignIn extends React.Component {
             <Modal 
                 isOpen={this.props.isSignInModalOpen} 
                 toggle={this.props.toggleSignInModalOpen} 
-                id={classes.content} 
                 className="modal-sm"
                 centered 
                 fade
             >
-                <ModalHeader toggle={this.props.toggleSignInModalOpen} id={classes.header}>Sign In</ModalHeader>
+                <ModalHeader toggle={this.props.toggleSignInModalOpen} id={classes.header_bg}>
+                    <span  id={classes.header}>Είσοδος</span>
+                </ModalHeader>
                 <ModalBody>
-                    <p id={classes.form_text} className="small ">Sign In using your existing account to have full access to all features.</p>
+                        <p className="small text-muted">
+                            Εισέλθετε στην πλατφόρμα προκειμένου να διαχειριστείτε το κατάστημα σας.
+                        </p>
 
                         <Form onSubmit={this.submitHandler}>
                             {formFields}
 
-                            <Button className="float-right mt-3" id={classes.submit_btn}>
-                                <span style={{textShadow: "2px 2px 2px black"}}>
+                            <MyBtn borderWidth='0' size="SM" classes="float-right mt-3" clickedHandler={this.submitHandler} >
+                                <span>
                                     Είσοδος
                                 </span>
-                            </Button>
+                            </MyBtn>
                         </Form>
                 </ModalBody>
         
