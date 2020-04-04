@@ -6,3 +6,4 @@ from .models import *
 admin.site.register(Store)
 admin.site.register(OpeningHours)
 admin.site.register(Item)
+admin.site.register(Timeslot)

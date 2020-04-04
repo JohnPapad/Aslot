@@ -2,6 +2,7 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
+from django.shortcuts import get_list_or_404, get_object_or_404
 
 from . import serializers as srs
 from . import models as mds
@@ -77,15 +78,26 @@ class Inventory(APIView):
         if "storeID" not in request.GET.keys():
             return Response(response_dict, status=status.HTTP_400_BAD_REQUEST)
         # find all items that belong to this store
-        try:
-            store = mds.Store.objects.get(id=request.GET["storeID"])
-            serializer = srs.ItemSerializer(store.items, many=True)
-            response_dict["inventory"] = serializer.data
-            return Response(response_dict, status=status.HTTP_200_OK)
-        except mds.Store.DoesNotExist:
-            return Response(response_dict, status=status.HTTP_404_NOT_FOUND)
-        
+        store = get_object_or_404(mds.Store, id=request.GET["storeID"])
+        response_dict["inventory"] = srs.ItemSerializer(store.items, many=True).data
+        return Response(response_dict, status=status.HTTP_200_OK)
 
+class StoreView(APIView):
+
+    permission_classes = (AllowAny,)
+
+    def get(self, request, storeID):
+        """[summary]
+        
+        Arguments:
+            request {[type]} -- [description]
+        """
+        response_dict = {}
+        store = get_object_or_404(mds.Store, id=storeID)
+        response_dict["inventory"] = srs.ItemSerializer(store.items, many=True).data
+        response_dict["store_info"] = srs.StoreSerializer(store).data
+        response_dict["timeslots"] = srs.TimeslotSerializer(store.timeslots, many=True).data
+        return Response(response_dict, status=status.HTTP_200_OK)
 
 class Timeslots(APIView):
     
@@ -95,4 +107,10 @@ class Timeslots(APIView):
         Arguments:
             request {[type]} -- [description]
         """
-        pass
+        response_dict = {}
+        if "storeID" not in request.GET.keys():
+            return Response(response_dict, status=status.HTTP_400_BAD_REQUEST)
+        # find all timeslots of this store
+        store = get_object_or_404(mds.Store, id=request.GET["storeID"])
+        response_dict["timeslots"] = srs.TimeslotSerializer(store.timeslots, many=True).data
+        return Response(response_dict, status=status.HTTP_200_OK)
