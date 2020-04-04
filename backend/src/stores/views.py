@@ -1,3 +1,4 @@
+from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
@@ -33,4 +34,19 @@ class MapPinpoints(APIView):
 
         response_dir = {"center": {"lng":lng,"lat":lat}, "pins": pinpoint_list}
         return Response(response_dir)
+
+
+# get -> a user is searching for a query
+class Search(APIView):
+    permission_classes = (AllowAny,)
+    
+    def get(self, request):
+        response_dict = {"success":False}
+        if "search_term" not in request.GET.keys():
+            return Response(response_dict, status=status.HTTP_400_BAD_REQUEST)
         
+        search_term = request.data["search_term"]
+        valid_stores = mds.Store.objects.filter(item_name_contains=search_term)
+        response_dict["success"] = True
+        response_dict["stores"] = valid_stores
+        return Response(response_dict, status=status.HTTP_200_OK)
