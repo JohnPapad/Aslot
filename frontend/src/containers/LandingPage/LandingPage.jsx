@@ -7,6 +7,9 @@ import axios from '../../services/axiosConfig';
 import { Container, Row, Col } from 'reactstrap';
 import SearchShopInput from './SearchShopInput/SearchShopInput';
 
+import { useDispatch, useSelector } from "react-redux";
+import { setStores } from '../../stores/storeStore';
+
 import { nominatimApi } from '../../services/nominatimApi';
 import { storesApi } from '../../services/storesApi';
 import LocationMap from '../../components/UI/LocationMap/LocationMap';
@@ -26,6 +29,7 @@ export default function LandingPage() {
         hasLocation: false,
     })
     const [{address, addressValid}, setAddress] = useState({address: '', addressValid: true});
+    const dispatch = useDispatch();
 
     const onSubmit = () => {
         if (markerPos.hasLocation == false) {
@@ -41,7 +45,10 @@ export default function LandingPage() {
                             lng: coords[0].toFixed(9)
                         }
                         storesApi.searchStores(axios, searchParams)
-                            .then(res => console.log(res));
+                            .then(res => {
+                                console.log(res);
+                                dispatch(setStores(res));
+                            });
                     }
                 });
         }
@@ -53,11 +60,18 @@ export default function LandingPage() {
             }
     
             storesApi.searchStores(axios, searchParams)
-                .then(res => console.log(res));
+                .then(res => {
+                    console.log(res);
+                    dispatch(setStores(res));
+                });
         }
     }
 
-    //----------------------------------------------------------------
+    
+    const onShopClick = (id) => {
+        // axios kai apothikeusi mono 1 store sto storeStore
+    }
+
 
 
     //---------------------Map Stuff------------------------
@@ -126,7 +140,7 @@ export default function LandingPage() {
             </Row>
 
 
-            <Row className={"justify-content-center mb-5"}>    
+            <Row className={"justify-content-center mb-3"}>    
                 <SearchShopInput
                     address={address}
                     addressValid={addressValid}
@@ -140,7 +154,7 @@ export default function LandingPage() {
                 />
             </Row>
 
-            <Row className="justify-content-center mt-5">            
+            <Row className="justify-content-center mt-4">            
                 <Col className="p-0">
                     <LocationMap
                         mapHeight={document.documentElement.clientHeight * 0.6}

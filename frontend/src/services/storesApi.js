@@ -13,11 +13,11 @@ function getPins(axios)
         .catch( err => err);
 }
 
-// JsonRequest:
+// searchParams:
 // {
-//     searchTerm: "   ",
+//     searchTerm,
 //     lat,
-//     lng
+//     lng,
 // }
 function searchStores(axios, searchParams)
 {
@@ -26,6 +26,31 @@ function searchStores(axios, searchParams)
         .catch( err => err);
 }
 
+// searchParams:
+// {
+//     searchTerm,
+//     lat,
+//     lng,
+// }
+function getStoreInventory(axios, searchParams)
+{
+    return axios.get('/stores/search', {params: searchParams})
+        .then( response =>  response ? response.data : null)
+        .catch( err => err);
+}
+
+// searchParams:
+// {
+//     searchTerm,
+//     lat,
+//     lng,
+// }
+function getTimeslots(axios, searchParams)
+{
+    return axios.get('/stores/search', {params: searchParams})
+        .then( response =>  response ? response.data : null)
+        .catch( err => err);
+}
 
 // function getPins(axios, jsonRequest)
 // {
