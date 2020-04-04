@@ -86,17 +86,14 @@ class StoreView(APIView):
 
     permission_classes = (AllowAny,)
 
-    def get(self, request):
+    def get(self, request, storeID):
         """[summary]
         
         Arguments:
             request {[type]} -- [description]
         """
         response_dict = {}
-        if "storeID" not in request.GET.keys():
-            return Response(response_dict, status=status.HTTP_400_BAD_REQUEST)
-        
-        store = get_object_or_404(mds.Store, id=request.GET["storeID"])
+        store = get_object_or_404(mds.Store, id=storeID)
         response_dict["inventory"] = srs.ItemSerializer(store.items, many=True).data
         response_dict["store_info"] = srs.StoreSerializer(store).data
         response_dict["timeslots"] = srs.TimeslotSerializer(store.timeslots, many=True).data
