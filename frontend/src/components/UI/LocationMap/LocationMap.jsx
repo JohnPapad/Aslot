@@ -4,12 +4,12 @@ import classes from './LocationMap.module.scss';
 import { Map, TileLayer, Marker, Popup } from "react-leaflet";
 import { Row, Col } from 'reactstrap'
 import L from 'leaflet';
-import i from '../../../assets/images/location-pin-red.png';
+import iconImp from '../../../assets/images/location-pin-red.png';
 
 export const redIcon = new L.Icon({
-    iconUrl: '../../../assets/images/location-pin-red.png',
+    iconUrl: iconImp,
     // iconRetinaUrl: '../../../assets/images/pointer-icon.svg',
-    // iconSize: [38, 95],
+    iconSize: [45, 45],
     // iconAnchor: [22, 94],
     // popupAnchor: [-3, -76],
     // shadowUrl: '../../../assets/images/marker-shadow.png',
@@ -17,14 +17,13 @@ export const redIcon = new L.Icon({
     // shadowAnchor: [22, 94]
 })
 
+
+
 export default function LocationMap(props) {
 
     const { startingLat, startingLng, selectedLat, selectedLng, mapHeight, hasLocation, pins } = props;
     const { handleMapClick } = props;
     const style = { height: mapHeight + 'px' };
-
-    console.log(selectedLat);
-    console.log(selectedLng);
 
     // If the user has clicked on the map, place a marker
     let marker = null
@@ -56,7 +55,7 @@ export default function LocationMap(props) {
                     <div className={classes.map}>
                         <Map
                             center={{ lat: startingLat, lng: startingLng }}
-                            zoom={15}
+                            zoom={16}
                             onClick={handleMapClick}
                             // onLocationfound={this.handleLocationFound}
                             //ref={this.mapRef}

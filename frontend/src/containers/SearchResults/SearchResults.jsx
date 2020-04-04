@@ -6,6 +6,7 @@ import SearchResult from '../../components/SeachResult/SearchResult';
 
 import LocationMap from '../../components/UI/LocationMap/LocationMap';
 
+import SearchShopInput from '../LandingPage/SearchShopInput/SearchShopInput';
 
 class SearchResults extends React.Component {
 
@@ -17,8 +18,17 @@ class SearchResults extends React.Component {
             <Container fluid id={styles.content}>
                 <Row>
                     <Col></Col>
-
                     <Col xs="6" className="">
+                        <Row className="pb-5">
+                            <SearchShopInput
+                                // address={address}
+                                // addressValid={addressValid}
+                                // setAddress={setAddress}
+
+                                // query={query}
+                                // setQuery={setQuery}
+                            />
+                        </Row>
                         <SearchResult />
                         <SearchResult />
                     
