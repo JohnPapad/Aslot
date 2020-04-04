@@ -36,7 +36,7 @@ class MapPinpoints(APIView):
         return Response(response_dir)
 
 
-# get -> a user is searching for a query
+# get -> a user is searching
 class Search(APIView):
     permission_classes = (AllowAny,)
     
@@ -45,7 +45,7 @@ class Search(APIView):
         if "searchTerm" not in request.GET.keys():
             return Response(response_dict, status=status.HTTP_400_BAD_REQUEST)
         
-        search_term = request.data["search_term"]
+        search_term = request.data["searchTerm"]
         valid_stores = mds.Store.objects.filter(item_name_contains=search_term)
         #sort object by distance here
         serializer = srs.StoreSerializer(valid_stores, many=True)
