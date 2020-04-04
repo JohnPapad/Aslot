@@ -10,6 +10,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPhoneAlt, faClock, faMapMarkedAlt } from '@fortawesome/free-solid-svg-icons';
 
 
+const bookBtnClickedHandler = (storeId, history) => {
+    history.push("/store/" + storeId);
+}
+
 
 const searchResult = (props) => {
 
@@ -74,7 +78,7 @@ const searchResult = (props) => {
                             </div>
 
                             <div>
-                                <MyBtn classes="" borderWidth='0' size="SM" >
+                                <MyBtn classes="" borderWidth='0' size="SM" clickedHandler={()=>bookBtnClickedHandler("3", props.history)}>
                                     <span style={{ letterSpacing: "0px" }}>
                                         Κράτηση
                                     </span>
@@ -92,4 +96,4 @@ const searchResult = (props) => {
 
 
 
-export default searchResult;
+export default withRouter(searchResult);
