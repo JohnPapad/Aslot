@@ -1,0 +1,28 @@
+@import '../../../styles/colors';
+@import '../../../styles/buttons';
+
+
+#item_hl {
+    border: 2px solid $primColor;
+    border-radius: 5px;
+}
+
+#item {
+    border: 2px rgb(32, 31, 28);
+    box-shadow: 1px 1px 2px 2px #ccc;
+    border-radius: 5px;
+}
+
+.tittle {   
+    color: $primColor;
+    font-weight: bold;
+}
+
+#icon_bg {
+    background-color: $primColor;
+}
+
+#input_num {
+    @include remove_hl;
+    border: 2px solid $primColor;
+}

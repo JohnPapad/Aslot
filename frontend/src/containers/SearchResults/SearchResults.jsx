@@ -11,9 +11,13 @@ import SearchShopInput from '../LandingPage/SearchShopInput/SearchShopInput';
 
 export default function SearchResults(props) {
     const stores = useSelector(state => state.storeReducer.stores);
-    console.log('STORES RE MOUNIA');
+    console.log('STORES');
     console.log(stores);
     const dispatch = useDispatch();
+
+    const makePinsForRightMap = () => {
+
+    }
     
     return (
         <Container fluid id={styles.content}>
@@ -33,13 +37,20 @@ export default function SearchResults(props) {
                         />
                     </Row>
 
-                    {/* {stores.map(store => {
+                    {stores.length > 0 ? stores.map((store, i) => {
                         return (
-                            <SearchResult />
+                            <SearchResult 
+                                key={i}
+
+                                name={store.name}
+                                address={store.address}
+                                email={store.email}
+                                openingFrom={store.opening_from_hour}
+                                openingTo={store.opening_to_hour}
+
+                            />
                         )
-                    })} */}
-                    <SearchResult />
-                    <SearchResult />
+                    }) : "No results :("}
                 
                 </Col>
                 <Col></Col>

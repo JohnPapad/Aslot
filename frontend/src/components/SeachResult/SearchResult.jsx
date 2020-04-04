@@ -20,10 +20,7 @@ const addressClickedHandler = (storeId) => {
 
 
 const searchResult = (props) => {
-
-
-    return (
-       
+    return (       
         <Row  className={"mb-4 p-2 " + styles.store_pres}>
             <Col xs="3" className="p-0 m-0 border">
                 <img src={"https://kdi.gr/wp-content/uploads/2017/01/KDICONTRACT_Katsaris_Pharmacy1.jpg"} style={{height: "100%", width: "100%", height: "15vh"}} alt="Shop Photo" className="img-fluid rounded"/>
@@ -32,12 +29,12 @@ const searchResult = (props) => {
             <Col xs="9" className="p-0 m-0 pl-2 d-flex-column ">
                 <div className="d-flex align-items-center">
                     <div className={styles.shop_name} onClick={()=>bookBtnClickedHandler("3", props.history)}>
-                        Φαρμακείο Παπαδοπούλου
+                        {props.name}
                     </div>
 
                     <div className={styles.address +" text-muted small font-weight-bold ml-4"} onClick={()=>addressClickedHandler("ID")}>
                         <FontAwesomeIcon icon={faMapMarkedAlt} className="mr-2"/>
-                        Κωννισοπούλου 28, Αθήνα
+                        {props.address}
                     </div>
 
                 </div>
@@ -46,20 +43,21 @@ const searchResult = (props) => {
                     <div className="pr-5">
                         <FontAwesomeIcon  icon={faPhoneAlt} />
                         <span className="ml-2">
-                            2108736636a
+                            {/* {props.} */}
+                            τηλ Δεν εχει το ρισπονς
                         </span>
                     </div>
 
                     <div  className="">
                         <FontAwesomeIcon icon={faClock} />
                         <span className="ml-2">
-                            08:83-20:34
+                            {props.openingFrom}-{props.openingTo}
                         </span>
                     </div>
                 </div>
 
                 <div className={styles.item + " mt-2"}>
-                    Αντισυπτικά
+                    ιτεμ Δεν εχει το ρισπονς
                 </div>
 
                 <div className={"d-flex align-items-center"}> 
@@ -67,14 +65,14 @@ const searchResult = (props) => {
                         <span className="small mr-2">
                             Διαθέσιμα
                         </span>
-                        <Badge pill id={styles.icon_bg}>14</Badge>
+                        <Badge pill id={styles.icon_bg}>Δεν εχει το ρισπονς</Badge>
                     </div>
 
                     <div className="mr-auto">
                         <span className="small mr-2">
-                            Τιμή
+                            Τιμη
                         </span>
-                        <Badge id={styles.icon_bg}>13 €</Badge>
+                        <Badge id={styles.icon_bg}>Δεν εχει το ρισπονς €</Badge>
                     </div>
 
                     <div>
@@ -88,7 +86,6 @@ const searchResult = (props) => {
                 
             </Col>
         </Row>
-       
     );
 }
 
