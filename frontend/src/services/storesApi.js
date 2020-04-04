@@ -21,7 +21,7 @@ function getPins(axios)
 // }
 function searchStores(axios, searchParams)
 {
-    return axios.get('/search', {params: searchParams})
+    return axios.get('/stores/search', {params: searchParams})
         .then( response =>  response ? response.data : null)
         .catch( err => err);
 }
