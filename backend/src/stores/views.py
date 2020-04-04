@@ -3,7 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 
-#from . import serializers as srs
+from . import serializers as srs
 from . import models as mds
 from . import utility
 
@@ -42,11 +42,13 @@ class Search(APIView):
     
     def get(self, request):
         response_dict = {"success":False}
-        if "search_term" not in request.GET.keys():
+        if "searchTerm" not in request.GET.keys():
             return Response(response_dict, status=status.HTTP_400_BAD_REQUEST)
         
         search_term = request.data["search_term"]
         valid_stores = mds.Store.objects.filter(item_name_contains=search_term)
+        #sort object by distance here
+        serializer = srs.StoreSerializer(valid_stores, many=True)
+        response_dict["data"] = serializer.data
         response_dict["success"] = True
-        response_dict["stores"] = valid_stores
         return Response(response_dict, status=status.HTTP_200_OK)
