@@ -4,3 +4,17 @@
 @import "../../styles/buttons";
 
 
+.content {
+    // height: 83vh;
+}
+
+
+#header {
+    font: {
+        size: $fontXL;
+        weight: bold;
+    };
+    color: $primColor;
+
+
+}
