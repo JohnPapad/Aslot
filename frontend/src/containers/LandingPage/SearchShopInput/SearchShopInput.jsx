@@ -34,7 +34,7 @@ export default function SearchShopMap(props) {
                     value={props.address}
                     type={"text"}
                     readOnly={props.readOnly}
-                    placeholder={"Οδός Αριθμός, Δήμος"}
+                    placeholder={"Που είσαι; Οδός Αριθμός, Δήμος"}
                     onChange={(e) => props.setAddress(e.target.value)}
                     onBlur={(e) => props.updateMap ? props.updateMap() : ''}
                     invalid = {props.invalidAddress}
