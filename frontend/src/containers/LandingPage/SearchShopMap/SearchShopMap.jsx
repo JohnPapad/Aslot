@@ -20,9 +20,10 @@ import LocationMap from '../../../components/UI/LocationMap/LocationMap';
 export default function SearchShopMap() {
     
     const history = useHistory();
-    const [startingPos, setStartingPos] = useState({
-        startingLat: 38.075331037, 
-        startingLng: 23.794199477
+    const [startingPosAndPins, setStartingPosAndPins] = useState({
+        startingLat: null, 
+        startingLng: null,
+        pins: null
     })
     const [markerPos, setMarkerPos] = useState({
             selectedLat: null,
@@ -57,16 +58,16 @@ export default function SearchShopMap() {
     //     });
     // }
 
-
-    const getPins = () => {
-        console.log("TESTING PINS API");
-        storesApi.getPins(axios)
-            .then(res => console.log(res));
-    }
-
     useEffect(() => {
-        getPins();
-    })
+        storesApi.getPins(axios)
+            .then(res => {
+                setStartingPosAndPins({
+                    startingLat: res.center.lat, 
+                    startingLng: res.center.lng,
+                    pins: res.pins
+                });
+            })
+    }, [])
 
 
     //---------------------Map Stuff------------------------
@@ -77,9 +78,10 @@ export default function SearchShopMap() {
                 if (data && data.features.length > 0) {
                     const coords = data.features[0].geometry.coordinates;
                     // Coordinates are given in reverse order from API
-                    setStartingPos({
+                    setStartingPosAndPins({
                         startingLat: coords[1].toFixed(9),
-                        startingLng: coords[0].toFixed(9)
+                        startingLng: coords[0].toFixed(9),
+                        pins: startingPosAndPins.pins
                     });
                 }
             });
@@ -130,8 +132,10 @@ export default function SearchShopMap() {
                     <LocationMap
                         mapHeight={document.documentElement.clientHeight * 0.7}
                 
-                        startingLat={startingPos.startingLat}
-                        startingLng={startingPos.startingLng}
+                        startingLat={startingPosAndPins.startingLat}
+                        startingLng={startingPosAndPins.startingLng}
+                        pins={startingPosAndPins.pins}
+
                         selectedLat={markerPos.selectedLat}
                         selectedLng={markerPos.selectedLng}
                         hasLocation={markerPos.hasLocation}
