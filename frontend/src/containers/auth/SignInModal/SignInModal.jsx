@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import axios from '../../../services/axiosConfig';
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
-import classes from './SignIn.module.scss';
-import { Card, CardHeader, CardBody, Container, Row, Col, Form, Alert, Button} from 'reactstrap';
+import classes from './SignInModal.module.scss';
+import { Card, CardHeader, CardBody, Container, Row, Col, Form, Alert, Button, Modal, ModalHeader, ModalBody} from 'reactstrap';
 import MyInput from '../../../components/UI/MyInput/MyInput';
 // import Header from '../../components/UI/Header/Header';
 import MyBtn from '../../../components/UI/MyBtn/MyBtn';
@@ -208,43 +208,74 @@ class SignIn extends React.Component {
         ));
 
         return (            
-            <Row id={classes.content}> 
-                <Col xs="12" id={classes.bg_gradient}>
-                    <Row className="justify-content-center">
-                        <Alert 
-                                color="danger" 
-                                isOpen={this.state.alert.visible} 
-                                toggle={() => (this.onDismiss())}
-                        >
-                            {this.state.alert.message}
-                        </Alert>
-                    </Row>
-                    <Row className="justify-content-center">
-                        <Col className="align-self-center" xs="9" sm="9" md="8" lg="8" style={{paddingLeft : "1%", paddingRight: "1%"}}>
-                            <Card id={classes.login_form}>
-                                <CardHeader id={classes.header}>
-                                    Είσοδος στην πλατφόρμα
-                                </CardHeader>
+            <Modal 
+                isOpen={this.props.isSignInModalOpen} 
+                toggle={this.props.toggleSignInModalOpen} 
+                id={classes.content} 
+                className="modal-sm"
+                centered 
+                fade
+            >
+                <ModalHeader toggle={this.props.toggleSignInModalOpen} id={classes.header}>Sign In</ModalHeader>
+                <ModalBody>
+                    <p id={classes.form_text} className="small ">Sign In using your existing account to have full access to all features.</p>
 
-                                <CardBody>
+                        <Form onSubmit={this.submitHandler}>
+                            {formFields}
+
+                            <Button className="float-right mt-3" id={classes.submit_btn}>
+                                <span style={{textShadow: "2px 2px 2px black"}}>
+                                    Είσοδος
+                                </span>
+                            </Button>
+                        </Form>
+                </ModalBody>
+        
+        
+                {/* <ModalFooter>
+                    <Button color="primary" onClick={toggle}>Do Something</Button>{' '}
+                    <Button color="secondary" onClick={toggle}>Cancel</Button>
+                </ModalFooter> */}
+             </Modal>
+
+
+            // <Row id={classes.content}> 
+            //     <Col xs="12" id={classes.bg_gradient}>
+            //         <Row className="justify-content-center">
+            //             <Alert 
+            //                     color="danger" 
+            //                     isOpen={this.state.alert.visible} 
+            //                     toggle={() => (this.onDismiss())}
+            //             >
+            //                 {this.state.alert.message}
+            //             </Alert>
+            //         </Row>
+            //         <Row className="justify-content-center">
+            //             <Col className="align-self-center" xs="9" sm="9" md="8" lg="8" style={{paddingLeft : "1%", paddingRight: "1%"}}>
+            //                 <Card id={classes.login_form}>
+            //                     <CardHeader id={classes.header}>
+            //                         Είσοδος στην πλατφόρμα
+            //                     </CardHeader>
+
+            //                     <CardBody>
                                     
-                                    <p id={classes.form_text} className="small ">Sign In using your existing account to have full access to all features.</p>
+            //                         <p id={classes.form_text} className="small ">Sign In using your existing account to have full access to all features.</p>
 
-                                    <Form onSubmit={this.submitHandler}>
-                                        {formFields}
+            //                         <Form onSubmit={this.submitHandler}>
+            //                             {formFields}
 
-                                        <Button className="float-right mt-3" id={classes.submit_btn}>
-                                            <span style={{textShadow: "2px 2px 2px black"}}>
-                                                Είσοδος
-                                            </span>
-                                        </Button>
-                                    </Form>
-                                </CardBody>
-                            </Card>
-                        </Col>
-                    </Row>
-                </Col>
-            </Row>
+            //                             <Button className="float-right mt-3" id={classes.submit_btn}>
+            //                                 <span style={{textShadow: "2px 2px 2px black"}}>
+            //                                     Είσοδος
+            //                                 </span>
+            //                             </Button>
+            //                         </Form>
+            //                     </CardBody>
+            //                 </Card>
+            //             </Col>
+            //         </Row>
+            //     </Col>
+            // </Row>
         );
     }
 
