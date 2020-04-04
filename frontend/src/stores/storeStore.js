@@ -20,7 +20,7 @@ const deleteStores = () => {
     };
 }
 
-export const feedActions = {
+export const storeActions = {
     setStores,
     deleteStores,
 }

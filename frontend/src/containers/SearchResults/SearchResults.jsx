@@ -10,7 +10,7 @@ import LocationMap from '../../components/UI/LocationMap/LocationMap';
 import SearchShopInput from '../LandingPage/SearchShopInput/SearchShopInput';
 
 export default function SearchResults(props) {
-    const count = useSelector(state => state.storeReducer.stores);
+    const stores = useSelector(state => state.storeReducer.stores);
     const dispatch = useDispatch();
     
     return (
@@ -30,6 +30,12 @@ export default function SearchResults(props) {
                             addressDisabled
                         />
                     </Row>
+
+                    {/* {stores.map(store => {
+                        return (
+                            <SearchResult />
+                        )
+                    })} */}
                     <SearchResult />
                     <SearchResult />
                 
