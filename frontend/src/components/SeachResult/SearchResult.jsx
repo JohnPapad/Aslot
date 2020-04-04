@@ -69,7 +69,7 @@ const searchResult = (props) => {
                                 </span>
                             </div>
 
-                            <div className="pl-5">
+                            <div className="pl-4">
                                 <Button className="font-weight-bold">
                                     Κράτηση
                                 </Button>
