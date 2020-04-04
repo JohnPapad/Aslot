@@ -60,11 +60,14 @@ class Search(APIView):
         cust_lat = request.GET["lat"]
         cust_lng = request.GET["lng"]
         # TODO find valid_stores first then search for name__contains
-        valid_stores = mds.Store.objects.filter(items__name__contains=search_term)
-        radius=3.0 #search within 3km
-        pinpoint_list = utility.get_stores_within_radius(valid_stores, radius, cust_lat, cust_lng)
-        response_dict["data"] = pinpoint_list
+        radius = 3.0
+        valid_stores = []
+        for store in mds.Store.objects.filter(items__name__contains=search_term):
+            if utility.euclidean_distance_in_km(cust_lat, cust_lng, store.lat, store.lng) < radius:
+                valid_stores.append(store)
+        response_dict["stores"] = srs.StoreSerializer(valid_stores, many=True).data
         return Response(response_dict, status=status.HTTP_200_OK)
+
 
 class Inventory(APIView):
 
@@ -84,6 +87,7 @@ class Inventory(APIView):
         response_dict["inventory"] = srs.ItemSerializer(store.items, many=True).data
         return Response(response_dict, status=status.HTTP_200_OK)
 
+
 class StoreView(APIView):
 
     permission_classes = (AllowAny,)
@@ -100,6 +104,7 @@ class StoreView(APIView):
         response_dict["store_info"] = srs.StoreSerializer(store).data
         response_dict["timeslots"] = srs.TimeslotSerializer(store.timeslots, many=True).data
         return Response(response_dict, status=status.HTTP_200_OK)
+
 
 class Timeslots(APIView):
     
