@@ -51,7 +51,9 @@ class Search(APIView):
             [type] -- [description]
         """
         response_dict = {}
-        if "searchTerm" not in request.GET.keys():
+        if "searchTerm" not in request.GET.keys() or \
+                "lat" not in request.GET.keys() or \
+                    "lng" not in request.GET.keys():
             return Response(response_dict, status=status.HTTP_400_BAD_REQUEST)
         
         search_term = request.GET["searchTerm"]
