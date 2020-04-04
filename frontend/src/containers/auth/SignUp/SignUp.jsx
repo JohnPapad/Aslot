@@ -43,7 +43,7 @@ class SignUp extends React.Component {
                 name: "Επωνυμία επιχείρησης",
                 value: '',
                 type: "text",
-                placeholder: "πχ Φαρμακείο Παπαδόπουλου",
+                placeholder: "π.χ. Φαρμακείο Παπαδόπουλου",
                 feedback: null,
                 validity: ''
             },
@@ -57,7 +57,7 @@ class SignUp extends React.Component {
                 name: "Τηλέφωνο επιχείρησης",
                 value: '',
                 type: "text",
-                placeholder: "πχ 2106543987",
+                placeholder: "π.χ. 2106543987",
                 feedback: null,
                 validity: ''
             },
@@ -71,7 +71,7 @@ class SignUp extends React.Component {
                 name: "Ωράριο λειτουργίας",
                 value: '',
                 type: "text",
-                placeholder: "πχ 8:00-18:00",
+                placeholder: "π.χ. 8:00-18:00",
                 feedback: null,
                 validity: ''
             },
@@ -189,7 +189,7 @@ class SignUp extends React.Component {
                 name: "Διάρκεια χρονοθυρίδας (σε λεπτά)",
                 value: '',
                 type: "text",
-                placeholder: "πχ 10",
+                placeholder: "π.χ. 10",
                 feedback: null,
                 validity: ''
             },
@@ -203,7 +203,7 @@ class SignUp extends React.Component {
                 name: "Μέγιστος αριθμός ατόμων ανά χρονοθυρίδα",
                 value: '',
                 type: "text",
-                placeholder: "πχ 2",
+                placeholder: "π.χ. 2",
                 feedback: null,
                 validity: ''
             },

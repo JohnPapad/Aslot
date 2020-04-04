@@ -115,7 +115,7 @@ export default function LandingPage() {
 
     return (
         <Container id={classes.content}>
-            <Row className={"justify-content-center pb-3"}>    
+            <Row className={"justify-content-center pb-5"}>    
                 <SearchShopInput
                     address={address}
                     addressValid={addressValid}

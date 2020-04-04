@@ -14,10 +14,16 @@
 }
 
 #header {
-    font-size: $fontLG;
+    font-weight: bold;
+    font-size: $fontMD;
     background-color: $primColor;
-    color: white;
+    color: #ffffff;
 }
+
+#header_bg {
+    background-color: $primColor;
+}
+
 
 #form_text {
     font-weight: lighter;
