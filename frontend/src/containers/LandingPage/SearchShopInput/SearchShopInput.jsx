@@ -37,9 +37,10 @@ export default function SearchShopMap(props) {
                     onChange={(e) => props.setAddress(e.target.value)}
                     onBlur={(e) => props.updateMap ? props.updateMap() : ''}
                     invalid = {props.invalidAddress}
+                    disabled = {props.addressDisabled}
                 />
                 <InputGroupAddon addonType="append">
-                    <Button >
+                    <Button onClick={props.onSubmit}>
                         Αναζήτηση
                     </Button>
                 </InputGroupAddon>
