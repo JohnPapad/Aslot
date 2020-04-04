@@ -10,6 +10,7 @@ import SearchShopInput from './SearchShopInput/SearchShopInput';
 import { useDispatch, useSelector } from "react-redux";
 import { storeActions } from '../../stores/storeStore';
 import { searchActions } from '../../stores/searchStore';
+import { specifActions } from '../../stores/specifStore';
 
 
 import { nominatimApi } from '../../services/nominatimApi';
@@ -19,7 +20,7 @@ import LocationMap from '../../components/UI/LocationMap/LocationMap';
 export default function LandingPage() {
     const search = useSelector(state => state.searchReducer);
     const history = useHistory();
-    
+
     const [query, setQuery] = useState(search.query);
     const [startingPosAndPins, setStartingPosAndPins] = useState({
         startingLat: null, 
@@ -90,8 +91,9 @@ export default function LandingPage() {
     }
 
     
-    const onShopClick = (id) => {
+    const onRedMarkerClick = (id) => {
         // axios kai apothikeusi mono 1 store sto storeStore
+        dispatch(specifActions.redirectToStore(axios, id, history));
     }
 
 
@@ -108,6 +110,8 @@ export default function LandingPage() {
                     });
                 }
             })
+
+        dispatch(specifActions.redirectToStore(axios, 3, history));
     }, [])
     
     const updateMap = () => {
@@ -190,6 +194,7 @@ export default function LandingPage() {
                         hasLocation={markerPos.hasLocation}
 
                         handleMapClick={handleMapClick}
+                        onRedMarkerClick={onRedMarkerClick}
                     />
                 </Col>
             </Row>

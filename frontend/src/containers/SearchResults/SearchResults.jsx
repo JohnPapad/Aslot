@@ -11,17 +11,17 @@ import SearchShopInput from '../LandingPage/SearchShopInput/SearchShopInput';
 
 export default function SearchResults(props) {
     const search = useSelector(state => state.searchReducer);
+    const addressInfo = search.addressInfo;
     const stores = useSelector(state => state.storeReducer.stores);
     const history = useHistory();
     
     const [query, setQuery] = useState(search.query);
     const [startingPosAndPins, setStartingPosAndPins] = useState({
-        startingLat: null, 
-        startingLng: null,
+        startingLat: addressInfo.lat,
+        startingLng: addressInfo.lng,
         pins: null
     })
 
-    const addressInfo = search.addressInfo;
     const [markerPos, setMarkerPos] = useState({
         selectedLat: addressInfo.lat,
         selectedLng: addressInfo.lng,
@@ -30,9 +30,7 @@ export default function SearchResults(props) {
     const [{address, addressValid}, setAddress] = useState({address: addressInfo.address, addressValid: true});
     const dispatch = useDispatch();
 
-    const makePinsForRightMap = () => {
-
-    }
+    
     
     return (
         <Container fluid id={styles.content}>
@@ -74,8 +72,8 @@ export default function SearchResults(props) {
                     <LocationMap   
                         mapHeight={document.documentElement.clientHeight * 0.7}
         
-                        startingLat={2323}
-                        startingLng={3232}
+                        startingLat={startingPosAndPins.startingLat}
+                        startingLng={startingPosAndPins.startingLng}
                         selectedLat={232}
                         selectedLng={3232}
                         hasLocation={true}

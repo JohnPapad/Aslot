@@ -36,7 +36,6 @@ const searchResult = (props) => {
                         <FontAwesomeIcon icon={faMapMarkedAlt} className="mr-2"/>
                         {props.address}
                     </div>
-
                 </div>
 
                 <div className={"d-flex align-items-center text-muted small"}> 
