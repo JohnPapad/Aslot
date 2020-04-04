@@ -20,10 +20,9 @@ const addressClickedHandler = (storeId) => {
 
 
 const searchResult = (props) => {
+    
 
-
-    return (
-       
+    return (       
         <Row  className={"mb-4 p-2 " + styles.store_pres}>
             <Col xs="3" className="p-0 m-0 border">
                 <img src={"https://kdi.gr/wp-content/uploads/2017/01/KDICONTRACT_Katsaris_Pharmacy1.jpg"} style={{height: "100%", width: "100%", height: "15vh"}} alt="Shop Photo" className="img-fluid rounded"/>
@@ -88,7 +87,6 @@ const searchResult = (props) => {
                 
             </Col>
         </Row>
-       
     );
 }
 

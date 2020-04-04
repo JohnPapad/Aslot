@@ -50,6 +50,8 @@ function getTimeslots(axios, searchParams)
         .catch( err => err);
 }
 
+
+
 // function getPins(axios, jsonRequest)
 // {
 //     return axios.get('/stores/pins', jsonRequest)
