@@ -39,7 +39,8 @@ export default function SearchShopMap(props) {
                     invalid = {props.invalidAddress}
                 />
                 <InputGroupAddon addonType="append">
-                    <Button >
+                    <Button className="font-weight-bold" id={classes.remHl}>
+                        <FontAwesomeIcon icon={faSearch} className="mr-2"/>
                         Αναζήτηση
                     </Button>
                 </InputGroupAddon>
