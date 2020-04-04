@@ -17,6 +17,8 @@ class Store(AbstractBaseUser):
     time_slot_duration = models.SmallIntegerField()
     lat = models.CharField(max_length=20)
     lng = models.CharField(max_length=20)
+    telephone = models.CharField(max_length=10)
+    
     
     USERNAME_FIELD = 'email'
 
@@ -54,10 +56,13 @@ class Item(models.Model):
     name = models.CharField(max_length=40)
     quantity = models.IntegerField()
     last_updated = models.DateTimeField(auto_now=True)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
 
+    def __str__(self):
+        return self.name
 
 class Timeslot(models.Model):
     store = models.ForeignKey(Store, on_delete=models.CASCADE, related_name='timeslots', default=1)
     emails = ArrayField(base_field=models.CharField(max_length=60))
-    start_time = models.TimeField(default=timezone.now())
-    end_time = models.TimeField(default=timezone.now())
+    start_time = models.TimeField()
+    end_time = models.TimeField()
