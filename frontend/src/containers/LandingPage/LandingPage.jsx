@@ -27,36 +27,34 @@ export default function LandingPage() {
     })
     const [{address, addressValid}, setAddress] = useState({address: '', addressValid: true});
 
-
-    // submitHandler = (event) => {
-    //     authAPI.signUp(axios, formData).then(res => {
-    //         // alert("Form Submitted");
-    //         console.log(res);
-    //         if (!res) {
-    //             return;
-    //         }
-
-    //         if (!res.success) {
-    //             console.log("signup NOT successful");
-    //             if (res.data.message === "Sign up error: email is already taken") {
-    //                 this.setFormField("email", "This email address is connected with an existing account", 'is-invalid', null);
-    //             }
-    //             else if (res.data.message === "Sign up error: mismatching password") {
-    //                 this.setFormField("password1", "Passwords don't match", "is-invalid", null);
-    //             }
-    //         }
-    //         else {
-    //             console.log("signup Successful");
-    //             const { token, ...user } = res.data;
-    //             this.props.onSignUpSuccess(token, user);
-    //             this.props.history.replace("/feed");
-    //         }
-    //     });
-    // }
-
     const onSubmit = () => {
-        storesApi.getStores(axios)
-            .then(res => console.log(res));
+        if (markerPos.hasLocation == false) {
+            nominatimApi.getGeoLocation(axios, address.replace(/,/g, ' '))
+                .then(data => {
+                    if (data && data.features.length > 0) {
+                        const coords = data.features[0].geometry.coordinates;
+                        // Coordinates are given in reverse order from API
+
+                        const searchParams = {
+                            searchTerm: query,
+                            lat: coords[1].toFixed(9),
+                            lng: coords[0].toFixed(9)
+                        }
+                        storesApi.searchStores(axios, searchParams)
+                            .then(res => console.log(res));
+                    }
+                });
+        }
+        else {
+            const searchParams = {
+                searchTerm: query,
+                lat: markerPos.selectedLat,
+                lng: markerPos.selectedLng
+            }
+    
+            storesApi.searchStores(axios, searchParams)
+                .then(res => console.log(res));
+        }
     }
 
     //----------------------------------------------------------------
