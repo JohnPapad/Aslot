@@ -107,7 +107,7 @@ export const checkValidity = ( value, rules, name ) => {
         }
 
         const streetNum = streetNameNum[streetNameNum.length-1]
-        const pattern = /^\d+$/;
+        const pattern = /\d/; 
         if (!pattern.test( streetNum ) )
         {
             return {report: false, msg: "Εισάγετε σωστή διεύθυνση"};
