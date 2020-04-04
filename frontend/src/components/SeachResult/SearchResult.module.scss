@@ -1,0 +1,30 @@
+@import "../../styles/colors";
+@import "../../styles/texts";
+
+
+.store_pres{
+    border: 2px rgb(32, 31, 28);
+    box-shadow: 1px 1px 8px 2px #ccc;
+    border-radius: 5px;
+}
+
+.shop_name {
+    font: {
+        size: $fontMD;
+        weight: bold;
+    };
+    color: $primColor;
+}
+
+
+.item {
+    font: {
+        // size: $fontMD;
+        weight: bold;
+    };
+    // color: $primColor;
+}
+
+
+
+

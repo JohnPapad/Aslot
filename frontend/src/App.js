@@ -21,6 +21,7 @@ import Feed from './containers/Feed/Feed';
 
 import LandingPage from './containers/LandingPage/LandingPage';
 import StorePage from './containers/StorePage/StorePage';
+import SearchResults from './containers/SearchResults/SearchResults';
 
 // https://www.youtube.com/watch?v=U9wuQmW8F_0
 
@@ -34,7 +35,7 @@ class App extends Component {
 
                 <Switch>
                     <Route exact path="/signup" component={SignUp} />
-                    <Route exact path="/report" component={Report} />
+                    <Route exact path="/searchresults" component={SearchResults} />
                     <Route exact path="/reportform" component={CreateReportPage} />
                     <Route exact path="/feed" component={Feed} />
                     <Route exact path="/logout" component={LogOut} />
