@@ -62,10 +62,13 @@ class Search(APIView):
         # TODO find valid_stores first then search for name__contains
         radius = 3.0
         valid_stores = []
-        for store in mds.Store.objects.filter(items__name__contains=search_term):
+        for store in mds.Store.objects.filter(items__name__iexact=search_term): # case insensitive
             if utility.euclidean_distance_in_km(cust_lat, cust_lng, store.lat, store.lng) < radius:
-                valid_stores.append(store)
-        response_dict["stores"] = srs.StoreSerializer(valid_stores, many=True).data
+                for item in  mds.Item.objects.filter(store=store.id, name__iexact=search_term):
+                    srs_dict = srs.StoreSerializer(store).data
+                    srs_dict["item"] = srs.ItemSerializer(item).data
+                    valid_stores.append(srs_dict)
+        response_dict["stores"] = valid_stores
         return Response(response_dict, status=status.HTTP_200_OK)
 
 

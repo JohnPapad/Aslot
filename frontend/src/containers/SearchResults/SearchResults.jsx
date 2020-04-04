@@ -1,5 +1,5 @@
-import React from 'react';
-import {  withRouter } from 'react-router-dom';
+import React, { useState } from 'react';
+import {  useHistory } from 'react-router-dom';
 import { Spinner, Container, Row, Col } from 'reactstrap';
 
 import { useDispatch, useSelector } from "react-redux";
@@ -10,9 +10,24 @@ import LocationMap from '../../components/UI/LocationMap/LocationMap';
 import SearchShopInput from '../LandingPage/SearchShopInput/SearchShopInput';
 
 export default function SearchResults(props) {
+    const search = useSelector(state => state.searchReducer);
     const stores = useSelector(state => state.storeReducer.stores);
-    console.log('STORES');
-    console.log(stores);
+    const history = useHistory();
+    
+    const [query, setQuery] = useState(search.query);
+    const [startingPosAndPins, setStartingPosAndPins] = useState({
+        startingLat: null, 
+        startingLng: null,
+        pins: null
+    })
+
+    const addressInfo = search.addressInfo;
+    const [markerPos, setMarkerPos] = useState({
+        selectedLat: addressInfo.lat,
+        selectedLng: addressInfo.lng,
+        hasLocation: addressInfo.lat ? true : false,
+    })
+    const [{address, addressValid}, setAddress] = useState({address: addressInfo.address, addressValid: true});
     const dispatch = useDispatch();
 
     const makePinsForRightMap = () => {
@@ -26,12 +41,12 @@ export default function SearchResults(props) {
                 <Col xs="6" className="">
                     <Row className="pb-5">
                         <SearchShopInput
-                            // address={address}
-                            // addressValid={addressValid}
-                            // setAddress={setAddress}
+                            address={address}
+                            addressValid={addressValid}
+                            setAddress={setAddress}
 
-                            // query={query}
-                            // setQuery={setQuery}
+                            query={query}
+                            setQuery={setQuery}
 
                             addressDisabled
                         />

@@ -9,27 +9,42 @@ import SearchShopInput from './SearchShopInput/SearchShopInput';
 
 import { useDispatch, useSelector } from "react-redux";
 import { storeActions } from '../../stores/storeStore';
+import { searchActions } from '../../stores/searchStore';
+
 
 import { nominatimApi } from '../../services/nominatimApi';
 import { storesApi } from '../../services/storesApi';
 import LocationMap from '../../components/UI/LocationMap/LocationMap';
 
 export default function LandingPage() {
-
+    const search = useSelector(state => state.searchReducer);
     const history = useHistory();
-    const [query, setQuery] = useState('');
+    
+    const [query, setQuery] = useState(search.query);
     const [startingPosAndPins, setStartingPosAndPins] = useState({
         startingLat: null, 
         startingLng: null,
         pins: null
     })
+
+    const addressInfo = search.addressInfo;
     const [markerPos, setMarkerPos] = useState({
-        selectedLat: null,
-        selectedLng: null,
-        hasLocation: false,
+        selectedLat: addressInfo.lat,
+        selectedLng: addressInfo.lng,
+        hasLocation: addressInfo.lat ? true : false,
     })
-    const [{address, addressValid}, setAddress] = useState({address: '', addressValid: true});
+    const [{address, addressValid}, setAddress] = useState({address: addressInfo.address, addressValid: true});
     const dispatch = useDispatch();
+
+    const updateSearchStore = (query, address, lat, lng) => {
+        dispatch(searchActions.setQuery(query));
+        const addressInfo = {
+            address,
+            lat,
+            lng
+        }
+        dispatch(searchActions.setAddressInfo(addressInfo));
+    }
 
     const onSubmit = () => {
         if (markerPos.hasLocation == false) {
@@ -38,7 +53,10 @@ export default function LandingPage() {
                     if (data && data.features.length > 0) {
                         const coords = data.features[0].geometry.coordinates;
                         // Coordinates are given in reverse order from API
-
+                        
+                        // First set search store
+                        updateSearchStore(query, address, coords[1].toFixed(9), coords[0].toFixed(9))
+                        
                         const searchParams = {
                             searchTerm: query,
                             lat: coords[1].toFixed(9),
@@ -54,12 +72,14 @@ export default function LandingPage() {
                 });
         }
         else {
+            // First set search store
+            updateSearchStore(query, address, markerPos.selectedLat, markerPos.selectedLng)
+
             const searchParams = {
                 searchTerm: query,
                 lat: markerPos.selectedLat,
                 lng: markerPos.selectedLng
             }
-    
             storesApi.searchStores(axios, searchParams)
                 .then(res => {
                     // console.log(res);
