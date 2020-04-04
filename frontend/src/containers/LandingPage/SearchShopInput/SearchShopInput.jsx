@@ -22,14 +22,14 @@ export default function SearchShopMap(props) {
         <Col className="p-0">
             <InputGroup className="p-0">
                 <Input
-                    id={"signup_shop_address"}
+                    id={classes.remHl}
                     value={props.query}
                     type={"text"}
                     placeholder={"Τι ψάχνεις;"}
                     onChange={(e) => props.setQuery(e.target.value)}
                 />
                 <Input
-                    id={"signup_shop_address"}
+                    id={classes.remHl}
                     // name={"Η διεύθυνσή σου"}
                     value={props.address}
                     type={"text"}
