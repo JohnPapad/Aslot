@@ -47,7 +47,7 @@ export default function LandingPage() {
                         storesApi.searchStores(axios, searchParams)
                             .then(res => {
                                 // console.log(res);
-                                dispatch(storeActions.setStores(res));
+                                dispatch(storeActions.setStores(res.stores));
                                 history.push('/searchresults');
                             });
                     }
@@ -63,7 +63,7 @@ export default function LandingPage() {
             storesApi.searchStores(axios, searchParams)
                 .then(res => {
                     // console.log(res);
-                    dispatch(storeActions.setStores(res));
+                    dispatch(storeActions.setStores(res.stores));
                     history.push('/searchresults');
                 });
         }

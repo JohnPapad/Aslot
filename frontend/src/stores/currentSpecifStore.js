@@ -2,32 +2,43 @@ import produce from 'immer';
 
 // Action types
 const actionTypes = {
-    SET_STORES: 'aslot/store/SET_STORES',
-    DELETE_STORES: 'aslot/store/DELETE_STORES'
+    SET_CURR_ITEMS: 'aslot/store/SET_CURR_ITEMS',
+    SET_CURR_TIMESLOTS: 'aslot/store/CURR_TIMESLOTS',
+
+    DELETE_ALL: 'aslot/store/DELETE_ALL'
 }
 
 // Action creators
-const setStores = (stores) => {
+const setCurrItems = (items) => {
     return {
-        type: actionTypes.SET_STORES,
-        stores,
-    };
-};
+        type: actionTypes.SET_CURR_ITEMS,
+        items,
+    }
+}
 
-const deleteStores = () => {
+const setCurrTimeslots = (timeslots) => {
+    return {
+        type: actionTypes.SET_CURR_TIMESLOTS,
+        timeslots,
+    }
+}
+
+const deleteAll = () => {
     return {
         type: actionTypes.DELETE_STORES,
     };
 }
 
 export const storeActions = {
-    setStores,
-    deleteStores,
+    setCurrItems,
+    setCurrTimeslots,
+    deleteAll
 }
 
 // Reducer Initialization
 const initialState = {
-    stores: []
+    items: [],
+    timeslots: []
 };
 
 // Reducer    
@@ -36,9 +47,13 @@ const reducer = ( state = initialState, action ) =>
         switch ( action.type ) {
             case actionTypes.SET_STORES: 
                 draft.stores = action.stores;
+                draft.items = [];
+                draft.timeslots = [];
                 return;
             case actionTypes.DELETE_STORES: 
                 draft.stores = [];
+                draft.items = [];
+                draft.timeslots = [];
                 return;
         }
     });
