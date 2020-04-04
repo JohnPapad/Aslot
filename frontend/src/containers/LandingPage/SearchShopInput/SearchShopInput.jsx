@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
 
-
 import axios from '../../../services/axiosConfig';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -38,9 +37,10 @@ export default function SearchShopMap(props) {
                     onChange={(e) => props.setAddress(e.target.value)}
                     onBlur={(e) => props.updateMap ? props.updateMap() : ''}
                     invalid = {props.invalidAddress}
+                    disabled = {props.addressDisabled}
                 />
                 <InputGroupAddon addonType="append">
-                    <Button className="font-weight-bold" id={classes.remHl}>
+                    <Button className="font-weight-bold" id={classes.remHl} onClick={props.onSubmit}>
                         <FontAwesomeIcon icon={faSearch} className="mr-2"/>
                         Αναζήτηση
                     </Button>

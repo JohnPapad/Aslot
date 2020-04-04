@@ -14,10 +14,7 @@ import { Container, Row, Col } from 'reactstrap';
 import SignUp from './containers/auth/SignUp/SignUp';
 // import LogOut from './containers/auth/LogOut/LogOut';
 
-import Report from './containers/Report/Report';
 import LogOut from './containers/auth/LogOut/LogOut';
-import CreateReportPage from './components/CreateReportPage/CreateReportPage';
-import Feed from './containers/Feed/Feed';
 
 import LandingPage from './containers/LandingPage/LandingPage';
 import StorePage from './containers/StorePage/StorePage';
@@ -36,15 +33,14 @@ class App extends Component {
                 <Switch>
                     <Route exact path="/signup" component={SignUp} />
                     <Route exact path="/searchresults" component={SearchResults} />
-                    <Route exact path="/reportform" component={CreateReportPage} />
-                    <Route exact path="/feed" component={Feed} />
                     <Route exact path="/logout" component={LogOut} />
 
                     <Route exact path="/" component={LandingPage} />
                     <Route exact path="/store" component={StorePage} />
                     {/* <Route exact path="/register" component={Register} />
                     <Route exact path="/browse" component={BrowseAuctions} />
-
+                    <Route exact path="/reportform" component={CreateReportPage} />
+                    <Route exact path="/feed" component={Feed} />
                     <Route exact path="/viewauction/:id" component={ViewAuction} />
 
                     <Route path="/notfound" component={NotFound} />

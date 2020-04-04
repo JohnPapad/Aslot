@@ -7,8 +7,6 @@ import axios from '../../services/axiosConfig';
 import { Container, Row, Col } from 'reactstrap';
 import SearchShopInput from './SearchShopInput/SearchShopInput';
 
-import MyBtn from '../../components/UI/MyBtn/MyBtn';
-
 import { nominatimApi } from '../../services/nominatimApi';
 import { storesApi } from '../../services/storesApi';
 import LocationMap from '../../components/UI/LocationMap/LocationMap';
@@ -56,6 +54,11 @@ export default function LandingPage() {
     //     });
     // }
 
+    const onSubmit = () => {
+        storesApi.getStores(axios)
+            .then(res => console.log(res));
+    }
+
     //----------------------------------------------------------------
 
 
@@ -74,18 +77,20 @@ export default function LandingPage() {
     }, [])
     
     const updateMap = () => {
-        nominatimApi.getGeoLocation(axios, address.replace(/,/g, ' '))
-            .then(data => {
-                if (data && data.features.length > 0) {
-                    const coords = data.features[0].geometry.coordinates;
-                    // Coordinates are given in reverse order from API
-                    setStartingPosAndPins({
-                        startingLat: coords[1].toFixed(9),
-                        startingLng: coords[0].toFixed(9),
-                        pins: startingPosAndPins.pins
-                    });
-                }
-            });
+        if (address) {
+            nominatimApi.getGeoLocation(axios, address.replace(/,/g, ' '))
+                .then(data => {
+                    if (data && data.features.length > 0) {
+                        const coords = data.features[0].geometry.coordinates;
+                        // Coordinates are given in reverse order from API
+                        setStartingPosAndPins({
+                            startingLat: coords[1].toFixed(9),
+                            startingLng: coords[0].toFixed(9),
+                            pins: startingPosAndPins.pins
+                        });
+                    }
+                });
+        }
     }
 
     const handleMapClick = (e) => {
@@ -125,6 +130,7 @@ export default function LandingPage() {
                     setQuery={setQuery}
 
                     updateMap={updateMap}
+                    onSubmit={onSubmit}
                 />
             </Row>
 
