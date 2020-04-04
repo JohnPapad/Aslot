@@ -8,7 +8,6 @@ import SearchShopInput from './SearchShopInput/SearchShopInput';
 
 export default function LandingPage() {
 
-
     return (
         <Container id={classes.content}>
             <Row className={"justify-content-center" + classes.pad} >    
