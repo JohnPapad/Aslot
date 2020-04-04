@@ -21,6 +21,8 @@ import LogOut from './containers/auth/LogOut/LogOut';
 import CreateReportPage from './components/CreateReportPage/CreateReportPage';
 import Feed from './containers/Feed/Feed';
 
+import SearchResults from './containers/SearchResults/SearchResults';
+
 // https://www.youtube.com/watch?v=U9wuQmW8F_0
 
 class App extends Component {
@@ -34,7 +36,7 @@ class App extends Component {
                 <Switch>
                     <Route exact path="/signin" component={SignInPage} />
                     <Route exact path="/signup" component={SignUp} />
-                    <Route exact path="/report" component={Report} />
+                    <Route exact path="/searchresults" component={SearchResults} />
                     <Route exact path="/reportform" component={CreateReportPage} />
                     <Route exact path="/feed" component={Feed} />
                     <Route exact path="/logout" component={LogOut} />
