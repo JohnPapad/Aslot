@@ -542,8 +542,8 @@ class SignUp extends React.Component {
                 </CardBody>
 
                 <CardFooter>
-                    <MyBtn classes="float-right" size="MD" clickedHandler={this.submitHandler}>
-                        <span style={{ textShadow: "2px 2px 2px black" }}>
+                    <MyBtn borderWidth='0' classes="float-right" size="MD" clickedHandler={this.submitHandler}>
+                        <span >
                             Εγγραφή
                         </span>
                     </MyBtn>
