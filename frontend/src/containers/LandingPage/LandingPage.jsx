@@ -110,8 +110,6 @@ export default function LandingPage() {
                     });
                 }
             })
-
-        dispatch(specifActions.redirectToStore(axios, 3, history));
     }, [])
     
     const updateMap = () => {
