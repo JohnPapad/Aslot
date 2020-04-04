@@ -13,12 +13,14 @@ import axios from './services/axiosConfig';
 import { Container, Row, Col } from 'reactstrap';
 import SignUp from './containers/auth/SignUp/SignUp';
 // import LogOut from './containers/auth/LogOut/LogOut';
-import LandingPage from './containers/LandingPage/LandingPage';
 
 import Report from './containers/Report/Report';
 import LogOut from './containers/auth/LogOut/LogOut';
 import CreateReportPage from './components/CreateReportPage/CreateReportPage';
 import Feed from './containers/Feed/Feed';
+
+import LandingPage from './containers/LandingPage/LandingPage';
+import StorePage from './containers/StorePage/StorePage';
 
 // https://www.youtube.com/watch?v=U9wuQmW8F_0
 
@@ -38,6 +40,7 @@ class App extends Component {
                     <Route exact path="/logout" component={LogOut} />
 
                     <Route exact path="/" component={LandingPage} />
+                    <Route exact path="/store" component={StorePage} />
                     {/* <Route exact path="/register" component={Register} />
                     <Route exact path="/browse" component={BrowseAuctions} />
 

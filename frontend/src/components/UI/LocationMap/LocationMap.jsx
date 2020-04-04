@@ -31,7 +31,7 @@ export default function LocationMap(props) {
                     <div className={classes.map}>
                         <Map
                             center={{ lat: startingLat, lng: startingLng }}
-                            zoom={15}
+                            zoom={14}
                             onClick={handleMapClick}
                             // onLocationfound={this.handleLocationFound}
                             //ref={this.mapRef}

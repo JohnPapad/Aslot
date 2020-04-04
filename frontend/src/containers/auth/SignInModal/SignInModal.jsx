@@ -208,8 +208,15 @@ class SignIn extends React.Component {
         ));
 
         return (            
-            <Modal isOpen={this.props.isSignInModalOpen} toggle={this.props.toggleSignInModalOpen} id={classes.content}>
-                <ModalHeader toggle={this.props.toggleSignInModalOpen} id={classes.header}>Modal title</ModalHeader>
+            <Modal 
+                isOpen={this.props.isSignInModalOpen} 
+                toggle={this.props.toggleSignInModalOpen} 
+                id={classes.content} 
+                className="modal-sm"
+                centered 
+                fade
+            >
+                <ModalHeader toggle={this.props.toggleSignInModalOpen} id={classes.header}>Sign In</ModalHeader>
                 <ModalBody>
                     <p id={classes.form_text} className="small ">Sign In using your existing account to have full access to all features.</p>
 
