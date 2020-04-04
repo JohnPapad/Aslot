@@ -47,6 +47,7 @@ class OpeningHours(models.Model):
         return u'%s: %s - %s' % (self.get_weekday_display(), self.from_hour, self.to_hour)
 
 class Item(models.Model):
+    store = models.ForeignKey(Store, on_delete=models.CASCADE, related_name='items')
     name = models.CharField(max_length=40)
     quantity = models.IntegerField()
     last_updated = models.DateTimeField(auto_now=True)

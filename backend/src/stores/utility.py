@@ -19,3 +19,15 @@ def euclidean_distance_in_km(lat1, lon1, lat2, lon2):
         c = 2 * atan2(sqrt(a), sqrt(1 - a))
         distance = R * c
         return distance/1000
+
+def get_stores_within_radius(stores, radius, ref_lat, ref_lng):
+        pinpoint_list = []
+        for store in stores:
+            print('{0} is {1} away from the center'.format(store.address, str(euclidean_distance_in_km(ref_lat, ref_lng, store.lat, store.lng))))
+            if euclidean_distance_in_km(ref_lat, ref_lng, store.lat, store.lng) < radius:
+                pinpoint_list.append({  "lat": store.lat,
+                                        "lng": store.lng,
+                                        "store_name": store.name,
+                                        "store_id": store.id})
+        
+        return pinpoint_list

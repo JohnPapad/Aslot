@@ -1,7 +1,7 @@
 import React from 'react';
 import {  withRouter } from 'react-router-dom';
 import styles from './SearchResult.module.scss';
-import { Container, Col, Row, Button, Collapse } from 'reactstrap';
+import { Container, Col, Row, Button, Badge } from 'reactstrap';
 
 import Header from '../../components/UI/Header/Header';
 import MyBtn from '../../components/UI/MyBtn/MyBtn';
@@ -60,9 +60,11 @@ const searchResult = (props) => {
                             </div>
 
                             <div className="pr-2">
-                                <span className="border pr-2 pl-2 pt-1 pb-1">
+                                {/* <span className="border pr-2 pl-2 pt-1 pb-1">
                                     12
-                                </span>
+                                </span> */}
+
+                                <Badge pill>14</Badge>
 
                                 <span className="small ml-2">
                                     διαθέσιμα

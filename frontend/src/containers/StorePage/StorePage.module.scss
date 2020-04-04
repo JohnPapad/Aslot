@@ -2,3 +2,13 @@
 @import "../../styles/gradients";
 @import "../../styles/texts";
 @import "../../styles/buttons";
+
+
+#content {
+    padding: {
+        left: 10vw;
+        right: 10vw;
+    };
+
+    // height: 100vh;
+}

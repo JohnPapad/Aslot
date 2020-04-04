@@ -1,8 +1,9 @@
+from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 
-#from . import serializers as srs
+from . import serializers as srs
 from . import models as mds
 from . import utility
 
@@ -12,32 +13,58 @@ class MapPinpoints(APIView):
     
     def get(self, request):
         if "lat" in request.GET.keys() and "lng" in request.GET.keys():
-            lat = request.data["lat"]
-            lng = request.data["lng"]
+            lat = request.GET["lat"]
+            lng = request.GET["lng"]
         else:
             # default center near omonia athens
-            lat = "38.075331037"
-            lng = "23.794199477"
+            lat = "37.9834132"
+            lng = "23.727644"
         
         # get list of pinpoints within radius in km
         radius = 1.0
-        pinpoint_list = []
         all_stores = mds.Store.objects.all()
-        for store in all_stores:
-            # print('{0} is {1}m away from the center'.format(store.address, str(utility.euclidean_distance_in_km(lat, lng, store.lat, store.lng))))
-            if utility.euclidean_distance_in_km(lat, lng, store.lat, store.lng) < radius:
-                pinpoint_list.append({  "lat": store.lat,
-                                        "lng": store.lng,
-                                        "store_name": store.name,
-                                        "store_id": store.id})
-
+        pinpoint_list = utility.get_stores_within_radius(all_stores, radius, lat, lng)
         response_dir = {"center": {"lng":lng,"lat":lat}, "pins": pinpoint_list}
         return Response(response_dir)
 
+
+# get -> a user is searching
+class Search(APIView):
+    """
+    Related to customer search requests
+    """
+    permission_classes = (AllowAny,)
+    
+    def get(self, request):
+        response_dict = {"success":False}
+        if "searchTerm" not in request.GET.keys():
+            return Response(response_dict, status=status.HTTP_400_BAD_REQUEST)
+        
+        search_term = request.GET["searchTerm"]
+        cust_lat = request.GET["lat"]
+        cust_lng = request.GET["lng"]
+        valid_stores = mds.Store.objects.filter(items__name__contains=search_term)
+        radius=3.0 #search within 3km
+        pinpoint_list = utility.get_stores_within_radius(valid_stores, radius, cust_lat, cust_lng)
+        response_dict["data"] = pinpoint_list
+        response_dict["success"] = True
+        return Response(response_dict, status=status.HTTP_200_OK)
+
 class Inventory(APIView):
+    """
+    Related to store inventory requests
+    """
 
     permission_classes = (AllowAny,)
     
     def get(self, request):
-        
-        
+        pass
+
+class Booking(APIView):
+    "Related to item and slot booking requests by a customer for a specific shop"
+
+    permission_classes = (AllowAny,)
+
+    def get(self, request):
+        pass
+
