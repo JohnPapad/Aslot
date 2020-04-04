@@ -30,6 +30,9 @@ class MapPinpoints(APIView):
 
 # get -> a user is searching
 class Search(APIView):
+    """
+    Related to customer search requests
+    """
     permission_classes = (AllowAny,)
     
     def get(self, request):
@@ -46,3 +49,22 @@ class Search(APIView):
         response_dict["data"] = pinpoint_list
         response_dict["success"] = True
         return Response(response_dict, status=status.HTTP_200_OK)
+
+class Inventory(APIView):
+    """
+    Related to store inventory requests
+    """
+
+    permission_classes = (AllowAny,)
+    
+    def get(self, request):
+        pass
+
+class Booking(APIView):
+    "Related to item and slot booking requests by a customer for a specific shop"
+
+    permission_classes = (AllowAny,)
+
+    def get(self, request):
+        pass
+
