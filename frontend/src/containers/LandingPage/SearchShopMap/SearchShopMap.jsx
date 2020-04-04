@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 
 
@@ -13,7 +13,7 @@ import MyInput from '../../../components/UI/MyInput/MyInput';
 import MyBtn from '../../../components/UI/MyBtn/MyBtn';
 
 import { nominatimApi } from '../../../services/nominatimApi';
-import { userActions } from '../../../stores/userStore';
+import { storesApi } from '../../../services/storesApi';
 import LocationMap from '../../../components/UI/LocationMap/LocationMap';
 
 
@@ -56,6 +56,17 @@ export default function SearchShopMap() {
     //         }
     //     });
     // }
+
+
+    const getPins = () => {
+        console.log("TESTING PINS API");
+        storesApi.getPins(axios)
+            .then(res => console.log(res));
+    }
+
+    useEffect(() => {
+        getPins();
+    })
 
 
     //---------------------Map Stuff------------------------
