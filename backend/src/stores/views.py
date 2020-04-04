@@ -24,7 +24,7 @@ class MapPinpoints(APIView):
         pinpoint_list = []
         all_stores = mds.Store.objects.all()
         for store in all_stores:
-            print('{0} is {1} away from the center'.format(store.address, str(utility.euclidean_distance_in_km(lat, lng, store.lat, store.lng))))
+            # print('{0} is {1}m away from the center'.format(store.address, str(utility.euclidean_distance_in_km(lat, lng, store.lat, store.lng))))
             if utility.euclidean_distance_in_km(lat, lng, store.lat, store.lng) < radius:
                 pinpoint_list.append({  "lat": store.lat,
                                         "lng": store.lng,
@@ -33,4 +33,11 @@ class MapPinpoints(APIView):
 
         response_dir = {"center": {"lng":lng,"lat":lat}, "pins": pinpoint_list}
         return Response(response_dir)
+
+class Inventory(APIView):
+
+    permission_classes = (AllowAny,)
+    
+    def get(self, request):
+        
         
