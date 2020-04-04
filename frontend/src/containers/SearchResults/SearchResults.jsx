@@ -11,6 +11,8 @@ import SearchShopInput from '../LandingPage/SearchShopInput/SearchShopInput';
 
 export default function SearchResults(props) {
     const stores = useSelector(state => state.storeReducer.stores);
+    console.log('STORES RE MOUNIA');
+    console.log(stores);
     const dispatch = useDispatch();
     
     return (

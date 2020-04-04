@@ -8,7 +8,7 @@ import { Container, Row, Col } from 'reactstrap';
 import SearchShopInput from './SearchShopInput/SearchShopInput';
 
 import { useDispatch, useSelector } from "react-redux";
-import { storeActions } from '../../stores/storeStore/';
+import { storeActions } from '../../stores/storeStore';
 
 import { nominatimApi } from '../../services/nominatimApi';
 import { storesApi } from '../../services/storesApi';
@@ -46,8 +46,9 @@ export default function LandingPage() {
                         }
                         storesApi.searchStores(axios, searchParams)
                             .then(res => {
-                                console.log(res);
+                                // console.log(res);
                                 dispatch(storeActions.setStores(res));
+                                history.push('/searchresults');
                             });
                     }
                 });
@@ -61,8 +62,9 @@ export default function LandingPage() {
     
             storesApi.searchStores(axios, searchParams)
                 .then(res => {
-                    console.log(res);
+                    // console.log(res);
                     dispatch(storeActions.setStores(res));
+                    history.push('/searchresults');
                 });
         }
     }
