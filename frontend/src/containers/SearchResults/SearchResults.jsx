@@ -18,7 +18,7 @@ class SearchResults extends React.Component {
                 <Row>
                     <Col></Col>
 
-                    <Col xs="6" className="border">
+                    <Col xs="6" className="">
                         <SearchResult />
                         <SearchResult />
                     
@@ -26,7 +26,7 @@ class SearchResults extends React.Component {
 
                     <Col></Col>
 
-                    <Col xs="3" className="border"> 
+                    <Col xs="3" className="border p-0"> 
 
                         <LocationMap   
                             mapHeight={document.documentElement.clientHeight * 0.7}
