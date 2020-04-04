@@ -6,7 +6,7 @@ import axios from '../../../services/axiosConfig';
 
 
 import classes from './SearchShopInput.module.scss';
-import { Container, Row } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 
 
 import MyInput from '../../../components/UI/MyInput/MyInput';
@@ -50,19 +50,19 @@ export default function SearchShopMap() {
     //----------------------------------------------------------------
 
     return (
-        <Container id={classes.signup_form}>
-            <Row className="justify-content-center">    
+        <Container>
+                <Col>
                 <MyInput
                     id={"signup_shop_address"}
-                    name={"Ψαξε"}
+                    name={"Τι ψάχνεις;"}
                     value={query}
                     type={"text"}
-                    placeholder={"Εδώ"}
+                    placeholder={"Αντικείμενο"}
                     feedback={null}
                     validity={''}
                     changed={(e) => setQuery(e.target.value)}
-                />            
-            </Row>
+                />
+                </Col>         
         </Container>
     );
 }

@@ -61,11 +61,13 @@ export default function SearchShopMap() {
     useEffect(() => {
         storesApi.getPins(axios)
             .then(res => {
-                setStartingPosAndPins({
-                    startingLat: res.center.lat, 
-                    startingLng: res.center.lng,
-                    pins: res.pins
-                });
+                if (res) {
+                    setStartingPosAndPins({
+                        startingLat: res.center.lat, 
+                        startingLng: res.center.lng,
+                        pins: res.pins
+                    });
+                }
             })
     }, [])
 
@@ -112,12 +114,12 @@ export default function SearchShopMap() {
     }
 
     return (
-        <Container id={classes.signup_form}>
+        <Container>
             <Col >
                 {/* <Row className="justify-content-center">     */}
                     <MyInput
                         id={"signup_shop_address"}
-                        name={"Διεύθυνση"}
+                        name={"Η διεύθυνσή σου"}
                         value={address}
                         type={"text"}
                         placeholder={"Οδός Αριθμός"}

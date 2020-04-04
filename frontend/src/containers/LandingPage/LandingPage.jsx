@@ -10,7 +10,7 @@ export default function LandingPage() {
 
     return (
         <Container id={classes.content}>
-            <Row className={"justify-content-center" + classes.pad} >    
+            <Row className={"justify-content-center pb-3"}>    
                 <SearchShopInput/>
             </Row>
 
