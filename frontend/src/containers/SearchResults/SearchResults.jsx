@@ -1,17 +1,17 @@
 import React from 'react';
 import {  withRouter } from 'react-router-dom';
 import { Spinner, Container, Row, Col } from 'reactstrap';
+
+import { useDispatch, useSelector } from "react-redux";
+
 import styles from './SearchResults.module.scss';
 import SearchResult from '../../components/SeachResult/SearchResult';
-
 import LocationMap from '../../components/UI/LocationMap/LocationMap';
-
 import SearchShopInput from '../LandingPage/SearchShopInput/SearchShopInput';
 
 export default function SearchResults(props) {
-
-
-        
+    const stores = useSelector(state => state.storeReducer.stores);
+    const dispatch = useDispatch();
     
     return (
         <Container fluid id={styles.content}>
@@ -30,6 +30,12 @@ export default function SearchResults(props) {
                             addressDisabled
                         />
                     </Row>
+
+                    {/* {stores.map(store => {
+                        return (
+                            <SearchResult />
+                        )
+                    })} */}
                     <SearchResult />
                     <SearchResult />
                 

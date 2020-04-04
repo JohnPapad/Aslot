@@ -17,6 +17,11 @@ import { userActions } from '../../../stores/userStore';
 
 export default function SearchShopMap(props) {
     
+    const updateAddress = (val) => {
+        const valid = val != '';
+        props.setAddress({address: val, addressValid: valid});
+    }
+
     return (
         <Col className="p-0">
             <InputGroup className="p-0">
@@ -34,7 +39,7 @@ export default function SearchShopMap(props) {
                     type={"text"}
                     readOnly={props.readOnly}
                     placeholder={"Που είσαι; Οδός Αριθμός, Δήμος"}
-                    onChange={(e) => props.setAddress(e.target.value)}
+                    onChange={(e) => updateAddress(e.target.value)}
                     onBlur={(e) => props.updateMap ? props.updateMap() : ''}
                     invalid = {props.invalidAddress}
                     disabled = {props.addressDisabled}

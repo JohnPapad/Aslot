@@ -2,14 +2,14 @@ import produce from 'immer';
 
 // Action types
 const actionTypes = {
-    REFRESH_STORES: 'aslot/store/REFRESH_STORES',
+    SET_STORES: 'aslot/store/SET_STORES',
     DELETE_STORES: 'aslot/store/DELETE_STORES'
 }
 
 // Action creators
-const refreshStores = (stores) => {
+const setStores = (stores) => {
     return {
-        type: actionTypes.REFRESH_STORES,
+        type: actionTypes.SET_STORES,
         stores,
     };
 };
@@ -20,8 +20,8 @@ const deleteStores = () => {
     };
 }
 
-export const feedActions = {
-    refreshStores,
+export const storeActions = {
+    setStores,
     deleteStores,
 }
 
@@ -34,7 +34,7 @@ const initialState = {
 const reducer = ( state = initialState, action ) => 
     produce(state, draft => {
         switch ( action.type ) {
-            case actionTypes.REFRESH_STORES: 
+            case actionTypes.SET_STORES: 
                 draft.stores = action.stores;
                 return;
             case actionTypes.DELETE_STORES: 
