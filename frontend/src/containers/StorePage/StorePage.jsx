@@ -8,7 +8,7 @@ import TimeSlotModal from '../../components/TimeSlotModal/TimeSlotModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPhoneAlt, faClock, faMapMarkedAlt, faHourglassHalf, faUsers, faUserClock, faAt } from '@fortawesome/free-solid-svg-icons';
 import LocationMap from '../../components/UI/LocationMap/LocationMap';
-
+import InventoryItem from './InventoryItem/InventoryItem';
 
 export default function StorePage() {
 
@@ -118,34 +118,16 @@ export default function StorePage() {
             </Row>
 
             <Row className="mt-5">
-                <div class="d-flex align-items-stretch">
-                    <div className="border p-3">
-                        <div>
-                            Χειρουργικες Μασκες
-                        </div>
-                        <div>
-                            Διαθεσιμα τεμαχια: 10
-                        </div>
-                        <div>
-                            <Button>
-                                Κρατησησ
-                            </Button>
-                        </div>
-                    </div>
+                <div class="d-flex align-items-stretch" width="100%">
+                    <InventoryItem selected={true}/>
+                    <InventoryItem/>
+                    <InventoryItem/>
+                    <InventoryItem/>
+                    <InventoryItem/>
 
-                    <div className="border">
-                        <div>
-                            Χειρουργικες Μασκες
-                        </div>
-                        <div>
-                            Διαθεσιμα τεμαχια: 10
-                        </div>
-                        <div>
-                            <Button>
-                                Κρατησησ
-                            </Button>
-                        </div>
-                    </div>
+                    <InventoryItem/>
+                    <InventoryItem/>
+                    <InventoryItem/>
                 </div>
             </Row>
 
