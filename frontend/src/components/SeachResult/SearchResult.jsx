@@ -14,6 +14,10 @@ const bookBtnClickedHandler = (storeId, history) => {
     history.push("/store/" + storeId);
 }
 
+const addressClickedHandler = (storeId) => {
+    alert("address handler")
+}
+
 
 const searchResult = (props) => {
 
@@ -27,15 +31,12 @@ const searchResult = (props) => {
 
             <Col xs="9" className="p-0 m-0 pl-2 d-flex-column ">
                 <div className="d-flex align-items-center">
-                    <div className={styles.shop_name}>
+                    <div className={styles.shop_name} onClick={()=>bookBtnClickedHandler("3", props.history)}>
                         Φαρμακείο Παπαδοπούλου
                     </div>
 
-                    <div className="text-muted small font-weight-bold ml-4 mr-2">
-                        <FontAwesomeIcon icon={faMapMarkedAlt} />
-                    </div>
-
-                    <div className="text-muted small font-weight-bold ">
+                    <div className={styles.address +" text-muted small font-weight-bold ml-4"} onClick={()=>addressClickedHandler("ID")}>
+                        <FontAwesomeIcon icon={faMapMarkedAlt} className="mr-2"/>
                         Κωννισοπούλου 28, Αθήνα
                     </div>
 
@@ -66,14 +67,14 @@ const searchResult = (props) => {
                         <span className="small mr-2">
                             Διαθέσιμα
                         </span>
-                        <Badge pill >14</Badge>
+                        <Badge pill id={styles.icon_bg}>14</Badge>
                     </div>
 
                     <div className="mr-auto">
                         <span className="small mr-2">
                             Τιμή
                         </span>
-                        <Badge color="secondary">13 €</Badge>
+                        <Badge id={styles.icon_bg}>13 €</Badge>
                     </div>
 
                     <div>
