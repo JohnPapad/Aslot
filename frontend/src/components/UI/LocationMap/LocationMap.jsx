@@ -22,7 +22,7 @@ export const redIcon = new L.Icon({
 export default function LocationMap(props) {
 
     const { startingLat, startingLng, selectedLat, selectedLng, mapHeight, hasLocation, pins } = props;
-    const { handleMapClick } = props;
+    const { handleMapClick, onRedMarkerClick } = props;
     const style = { height: mapHeight + 'px' };
 
     // If the user has clicked on the map, place a marker
@@ -40,7 +40,7 @@ export default function LocationMap(props) {
         initPins = pins.map((pin, i) => {
                 return (
                     <Marker position={{ lat: pin.lat, lng: pin.lng }} key={i} icon={redIcon}> 
-                        <Popup>{pin.store_name}</Popup>
+                        <Popup onClick={() => onRedMarkerClick(pin.store_id)}>{pin.store_name}</Popup>
                     </Marker>
                 )
             })
