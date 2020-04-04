@@ -2,7 +2,9 @@ import Layout from "../hoc/Layout/Layout";
 
 export const storesApi = {
     getPins,
-    searchStores
+    searchStores,
+    getStoreInventory,
+    getTimeslots
 };
 
 
@@ -28,26 +30,22 @@ function searchStores(axios, searchParams)
 
 // searchParams:
 // {
-//     searchTerm,
-//     lat,
-//     lng,
+//     storeID,
 // }
 function getStoreInventory(axios, searchParams)
 {
-    return axios.get('/stores/search', {params: searchParams})
+    return axios.get('/stores/inverntory', {params: searchParams})
         .then( response =>  response ? response.data : null)
         .catch( err => err);
 }
 
 // searchParams:
 // {
-//     searchTerm,
-//     lat,
-//     lng,
+//     storeID,
 // }
 function getTimeslots(axios, searchParams)
 {
-    return axios.get('/stores/search', {params: searchParams})
+    return axios.get('/stores/timeslots', {params: searchParams})
         .then( response =>  response ? response.data : null)
         .catch( err => err);
 }
