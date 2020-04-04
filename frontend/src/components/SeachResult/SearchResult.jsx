@@ -19,7 +19,7 @@ const searchResult = (props) => {
             <Container fluid className="">
                 <Row className="p-2">
                     <Col xs="3" className="p-0 m-0 border">
-                        <img src={"https://kdi.gr/wp-content/uploads/2017/01/KDICONTRACT_Katsaris_Pharmacy1.jpg"} style={{height: "100%", width: "100%", maxHeight: "12vh"}} alt="Shop Photo" className="img-fluid rounded"/>
+                        <img src={"https://kdi.gr/wp-content/uploads/2017/01/KDICONTRACT_Katsaris_Pharmacy1.jpg"} style={{height: "100%", width: "100%", maxHeight: "15vh"}} alt="Shop Photo" className="img-fluid rounded"/>
                     </Col>
 
                     <Col xs="9" className="p-0 m-0 pl-2 d-flex-column ">
@@ -54,27 +54,31 @@ const searchResult = (props) => {
                             </div>
                         </div>
 
-                        <div className={"d-flex align-items-center mt-3"}> 
-                            <div className={"font-weight-bold pr-3"}>
-                                Αντισυπτικά:
-                            </div>
+                        <div className={styles.item + " mt-2"}>
+                            Αντισυπτικά
+                        </div>
 
-                            <div className="pr-2">
-                                {/* <span className="border pr-2 pl-2 pt-1 pb-1">
-                                    12
-                                </span> */}
-
-                                <Badge pill>14</Badge>
-
-                                <span className="small ml-2">
-                                    διαθέσιμα
+                        <div className={"d-flex align-items-center"}> 
+                            <div className="pr-5">
+                                <span className="small mr-2">
+                                    Διαθέσιμα
                                 </span>
+                                <Badge pill >14</Badge>
                             </div>
 
-                            <div className="pl-4">
-                                <Button className="font-weight-bold">
-                                    Κράτηση
-                                </Button>
+                            <div className="mr-auto">
+                                <span className="small mr-2">
+                                    Τιμή
+                                </span>
+                                <Badge color="secondary">13 €</Badge>
+                            </div>
+
+                            <div>
+                                <MyBtn classes="" borderWidth='0' size="SM" >
+                                    <span style={{ letterSpacing: "0px" }}>
+                                        Κράτηση
+                                    </span>
+                                </MyBtn>
                             </div>
                         </div>
                         
