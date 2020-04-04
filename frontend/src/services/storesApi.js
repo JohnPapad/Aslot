@@ -1,7 +1,8 @@
 import Layout from "../hoc/Layout/Layout";
 
 export const storesApi = {
-    getPins
+    getPins,
+    getStores
 };
 
 
