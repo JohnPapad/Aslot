@@ -5,15 +5,15 @@
 
 #submit_btn {
     @include remove_hl;
-    background-color: $primColorDark;
-    color: $secColor;
+    background-color: $primColor;
+    color: #ffffff;
     border: {
         style: solid; 
-        color: $secColor;
+        color: $primColorDarker;
         width: 3px;
     }
     &:hover {
-        background-color: $primColorDarker;
+        background-color: $primColorDark;
     };
 }
 
