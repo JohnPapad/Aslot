@@ -11,7 +11,6 @@ import { authAPI } from './services/authApi';
 import axios from './services/axiosConfig';
 
 import { Container, Row, Col } from 'reactstrap';
-import SignInPage from './components/SignInPage/SignInPage';
 import SignUp from './containers/auth/SignUp/SignUp';
 // import LogOut from './containers/auth/LogOut/LogOut';
 import LandingPage from './containers/LandingPage/LandingPage';
@@ -34,7 +33,6 @@ class App extends Component {
                 <Layout >
 
                 <Switch>
-                    <Route exact path="/signin" component={SignInPage} />
                     <Route exact path="/signup" component={SignUp} />
                     <Route exact path="/searchresults" component={SearchResults} />
                     <Route exact path="/reportform" component={CreateReportPage} />

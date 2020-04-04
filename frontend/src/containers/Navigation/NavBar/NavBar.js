@@ -4,6 +4,7 @@ import classes from './NavBar.module.scss';
 import { NavLink as RouterNavLink, withRouter }  from 'react-router-dom';
 // import logo_path from '../../../assets/images/nmm_board.png';
 import NavigationItem from '../../../components/Navigation/NavigationItem';
+import NavigationButton from '../../../components/Navigation/NavigationButton';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSignInAlt, faSignOutAlt, faUserEdit, faListOl, faUserCircle } from '@fortawesome/free-solid-svg-icons';
@@ -14,12 +15,7 @@ import {
     NavbarToggler,
     NavbarBrand,
     Nav,
-    NavItem,
-    NavLink,
-    UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem } from 'reactstrap';
+    } from 'reactstrap';
 
 const hardRedirectPaths = ["/gamelobby", "/game"];
 
@@ -28,13 +24,12 @@ class NavBar extends React.Component {
     constructor(props) {
         super(props);
 
-        this.toggle = this.toggle.bind(this);
         this.state = {
-            isOpen: false
+            isOpen: false,
         };
     }
 
-    toggle() {
+    toggle = () => {
         this.setState({
             isOpen: !this.state.isOpen
         });
@@ -43,10 +38,10 @@ class NavBar extends React.Component {
     unAuthNavItems = () => {
 		return(
 			<>
-				<NavigationItem link="/signin">
+				<NavigationButton isActive={this.props.isSignInModalOpen} toggle={this.props.toggleSignInModalOpen}>
                     Sign In
                     <FontAwesomeIcon icon={faSignInAlt} className="ml-2"/>
-                </NavigationItem>
+                </NavigationButton>
 
                 <NavigationItem link="/signup">
                     Sign Up
@@ -59,7 +54,6 @@ class NavBar extends React.Component {
     authNavItems = () => {
 		return(
 			<>
-
                 {/* <NavigationItem link="/profile">
                     Profile
                     <FontAwesomeIcon icon={faUserCircle} className="ml-2"/>
@@ -70,7 +64,6 @@ class NavBar extends React.Component {
                     ? this.citizenNavItems()
                     : this.authorityNavItems()
                 }
-
 
                 <NavigationItem link="/logout">
                     Log Out
