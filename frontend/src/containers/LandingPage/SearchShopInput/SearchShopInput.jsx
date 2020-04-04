@@ -33,14 +33,16 @@ export default function SearchShopMap(props) {
                     // name={"Η διεύθυνσή σου"}
                     value={props.address}
                     type={"text"}
-                    placeholder={"Η διεύθυνσή σου"}
+                    readOnly={props.readOnly}
+                    placeholder={"Που είσαι; Οδός Αριθμός, Δήμος"}
                     onChange={(e) => props.setAddress(e.target.value)}
                     onBlur={(e) => props.updateMap ? props.updateMap() : ''}
                     invalid = {props.invalidAddress}
                     disabled = {props.addressDisabled}
                 />
                 <InputGroupAddon addonType="append">
-                    <Button onClick={props.onSubmit}>
+                    <Button className="font-weight-bold" id={classes.remHl} onClick={props.onSubmit}>
+                        <FontAwesomeIcon icon={faSearch} className="mr-2"/>
                         Αναζήτηση
                     </Button>
                 </InputGroupAddon>
