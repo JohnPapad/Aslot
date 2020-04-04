@@ -118,7 +118,15 @@ export default function LandingPage() {
 
     return (
         <Container id={classes.content}>
-            <Row className={"justify-content-center pb-5"}>    
+
+            <Row className={"justify-content-center  mb-3"} >
+                <p id={classes.header}>
+                    Το φαρμακείο της γειτονιάς σου τώρα online
+                </p>
+            </Row>
+
+
+            <Row className={"justify-content-center mb-5"}>    
                 <SearchShopInput
                     address={address}
                     addressValid={addressValid}
@@ -132,10 +140,10 @@ export default function LandingPage() {
                 />
             </Row>
 
-            <Row className="justify-content-center">            
+            <Row className="justify-content-center mt-5">            
                 <Col className="p-0">
                     <LocationMap
-                        mapHeight={document.documentElement.clientHeight * 0.7}
+                        mapHeight={document.documentElement.clientHeight * 0.6}
                 
                         startingLat={startingPosAndPins.startingLat}
                         startingLng={startingPosAndPins.startingLng}
