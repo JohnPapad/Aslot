@@ -1,7 +1,7 @@
 
 from rest_framework import serializers
 
-from .models import Store, Item
+from .models import *
 
 class StoreSerializer(serializers.ModelSerializer):
     class Meta:
@@ -12,4 +12,9 @@ class StoreSerializer(serializers.ModelSerializer):
 class ItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = Item
+        fields = '__all__'
+
+class TimeslotSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Timeslot
         fields = '__all__'

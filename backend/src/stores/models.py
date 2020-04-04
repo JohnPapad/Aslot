@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.postgres.fields import ArrayField
+from django.utils import timezone
 
 
 # Create your models here.
@@ -46,6 +48,7 @@ class OpeningHours(models.Model):
     def __str__(self): # __str__ for Python 3, __unicode__ for Python 2
         return u'%s: %s - %s' % (self.get_weekday_display(), self.from_hour, self.to_hour)
 
+
 class Item(models.Model):
     store = models.ForeignKey(Store, on_delete=models.CASCADE, related_name='items', default=1)
     name = models.CharField(max_length=40)
@@ -53,3 +56,8 @@ class Item(models.Model):
     last_updated = models.DateTimeField(auto_now=True)
 
 
+class Timeslot(models.Model):
+    store = models.ForeignKey(Store, on_delete=models.CASCADE, related_name='timeslots', default=1)
+    emails = ArrayField(base_field=models.CharField(max_length=60))
+    start_time = models.TimeField(default=timezone.now())
+    end_time = models.TimeField(default=timezone.now())
