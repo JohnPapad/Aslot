@@ -2,7 +2,7 @@ import Layout from "../hoc/Layout/Layout";
 
 export const storesApi = {
     getPins,
-    getStores
+    searchStores
 };
 
 
@@ -19,9 +19,9 @@ function getPins(axios)
 //     lat,
 //     lng
 // }
-function getStores(axios, jsonRequest)
+function searchStores(axios, searchParams)
 {
-    return axios.get('/stores', jsonRequest)
+    return axios.get('/stores/search', {params: searchParams})
         .then( response =>  response ? response.data : null)
         .catch( err => err);
 }
@@ -33,8 +33,6 @@ function getStores(axios, jsonRequest)
 //         .then( response =>  response ? response.data : null)
 //         .catch( err => err);
 // }
-
-
 
 
 // export const reportApi = {
