@@ -98,9 +98,9 @@ class NavBar extends React.Component {
         return (
             <Navbar light expand="sm" id={classes.navbar} className="fixed-top pl-4 pb-2 pt-2" >
               
-                <RouterNavLink to="/" exact>
+                <RouterNavLink to="/" exact id={classes.remFor}>
                     {/* <img src={logo_path} id={classes.img} alt="Logo" className="img-fluid"/> */}
-                    <h3 className={classes.remFor}>ePharmacy</h3>
+                   e-Pharmacy
                 </RouterNavLink> 
 
                 <NavbarToggler onClick={this.toggle} />

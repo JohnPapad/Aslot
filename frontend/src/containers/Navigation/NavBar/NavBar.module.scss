@@ -1,4 +1,6 @@
 @import "../../../styles/colors";
+@import "../../../styles/texts";
+
 
 
 #navbar{
@@ -9,10 +11,12 @@
     height: 6vh;
 }
 
-.remFor {
+#remFor {
+    font-weight: bold;
+    font-size: $fontLG;
     text-decoration: none;
     color: white;
-    :hover {
+    &:hover {
         text-decoration: none;
     }
 }
