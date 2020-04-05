@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import styles from './StorePage.module.scss';
 
-import { Container, Row, Col, Button, Form } from 'reactstrap';
+import { Container, Row, Col, Button } from 'reactstrap';
 import TimeSlotModal from '../../components/TimeSlotModal/TimeSlotModal';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -10,8 +10,15 @@ import { faPhoneAlt, faClock, faMapMarkedAlt, faHourglassHalf, faUsers, faUserCl
 import LocationMap from '../../components/UI/LocationMap/LocationMap';
 import InventoryItem from './InventoryItem/InventoryItem';
 
-export default function StorePage() {
+import { useDispatch, useSelector } from "react-redux";
+import { specifActions } from '../../stores/specifStore';
 
+export default function StorePage(props) {
+    console.log('STOREEEEEEPAGE');
+    console.log(props.match.params.id);
+
+    const specifics = useSelector(state => state.specifReducer);
+    console.log(specifics);
 
     return (
         <Container fluid id={styles.content}>
@@ -117,34 +124,9 @@ export default function StorePage() {
                 </Col>
             </Row>
 
-            <Row className="mb-5 d-flex align-items-stretch justify-content-between">
-                    <InventoryItem selected={true}/>
-
-                    <div className="d-flex flex-column border">
-                        <div className="d-flex flex-wrap align-items-center justify-content-start border">
-                            <div>
-                                Χειρουργικη μασκα: 3
-                            </div>
-
-                            <div>
-                                Αντισηπτικο: 3
-                            </div>
-
-                            <div>
-                                Αντισηπτικο: 3
-                            </div>
-                            
-
-                        </div>
-
-                        <div className="">
-                            σςςξδξςδξξς
-                        </div>
-                    </div>
-            </Row>
-
             <Row className="mt-5">
-                <div className="d-flex align-items-stretch flex-wrap">
+                <div class="d-flex align-items-stretch flex-wrap">
+                    <InventoryItem selected={true}/>
                     <InventoryItem/>
                     <InventoryItem/>
                     <InventoryItem/>

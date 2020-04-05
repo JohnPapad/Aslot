@@ -60,6 +60,7 @@ const redirectToStore = (axios, id, history) => {
             .then(values => {
                 dispatch({type: actionTypes.SET_FETCHING, fetching: false});
 
+                console.log('PROMISE VALUES');
                 console.log(values);
                 history.push('./store/' + id);
             });
