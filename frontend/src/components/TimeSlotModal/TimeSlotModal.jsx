@@ -29,14 +29,13 @@ export default function TimeSlotModal(props) {
             <ModalBody>
                 <Container fluid  className="p-2">
                 <Row className={"border"}>
-                    <DayTimeSlot day="Δευτέρα"/>
-                    <DayTimeSlot day="Τρίτη"/>
-                    <DayTimeSlot day="Τετάρτη"/>
-                    <DayTimeSlot day="Πέμπτη"/>
-                    <DayTimeSlot day="Παρασκευή"/>
-                    <DayTimeSlot day="Σάββατο"/>
-                    <DayTimeSlot day=" Κυριακή"/>
-
+                    <DayTimeSlot day="Δευτέρα" slotClickedHandler={props.slotClickedHandler}/>
+                    <DayTimeSlot day="Τρίτη" slotClickedHandler={props.slotClickedHandler}/>
+                    <DayTimeSlot day="Τετάρτη" slotClickedHandler={props.slotClickedHandler}/>
+                    <DayTimeSlot day="Πέμπτη" slotClickedHandler={props.slotClickedHandler}/>
+                    <DayTimeSlot day="Παρασκευή" slotClickedHandler={props.slotClickedHandler}/>
+                    <DayTimeSlot day="Σάββατο" slotClickedHandler={props.slotClickedHandler}/>
+                    <DayTimeSlot day=" Κυριακή" slotClickedHandler={props.slotClickedHandler}/>
                 </Row>
                 </Container>
 

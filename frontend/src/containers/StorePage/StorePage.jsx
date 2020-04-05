@@ -17,6 +17,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { specifActions } from '../../stores/specifStore';
 
 export default function StorePage(props) {
+
+    const slotClickedHandler = (day, timeSlot) =>{
+        console.log(day, timeSlot);
+    }
+
     const [amountValues, setAmountValues] = useState({});
 
     // call specifActions get everything 
@@ -207,7 +212,7 @@ export default function StorePage(props) {
                                         Επιλέξτε χρονοθυρίδα
                                     </Button> */}
 
-                                    <TimeSlotModal />
+                                    <TimeSlotModal slotClickedHandler={slotClickedHandler}/>
                                 </div>
                                 
                             </div>

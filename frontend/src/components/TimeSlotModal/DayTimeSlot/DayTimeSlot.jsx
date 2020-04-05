@@ -2,11 +2,19 @@ import React, { useState } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Table, Row, Col } from 'reactstrap';
 import classes from './DayTimeSlot.module.scss';
 
-const la = () => {
-    alert("dd")
-}
+
+const dummyTimeSlots = [ "08:00-09:00", "18:00-19:00", "10:00-20:00" ]
+       
 
 export default function DayTimeSlot(props) {
+
+    const timeSlots = dummyTimeSlots.map( (timeSlot, i) =>
+        <Row className="border" key={i}>
+            <Col className={classes.slot + " p-0 d-flex justify-content-center font-weight-bold"} onClick={()=>props.slotClickedHandler(props.day, timeSlot)}>
+                {timeSlot}
+            </Col>
+        </Row>
+    );
 
     return (
         <Col>
@@ -16,17 +24,8 @@ export default function DayTimeSlot(props) {
                 </Col>
             </Row>
 
-            <Row className="border">
-                <Col className={classes.slot + " p-0 d-flex justify-content-center font-weight-bold"} onClick={la}>
-                    12:33-22:30
-                </Col>
-            </Row>
-
-            <Row className="border">
-                <Col>
-                    12:33-22:30
-                </Col>
-            </Row>
+            {timeSlots}
+            
         </Col>
     )
 
