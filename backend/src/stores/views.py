@@ -1,3 +1,4 @@
+from rest_framework import generics
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -160,3 +161,18 @@ class Booking(APIView):
             return Response({"msg":"booking serializer failed"}, status=status.HTTP_406_NOT_ACCEPTABLE)
         return Response({}, status=status.HTTP_200_OK)
 
+
+class ItemCreateView(generics.CreateAPIView):
+        serializer_class = srs.ItemSerializer
+
+        def post(self, request, *args, **kwargs):
+            return self.create(request, *args, **kwargs)
+
+
+class ItemUpdateView(generics.RetrieveUpdateAPIView):
+    serializer_class = srs.ItemSerializer
+    # lookup_field = pk
+    
+    #update item
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)

@@ -7,7 +7,6 @@ class ItemAdmin(admin.ModelAdmin):
 
 # Register your models here.
 admin.site.register(Store)
-admin.site.register(OpeningHours)
-admin.site.register(Item, ItemAdmin)
+admin.site.register(Item)
 admin.site.register(Timeslot)
 admin.site.register(Booking)

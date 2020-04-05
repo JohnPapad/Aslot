@@ -12,9 +12,11 @@ class StoreSerializer(serializers.ModelSerializer):
 
 
 class ItemSerializer(serializers.ModelSerializer):
+        
     class Meta:
         model = Item
         fields = '__all__'
+
 
 class TimeslotSerializer(serializers.ModelSerializer):
     class Meta:

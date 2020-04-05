@@ -26,35 +26,11 @@ class Store(AbstractBaseUser):
         return self.name
 
 
-WEEKDAYS = [
-  (1, ("Monday")),
-  (2, ("Tuesday")),
-  (3, ("Wednesday")),
-  (4, ("Thursday")),
-  (5, ("Friday")),
-  (6, ("Saturday")),
-  (7, ("Sunday")),
-]
-
-class OpeningHours(models.Model):
-
-    #store = models.ForeignKey(Store, on_delete=models.CASCADE)
-    weekday = models.IntegerField(choices=WEEKDAYS)
-    from_hour = models.TimeField()
-    to_hour = models.TimeField()
-
-    class Meta:
-        ordering = ('weekday', 'from_hour')
-        unique_together = ('weekday', 'from_hour', 'to_hour')
-    
-    def __str__(self): # __str__ for Python 3, __unicode__ for Python 2
-        return u'%s: %s - %s' % (self.get_weekday_display(), self.from_hour, self.to_hour)
-
-
 class Item(models.Model):
     store = models.ForeignKey(Store, on_delete=models.CASCADE, related_name='items', default=1)
     name = models.CharField(max_length=40)
     quantity = models.IntegerField()
+    max_to_buy = models.SmallIntegerField(default=1)
     last_updated = models.DateTimeField(auto_now=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     total_reserved = models.IntegerField(default=0) # total num of reserved for this item
