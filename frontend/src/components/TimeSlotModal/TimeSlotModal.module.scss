@@ -7,3 +7,26 @@
 .dialog {
     width: 90vw;
 }
+
+
+
+
+#header {
+    font-weight: bold;
+    font-size: $fontMD;
+    background-color: $primColor;
+    color: #ffffff;
+}
+
+#header_bg {
+    background-color: $primColor;
+}
+
+
+
+#btn_bg {
+    @include remove_hl;
+    background-color: $primColor;
+    font-weight: bold;
+}
+

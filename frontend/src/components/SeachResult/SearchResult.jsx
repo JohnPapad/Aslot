@@ -1,5 +1,5 @@
-import React from 'react';
-import {  withRouter } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import styles from './SearchResult.module.scss';
 import { Container, Col, Row, Button, Badge } from 'reactstrap';
 
@@ -9,17 +9,25 @@ import MyBtn from '../../components/UI/MyBtn/MyBtn';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPhoneAlt, faClock, faMapMarkedAlt } from '@fortawesome/free-solid-svg-icons';
 
+import axios from '../../services/axiosConfig';
 
-const bookBtnClickedHandler = (storeId, history) => {
-    history.push("/store/" + storeId);
-}
+import { useDispatch, useSelector } from "react-redux";
+import { specifActions } from '../../stores/specifStore';
+
 
 const addressClickedHandler = (storeId) => {
     alert("address handler")
 }
 
 
-const searchResult = (props) => {
+export default function SearchResult(props) {
+    const history = useHistory();
+    const dispatch = useDispatch();
+
+    const goToStore = () => {
+        dispatch(specifActions.redirectToStore(axios, props.id, history));
+    }
+
     return (       
         <Row  className={"mb-4 p-2 " + styles.store_pres}>
             <Col xs="3" className="p-0 m-0 border">
@@ -28,7 +36,7 @@ const searchResult = (props) => {
 
             <Col xs="9" className="p-0 m-0 pl-2 d-flex-column ">
                 <div className="d-flex align-items-center">
-                    <div className={styles.shop_name} onClick={()=>bookBtnClickedHandler("3", props.history)}>
+                    <div className={styles.shop_name} onClick={()=>goToStore()}>
                         {props.name}
                     </div>
 
@@ -75,7 +83,7 @@ const searchResult = (props) => {
                     </div>
 
                     <div>
-                        <MyBtn classes="" borderWidth='0' size="SM" clickedHandler={()=>bookBtnClickedHandler("3", props.history)}>
+                        <MyBtn classes="" borderWidth='0' size="SM" clickedHandler={()=>goToStore()}>
                             <span style={{ letterSpacing: "0px" }}>
                                 Κράτηση
                             </span>
@@ -87,8 +95,3 @@ const searchResult = (props) => {
         </Row>
     );
 }
-
-
-
-
-export default withRouter(searchResult);
