@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 
 import styles from './StorePage.module.scss';
 
-import { Container, Row, Col, Button } from 'reactstrap';
+import { Container, Row, Col, Button, Input, Badge } from 'reactstrap';
 import TimeSlotModal from '../../components/TimeSlotModal/TimeSlotModal';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPhoneAlt, faClock, faMapMarkedAlt, faHourglassHalf, faUsers, faUserClock, faAt } from '@fortawesome/free-solid-svg-icons';
+import { faPhoneAlt, faClock, faMapMarkedAlt, faHourglassHalf, faUsers, faUserClock, faAt, faShoppingBasket } from '@fortawesome/free-solid-svg-icons';
 import LocationMap from '../../components/UI/LocationMap/LocationMap';
 import InventoryItem from './InventoryItem/InventoryItem';
+import MyBtn from '../../components/UI/MyBtn/MyBtn';
 
 import { useDispatch, useSelector } from "react-redux";
 import { specifActions } from '../../stores/specifStore';
@@ -124,6 +125,74 @@ export default function StorePage(props) {
                 </Col>
             </Row>
 
+<<<<<<< HEAD
+=======
+            <Row className="mb-5 d-flex align-items-stretch justify-content-start border-bottom pb-5">
+                    <InventoryItem selected={true}/>
+
+                    <div className="d-flex align-items-stretch" id={styles.selected_items}>
+
+                        <div className="flex-shrink-1 p-1 border-right">
+                            <FontAwesomeIcon icon={faShoppingBasket} size="5x" className={styles.icon}/>
+                        </div>
+
+                        <div className="d-flex flex-column" >
+                            <div className="d-flex flex-wrap align-items-center justify-content-start border p-2">
+                                <div className="mr-4">
+                                    <span className={"mr-2 " + styles.item}>
+                                        Χειρουργικη μασκα: 
+                                    </span>
+                                    <span className="">
+                                        3
+                                    </span>
+                                </div>
+
+                                <div className="mr-4">
+                                    <span className={"mr-2 " + styles.item}>
+                                        Χειρουργικη μασκα: 
+                                    </span>
+                                    <span className="">
+                                        3
+                                    </span>
+                                </div>
+
+                                <div className="mr-4">
+                                    <span className={"mr-2 " + styles.item}>
+                                        Χειρουργικη μασκα: 
+                                    </span>
+                                    <span className="">
+                                        3
+                                    </span>
+                                </div>
+
+                            </div>
+
+                            <div className="d-flex h-100 pl-2 pr-2 align-items-center justify-content-between border">
+                                <div>
+                                    <span className="font-weight-bold mr-2">
+                                        Συνολικό κόστος:
+                                    </span>
+                                    <Badge id={styles.icon_bg} className="p-2">13 €</Badge>
+                                </div>
+
+                                <div>
+                                    <Input bsSize="md" type="text" placeholder="email" id={styles.input_email}/>
+                                </div>
+
+                                <div>
+                                    <Button size="md" id={styles.btn_bg}>
+                                        Επιλέξτε χρονοθυρίδα
+                                    </Button>
+
+                                    {/* <TimeSlotModal /> */}
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+            </Row>
+
+>>>>>>> 19dcf843658cc1e0573afb9f71d271648306dd27
             <Row className="mt-5">
                 <div class="d-flex align-items-stretch flex-wrap">
                     <InventoryItem selected={true}/>
