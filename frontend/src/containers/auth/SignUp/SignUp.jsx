@@ -32,12 +32,12 @@ class SignUp extends React.Component {
 
         formControls: {
 
-            brandname: {
+            name: {
                 rules: {
                     required: true,
                     onlyLettersDotsAndSpace: true,
-                    minLength: 2,
-                    maxLength: 15
+                    minLength: 4,
+                    maxLength: 25
                 },
                 id: "signup_shop_name",
                 name: "Επωνυμία επιχείρησης",
@@ -48,7 +48,7 @@ class SignUp extends React.Component {
                 validity: ''
             },
 
-            tel: {
+            telephone: {
                 rules: {
                     required: true,
                     isTel: true
@@ -71,7 +71,7 @@ class SignUp extends React.Component {
                 name: "Ωράριο λειτουργίας",
                 value: '',
                 type: "text",
-                placeholder: "π.χ. 8:00-18:00",
+                placeholder: "π.χ. 08:00-18:00",
                 feedback: null,
                 validity: ''
             },
@@ -180,7 +180,7 @@ class SignUp extends React.Component {
                 validity: ''
             },
 
-            time_slot_dur: {
+            time_slot_duration: {
                 rules: {
                     required: true,
                     isMinutes: true
@@ -354,10 +354,24 @@ class SignUp extends React.Component {
 
         formData = {
             ...formData,
-            shop_type: "pharmacy",
+            store_type: "pharmacy",
             lat: this.state.selectedLat,
             lng: this.state.selectedLng
         };
+
+        delete formData.hours;
+        delete formData.password1;
+
+        const open_close_hours = this.state.formControls.hours.value.split('-');
+        const opening_from_hour = open_close_hours[0];
+        const opening_to_hour = open_close_hours[1];
+
+        formData = {
+            ...formData,
+            opening_from_hour: opening_from_hour,
+            opening_to_hour: opening_to_hour
+        }
+
         console.log("---Form Data---");
         console.log(formData);
         console.log("---------------");
