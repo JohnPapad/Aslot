@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-
+import React, { Component }  from 'react';
+import { connect } from 'react-redux';
 import styles from './StorePage.module.scss';
 
 import axios from '../../services/axiosConfig';
+import { withRouter } from 'react-router-dom';
 
 import { Container, Row, Col, Button, Input, Badge } from 'reactstrap';
 import TimeSlotModal from '../../components/TimeSlotModal/TimeSlotModal';
@@ -16,35 +17,40 @@ import MyBtn from '../../components/UI/MyBtn/MyBtn';
 import { useDispatch, useSelector } from "react-redux";
 import { specifActions } from '../../stores/specifStore';
 
-export default function StorePage(props) {
+class StorePage extends Component {
 
-    const slotClickedHandler = (day, timeSlot) =>{
+    slotClickedHandler = (day, timeSlot) =>{
         console.log(day, timeSlot);
     }
 
     state = {
-        amountValues // items poses fores ta exw dialeksei
+        amountValues: {} // items poses fores ta exw dialeksei
 
     }
 
-    const [amountValues, setAmountValues] = useState({});
+    setAmountValues = () => {
+
+    }
+
+    render (){
+
+        console.log("render state: ", this.props)
 
     // call specifActions get everything 
     //const dispatch = useDispatch(); // <- me higher order
-    // const specifics = useSelector(state => state.specifReducer); 
-    if (specifics.noData == true && specifics.fetching == false) {
-        const idFromUrl = props.match.params.id;
-        dispatch(specifActions.redirectToStore(axios, idFromUrl));
+    if (this.props.specifics.noData === true && this.props.specifics.fetching === false) {
+        const idFromUrl = this.props.match.params.id;
+        this.props.dispatch(specifActions.redirectToStore(axios, idFromUrl));
         return null;
     }
-    if (!specifics.store) {
+    if (!this.props.specifics.store) {
         return null;
     }
 
-    const store = specifics.store;
-    const items = specifics.items;
-    const timeslots = specifics.timeslots;
-    const selectedItem = specifics.selectedItem;
+    const store = this.props.specifics.store;
+    const items = this.props.specifics.items;
+    const timeslots = this.props.specifics.timeslots;
+    const selectedItem = this.props.specifics.selectedItem;
     return (
         <Container fluid id={styles.content}>
             <Row className="mb-5">
@@ -152,7 +158,7 @@ export default function StorePage(props) {
                         selected={true} 
                         item={selectedItem} 
                         
-                        changeAmountValue={changeAmountValue}
+                        changeAmountValue={this.changeAmountValue}
                     />
                 ): (<></>)
             }
@@ -167,7 +173,7 @@ export default function StorePage(props) {
                         <div className="d-flex flex-wrap align-items-center justify-content-start border p-2">
                             <div className="mr-4">
                                 <span className={"mr-2 " + styles.item}>
-                                    {selectedItem.name}
+                                    κδκδκδκδκδκδ
                                 </span>
                                 <span className="">
                                     3
@@ -211,7 +217,7 @@ export default function StorePage(props) {
                                     Επιλέξτε χρονοθυρίδα
                                 </Button> */}
 
-                                <TimeSlotModal slotClickedHandler={slotClickedHandler}/>
+                                <TimeSlotModal slotClickedHandler={this.slotClickedHandler}/>
                             </div>
                             
                         </div>
@@ -226,7 +232,7 @@ export default function StorePage(props) {
                             <InventoryItem
                                 item={item} 
                             
-                                changeAmountValue={changeAmountValue}
+                                changeAmountValue={this.changeAmountValue}
                             />
                         );
                     }
@@ -238,4 +244,23 @@ export default function StorePage(props) {
 
         </Container>
     );
+    }
+
+
 }
+
+
+
+const mapStateToProps = state => {
+    return {
+        specifics : state.specifReducer
+    }
+}
+
+// const mapDispatchToProps = dispatch => {
+//     return {        
+//         redirectToStore: redirectToStore(axios, idFromUrl)
+//     };
+// }
+
+export default withRouter(connect(mapStateToProps, null)(StorePage));

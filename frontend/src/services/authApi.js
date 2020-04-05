@@ -10,7 +10,7 @@ export const authAPI = {
 
 function signIn(axios, jsonRequest) 
 {
-    return axios.post('/users/signin', jsonRequest)
+    return axios.post('/stores/users/signin', jsonRequest)
         .then( response =>  response ? response.data : null)
         .catch( err => err);
 }
