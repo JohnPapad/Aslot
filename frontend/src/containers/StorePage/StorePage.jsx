@@ -16,11 +16,16 @@ import MyBtn from '../../components/UI/MyBtn/MyBtn';
 
 import { useDispatch, useSelector } from "react-redux";
 import { specifActions } from '../../stores/specifStore';
+import { storesApi } from '../../services/storesApi';
 
 class StorePage extends Component {
 
     slotClickedHandler = (day, timeSlot) =>{
         console.log(day, timeSlot);
+    }
+
+    submitHandler = () => {
+        
     }
 
     state = {
@@ -217,7 +222,7 @@ class StorePage extends Component {
                                     Επιλέξτε χρονοθυρίδα
                                 </Button> */}
 
-                                <TimeSlotModal slotClickedHandler={this.slotClickedHandler}/>
+                                <TimeSlotModal slotClickedHandler={this.slotClickedHandler} submitHandler={this.submitHandler}/>
                             </div>
                             
                         </div>

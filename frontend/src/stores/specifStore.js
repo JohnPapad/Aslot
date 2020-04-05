@@ -62,20 +62,22 @@ const redirectToStore = (axios, id, history, selectedItem) => {
 
         const storePromise = storesApi.getStore(axios, id)
             .then(res =>{
-                dispatch(setFetching(false));
+                    if (res) {
+                    dispatch(setFetching(false));
 
-                dispatch(setCurrStore(res.store_info));
-                dispatch(setCurrItems(res.inventory));                
-                dispatch(setCurrTimeslots(res.timeslots));
+                    dispatch(setCurrStore(res.store_info));
+                    dispatch(setCurrItems(res.inventory));                
+                    dispatch(setCurrTimeslots(res.timeslots));
 
-                // set selected item if defined
-                if (selectedItem) {
-                    dispatch(setSelectedItem(selectedItem));
-                }
+                    // set selected item if defined
+                    if (selectedItem) {
+                        dispatch(setSelectedItem(selectedItem));
+                    }
 
-                // only push if history is defined
-                if (history) {
-                    history.push('./store/' + id);
+                    // only push if history is defined
+                    if (history) {
+                        history.push('./store/' + id);
+                    }
                 }
             })
 
