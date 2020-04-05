@@ -3,6 +3,11 @@ import {  useHistory } from 'react-router-dom';
 import { Spinner, Container, Row, Col } from 'reactstrap';
 
 import { useDispatch, useSelector } from "react-redux";
+import axios from '../../services/axiosConfig';
+
+import { storeActions } from '../../stores/storeStore';
+import { searchActions } from '../../stores/searchStore';
+import { storesApi } from '../../services/storesApi';
 
 import styles from './SearchResults.module.scss';
 import SearchResult from '../../components/SeachResult/SearchResult';
@@ -14,7 +19,8 @@ export default function SearchResults(props) {
     const addressInfo = search.addressInfo;
     const stores = useSelector(state => state.storeReducer.stores);
     const history = useHistory();
-    
+    const dispatch = useDispatch();
+
     const [query, setQuery] = useState(search.query);
     const [startingPosAndPins, setStartingPosAndPins] = useState({
         startingLat: addressInfo.lat,
@@ -27,6 +33,33 @@ export default function SearchResults(props) {
     //     selectedLng: addressInfo.lng,
     //     hasLocation: addressInfo.lat ? true : false,
     // })
+
+    const onSubmit = () => {
+        // First set search store
+        updateSearchStore(query, addressInfo.address, startingPosAndPins.startingLat, startingPosAndPins.startingLng)
+
+        const searchParams = {
+            searchTerm: query,
+            lat: startingPosAndPins.startingLat,
+            lng: startingPosAndPins.startingLng
+        }
+        storesApi.searchStores(axios, searchParams)
+            .then(res => {
+                // console.log(res);
+                dispatch(storeActions.setStores(res.stores));
+                history.push('/searchresults');
+            });
+    }
+
+    const updateSearchStore = (query, address, lat, lng) => {
+        dispatch(searchActions.setQuery(query));
+        const addressInfo = {
+            address,
+            lat,
+            lng
+        }
+        dispatch(searchActions.setAddressInfo(addressInfo));
+    }
 
     const [{address, addressValid}, setAddress] = useState({address: addressInfo.address, addressValid: true});
     return (
@@ -44,6 +77,7 @@ export default function SearchResults(props) {
                             setQuery={setQuery}
 
                             addressDisabled
+                            onSubmit={onSubmit}
                         />
                     </Row>
 
