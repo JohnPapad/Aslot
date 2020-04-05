@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import styles from './StorePage.module.scss';
 
-import { Container, Row, Col, Button } from 'reactstrap';
+import { Container, Row, Col, Button, Form } from 'reactstrap';
 import TimeSlotModal from '../../components/TimeSlotModal/TimeSlotModal';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -117,9 +117,34 @@ export default function StorePage() {
                 </Col>
             </Row>
 
-            <Row className="mt-5">
-                <div class="d-flex align-items-stretch flex-wrap">
+            <Row className="mb-5 d-flex align-items-stretch justify-content-between">
                     <InventoryItem selected={true}/>
+
+                    <div className="d-flex flex-column border">
+                        <div className="d-flex flex-wrap align-items-center justify-content-start border">
+                            <div>
+                                Χειρουργικη μασκα: 3
+                            </div>
+
+                            <div>
+                                Αντισηπτικο: 3
+                            </div>
+
+                            <div>
+                                Αντισηπτικο: 3
+                            </div>
+                            
+
+                        </div>
+
+                        <div className="">
+                            σςςξδξςδξξς
+                        </div>
+                    </div>
+            </Row>
+
+            <Row className="mt-5">
+                <div className="d-flex align-items-stretch flex-wrap">
                     <InventoryItem/>
                     <InventoryItem/>
                     <InventoryItem/>

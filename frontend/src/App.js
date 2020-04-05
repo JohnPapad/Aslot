@@ -36,7 +36,7 @@ class App extends Component {
                     <Route exact path="/logout" component={LogOut} />
 
                     <Route exact path="/" component={LandingPage} />
-                    <Route exact path="/store" component={StorePage} />
+                    <Route exact path="/store/:id" component={StorePage} />
                     {/* <Route exact path="/register" component={Register} />
                     <Route exact path="/browse" component={BrowseAuctions} />
                     <Route exact path="/reportform" component={CreateReportPage} />

@@ -1,6 +1,7 @@
 import Layout from "../hoc/Layout/Layout";
 
 export const storesApi = {
+    getStore,
     getPins,
     searchStores,
     getStoreInventory,
@@ -8,8 +9,13 @@ export const storesApi = {
 };
 
 
-function getPins(axios)
-{
+function getStore(axios, id) {
+    return axios.get('/stores/' + id)
+        .then( response =>  response ? response.data : null)
+        .catch( err => err);
+}
+
+function getPins(axios) {
     return axios.get('/stores/pins')
         .then( response =>  response ? response.data : null)
         .catch( err => err);
@@ -21,8 +27,7 @@ function getPins(axios)
 //     lat,
 //     lng,
 // }
-function searchStores(axios, searchParams)
-{
+function searchStores(axios, searchParams) {
     return axios.get('/stores/search', {params: searchParams})
         .then( response =>  response ? response.data : null)
         .catch( err => err);
@@ -32,9 +37,8 @@ function searchStores(axios, searchParams)
 // {
 //     storeID,
 // }
-function getStoreInventory(axios, searchParams)
-{
-    return axios.get('/stores/inverntory', {params: searchParams})
+function getStoreInventory(axios, searchParams) {
+    return axios.get('/stores/inventory', {params: searchParams})
         .then( response =>  response ? response.data : null)
         .catch( err => err);
 }
@@ -43,13 +47,11 @@ function getStoreInventory(axios, searchParams)
 // {
 //     storeID,
 // }
-function getTimeslots(axios, searchParams)
-{
+function getTimeslots(axios, searchParams) {
     return axios.get('/stores/timeslots', {params: searchParams})
         .then( response =>  response ? response.data : null)
         .catch( err => err);
 }
-
 
 
 // function getPins(axios, jsonRequest)

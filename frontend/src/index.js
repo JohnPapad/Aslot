@@ -12,6 +12,7 @@ import thunk from 'redux-thunk';
 import userReducer from './stores/userStore';
 import storeReducer from './stores/storeStore';
 import searchReducer from './stores/searchStore';
+import specifReducer from './stores/specifStore';
 
 // import authReducer from './store/reducers/auth';
 
@@ -21,7 +22,8 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const appReducer = combineReducers({
     userReducer,
     storeReducer,
-    searchReducer
+    searchReducer,
+    specifReducer
 });
 
 
