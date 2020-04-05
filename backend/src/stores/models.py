@@ -57,12 +57,19 @@ class Item(models.Model):
     quantity = models.IntegerField()
     last_updated = models.DateTimeField(auto_now=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
+    total_reserved = models.IntegerField(default=0) # total num of reserved for this item
 
     def __str__(self):
         return self.name
 
 class Timeslot(models.Model):
-    store = models.ForeignKey(Store, on_delete=models.CASCADE, related_name='timeslots', default=1)
-    emails = ArrayField(base_field=models.CharField(max_length=60))
+    store = models.ForeignKey(Store, on_delete=models.CASCADE, related_name='timeslots')
     start_time = models.TimeField()
     end_time = models.TimeField()
+
+class Booking(models.Model):
+    item = models.ForeignKey(Item, on_delete=models.CASCADE, related_name='bookings') # TODO make this many to many
+    timeslot = models.ForeignKey(Timeslot, on_delete=models.CASCADE, related_name='bookings')
+    reserved_quanity = models.IntegerField()
+    email = models.CharField(max_length=60)
+    confirmed = models.BooleanField(default=False)

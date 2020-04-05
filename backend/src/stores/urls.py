@@ -8,4 +8,5 @@ urlpatterns = [
     path('inventory', vs.Inventory.as_view(), name='store-inventory'),
     path('timeslots', vs.Timeslots.as_view(), name='store-timeslots'),
     path('<int:storeID>/', vs.StoreView.as_view(), name='store-view'),
+    path('create-booking/', vs.Booking.as_view(), name='create-booking'),
 ]

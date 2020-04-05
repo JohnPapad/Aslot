@@ -1,8 +1,10 @@
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from django.shortcuts import get_list_or_404, get_object_or_404
+
+import json
 
 from . import serializers as srs
 from . import models as mds
@@ -110,6 +112,8 @@ class StoreView(APIView):
 
 
 class Timeslots(APIView):
+
+    permission_classes = (AllowAny,)
     
     def get(self, request):
         """Timeslot data requests
@@ -124,3 +128,35 @@ class Timeslots(APIView):
         store = get_object_or_404(mds.Store, id=request.GET["storeID"])
         response_dict["timeslots"] = srs.TimeslotSerializer(store.timeslots, many=True).data
         return Response(response_dict, status=status.HTTP_200_OK)
+
+class Booking(APIView):
+
+    permission_classes = (AllowAny,)
+
+    def get(self, request):
+        return Response({"here":"here"})
+
+    def post(self, request, format='json'):
+        """Create an item booking (based on item id)
+        
+        Arguments:
+            request {[type]} -- [description]
+        
+        Keyword Arguments:
+            format {str} -- [description] (default: {'json'})
+        """
+        item = get_object_or_404(mds.Item, id=request.data["item_id"])
+        
+        timeslot_srs = srs.TimeslotSerializer(data=request.data)
+        if timeslot_srs.is_valid():
+            timeslot_srs.save()
+            return Response({"msg":"timeslot serializer failed"}, status=status.HTTP_406_NOT_ACCEPTABLE)
+        print("-----------------------------")
+        print(timeslot_srs.data)
+        request.data["timeslot_id"] = timeslot_srs.data["id"]
+        booking_srs = srs.BookingSerializer(data=request.data)
+
+        if not booking_srs.is_valid():
+            return Response({"msg":"booking serializer failed"}, status=status.HTTP_406_NOT_ACCEPTABLE)
+        return Response({}, status=status.HTTP_200_OK)
+
