@@ -22,16 +22,13 @@ export default function SearchResults(props) {
         pins: null
     })
 
-    const [markerPos, setMarkerPos] = useState({
-        selectedLat: addressInfo.lat,
-        selectedLng: addressInfo.lng,
-        hasLocation: addressInfo.lat ? true : false,
-    })
-    const [{address, addressValid}, setAddress] = useState({address: addressInfo.address, addressValid: true});
-    const dispatch = useDispatch();
+    // const [markerPos, setMarkerPos] = useState({
+    //     selectedLat: addressInfo.lat,
+    //     selectedLng: addressInfo.lng,
+    //     hasLocation: addressInfo.lat ? true : false,
+    // })
 
-    // dispatch(specifActions.redirectToStore(axios, 3, history));
-    
+    const [{address, addressValid}, setAddress] = useState({address: addressInfo.address, addressValid: true});
     return (
         <Container fluid id={styles.content}>
             <Row>
@@ -53,14 +50,17 @@ export default function SearchResults(props) {
                     {stores.length > 0 ? stores.map(store => {
                         return (
                             <SearchResult 
-                                key={store.store_id}
+                                key={store.id}
 
-                                id={store.store_id}
+                                id={store.id}
                                 name={store.name}
                                 address={store.address}
                                 email={store.email}
                                 openingFrom={store.opening_from_hour}
                                 openingTo={store.opening_to_hour}
+                                telephone={store.telephone}
+
+                                item={store.item}
 
                             />
                         )
@@ -75,8 +75,8 @@ export default function SearchResults(props) {
         
                         startingLat={startingPosAndPins.startingLat}
                         startingLng={startingPosAndPins.startingLng}
-                        selectedLat={232}
-                        selectedLng={3232}
+                        selectedLat={startingPosAndPins.startingLat}
+                        selectedLng={startingPosAndPins.startingLng}
                         hasLocation={true}
 
                         // handleMapClick={this.handleMapClick}

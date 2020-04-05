@@ -25,7 +25,7 @@ export default function SearchResult(props) {
     const dispatch = useDispatch();
 
     const goToStore = () => {
-        dispatch(specifActions.redirectToStore(axios, props.id, history));
+        dispatch(specifActions.redirectToStore(axios, props.id, history, props.item));
     }
 
     return (       
@@ -50,8 +50,7 @@ export default function SearchResult(props) {
                     <div className="pr-5">
                         <FontAwesomeIcon  icon={faPhoneAlt} />
                         <span className="ml-2">
-                            {/* {props.} */}
-                            τηλ Δεν εχει το ρισπονς
+                            {props.telephone}
                         </span>
                     </div>
 
@@ -64,7 +63,7 @@ export default function SearchResult(props) {
                 </div>
 
                 <div className={styles.item + " mt-2"}>
-                    ιτεμ Δεν εχει το ρισπονς
+                    {props.item.name}
                 </div>
 
                 <div className={"d-flex align-items-center"}> 
@@ -72,14 +71,14 @@ export default function SearchResult(props) {
                         <span className="small mr-2">
                             Διαθέσιμα
                         </span>
-                        <Badge pill id={styles.icon_bg}>Δεν εχει το ρισπονς</Badge>
+                        <Badge pill id={styles.icon_bg}>{props.item.quantity}</Badge>
                     </div>
 
                     <div className="mr-auto">
                         <span className="small mr-2">
                             Τιμη
                         </span>
-                        <Badge id={styles.icon_bg}>Δεν εχει το ρισπονς €</Badge>
+                        <Badge id={styles.icon_bg}>{props.item.price}€</Badge>
                     </div>
 
                     <div>
