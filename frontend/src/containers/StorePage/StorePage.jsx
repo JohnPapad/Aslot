@@ -125,8 +125,6 @@ export default function StorePage(props) {
                 </Col>
             </Row>
 
-<<<<<<< HEAD
-=======
             <Row className="mb-5 d-flex align-items-stretch justify-content-start border-bottom pb-5">
                     <InventoryItem selected={true}/>
 
@@ -192,7 +190,6 @@ export default function StorePage(props) {
                     </div>
             </Row>
 
->>>>>>> 19dcf843658cc1e0573afb9f71d271648306dd27
             <Row className="mt-5">
                 <div class="d-flex align-items-stretch flex-wrap">
                     <InventoryItem selected={true}/>
