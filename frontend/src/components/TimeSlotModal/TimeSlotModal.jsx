@@ -18,7 +18,10 @@ export default function TimeSlotModal(props) {
 
   return (
     <div>
-      <Button color="danger" onClick={() => setModal(!modal)}>button</Button>
+
+        <Button size="md" onClick={() => setModal(!modal)} id={classes.btn_bg}>
+            Επιλέξτε χρονοθυρίδα
+        </Button>
         <Modal isOpen={modal} toggle={() => setModal(!modal)} className="modal-lg">
             <ModalHeader toggle={() => setModal(!modal)} id={classes.header_bg}>
                 <span  id={classes.header}> Επιλέξτε μια διαθέσιμη χρονοθυρίδα</span>

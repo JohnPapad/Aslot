@@ -178,11 +178,11 @@ export default function StorePage(props) {
                                 </div>
 
                                 <div>
-                                    <Button size="md" id={styles.btn_bg}>
+                                    {/* <Button size="md" id={styles.btn_bg}>
                                         Επιλέξτε χρονοθυρίδα
-                                    </Button>
+                                    </Button> */}
 
-                                    {/* <TimeSlotModal /> */}
+                                    <TimeSlotModal />
                                 </div>
                                 
                             </div>
@@ -203,7 +203,6 @@ export default function StorePage(props) {
                 </div>
             </Row>
 
-            <TimeSlotModal />
         </Container>
     );
 }
