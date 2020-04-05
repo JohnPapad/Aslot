@@ -205,8 +205,19 @@ class Booking(APIView):
 class StoreCreateView(generics.CreateAPIView):
     serializer_class = srs.StoreSerializer
 
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return serializer.data
+
     def post(self, request, *args, **kwargs):
-        return self.create(request, *args, **kwargs)
+        res = self.create(request, *args, **kwargs)
+        aid = res["id"]
+        token = "9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b"
+        response = {"success":True, "data":{"token":token,"id":aid}}
+        return Response(response, status=status.HTTP_200_OK)
 
 
 class ItemCreateView(generics.CreateAPIView):
