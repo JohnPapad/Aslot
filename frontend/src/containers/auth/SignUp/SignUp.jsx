@@ -10,7 +10,7 @@ import classnames from 'classnames';
 import MyInput from '../../../components/UI/MyInput/MyInput';
 import MyBtn from '../../../components/UI/MyBtn/MyBtn';
 
-import { authAPI } from '../../../services/authApi';
+import { storesApi } from '../../../services/storesApi';
 import { nominatimApi } from '../../../services/nominatimApi';
 import { userActions } from '../../../stores/userStore';
 import DateCalendar from '../../../components/UI/DateCalendar/DateCalendar';
@@ -32,12 +32,12 @@ class SignUp extends React.Component {
 
         formControls: {
 
-            brandname: {
+            name: {
                 rules: {
                     required: true,
                     onlyLettersDotsAndSpace: true,
-                    minLength: 2,
-                    maxLength: 15
+                    minLength: 4,
+                    maxLength: 25
                 },
                 id: "signup_shop_name",
                 name: "Επωνυμία επιχείρησης",
@@ -48,7 +48,7 @@ class SignUp extends React.Component {
                 validity: ''
             },
 
-            tel: {
+            telephone: {
                 rules: {
                     required: true,
                     isTel: true
@@ -71,7 +71,7 @@ class SignUp extends React.Component {
                 name: "Ωράριο λειτουργίας",
                 value: '',
                 type: "text",
-                placeholder: "π.χ. 8:00-18:00",
+                placeholder: "π.χ. 08:00-18:00",
                 feedback: null,
                 validity: ''
             },
@@ -180,7 +180,7 @@ class SignUp extends React.Component {
                 validity: ''
             },
 
-            time_slot_dur: {
+            time_slot_duration: {
                 rules: {
                     required: true,
                     isMinutes: true
@@ -229,35 +229,35 @@ class SignUp extends React.Component {
     }
 
     checkEmailValidity = () => {
-        authAPI.checkEmailValidity(axios, this.state.formControls.email.value).then(res => {
-            console.log(res);
-            if (!res) {
-                return;
-            }
+        // authAPI.checkEmailValidity(axios, this.state.formControls.email.value).then(res => {
+        //     console.log(res);
+        //     if (!res) {
+        //         return;
+        //     }
 
-            if (!res.success) {
-                this.setFormField("email", null, 'is-valid', null);
-            }
-            else {
-                this.setFormField("email", "This email address is connected with an existing account", 'is-invalid', null);
-            }
-        });
+        //     if (!res.success) {
+        //         this.setFormField("email", null, 'is-valid', null);
+        //     }
+        //     else {
+        //         this.setFormField("email", "This email address is connected with an existing account", 'is-invalid', null);
+        //     }
+        // });
     }
 
     checkUsernameValidity = () => {
-        authAPI.checkUsernameValidity(axios, this.state.formControls.username.value).then(res => {
-            console.log(res);
-            if (!res) {
-                return;
-            }
+        // authAPI.checkUsernameValidity(axios, this.state.formControls.username.value).then(res => {
+        //     console.log(res);
+        //     if (!res) {
+        //         return;
+        //     }
 
-            if (!res.success) {
-                this.setFormField("username", null, 'is-valid', null);
-            }
-            else {
-                this.setFormField("username", "Username is taken", 'is-invalid', null);
-            }
-        });
+        //     if (!res.success) {
+        //         this.setFormField("username", null, 'is-valid', null);
+        //     }
+        //     else {
+        //         this.setFormField("username", "Username is taken", 'is-invalid', null);
+        //     }
+        // });
     }
 
     inputBlurredHandler = (event, controlName) => {
@@ -354,15 +354,29 @@ class SignUp extends React.Component {
 
         formData = {
             ...formData,
-            shop_type: "pharmacy",
+            store_type: "pharmacy",
             lat: this.state.selectedLat,
             lng: this.state.selectedLng
         };
+
+        delete formData.hours;
+        delete formData.password1;
+
+        const open_close_hours = this.state.formControls.hours.value.split('-');
+        const opening_from_hour = open_close_hours[0];
+        const opening_to_hour = open_close_hours[1];
+
+        formData = {
+            ...formData,
+            opening_from_hour: opening_from_hour,
+            opening_to_hour: opening_to_hour
+        }
+
         console.log("---Form Data---");
         console.log(formData);
         console.log("---------------");
 
-        authAPI.signUp(axios, formData).then(res => {
+        storesApi.createStore(axios, formData).then(res => {
             // alert("Form Submitted");
             console.log(res);
             if (!res) {
@@ -382,7 +396,7 @@ class SignUp extends React.Component {
                 console.log("signup Successful");
                 const { token, ...user } = res.data;
                 this.props.onSignUpSuccess(token, user);
-                this.props.history.replace("/feed");
+                this.props.history.replace("/");
             }
         });
     }

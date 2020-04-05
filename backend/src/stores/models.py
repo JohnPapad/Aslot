@@ -40,12 +40,12 @@ class Item(models.Model):
 
 class Timeslot(models.Model):
     store = models.ForeignKey(Store, on_delete=models.CASCADE, related_name='timeslots')
-    start_time = models.TimeField()
-    end_time = models.TimeField()
+    start_time = models.DateTimeField()
+    end_time = models.DateTimeField()
 
 class Booking(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE, related_name='bookings') # TODO make this many to many
     timeslot = models.ForeignKey(Timeslot, on_delete=models.CASCADE, related_name='bookings')
-    reserved_quanity = models.IntegerField()
+    reserved_quantity = models.IntegerField()
     email = models.CharField(max_length=60)
     confirmed = models.BooleanField(default=False)
