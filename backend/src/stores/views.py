@@ -33,7 +33,7 @@ class UserLogin(APIView):
             token = "9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b"
         else:
             return Response({"success":False}, status=status.HTTP_200_OK)
-        response = {"success":True, data={"token":token,"id":store.pk}}
+        response = {"success":True, "data":{"token":token,"id":store.pk}}
         return Response(response, status=status.HTTP_200_OK)
 
 
