@@ -1,0 +1,16 @@
+@import "../../../styles/colors";
+@import "../../../styles/gradients";
+@import "../../../styles/texts";
+@import "../../../styles/buttons";
+
+.day {
+    color: $primColor;
+    font-weight: bold;
+}
+
+.slot{
+    &:hover{
+        background-color: lighten($color: $primColor, $amount: 12);
+        cursor: pointer;
+    };
+}

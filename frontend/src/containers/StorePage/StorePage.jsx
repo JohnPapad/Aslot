@@ -192,7 +192,6 @@ export default function StorePage(props) {
 
             <Row className="mt-5">
                 <div class="d-flex align-items-stretch flex-wrap">
-                    <InventoryItem selected={true}/>
                     <InventoryItem/>
                     <InventoryItem/>
                     <InventoryItem/>
