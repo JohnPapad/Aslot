@@ -9,7 +9,7 @@ import MyBtn from '../../../components/UI/MyBtn/MyBtn';
 export default function Inventory(props) {
 
     return (
-        <div className={"pr-4 pb-4"} >
+        <div className={!props.selected ? "pr-4 pb-4" : ""} >
             <Container fluid id={props.selected ? styles.item_hl : styles.item}>
                 <Row>
                     <Col xs="3" className="p-1 m-0">
