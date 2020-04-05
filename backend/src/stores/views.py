@@ -162,6 +162,13 @@ class Booking(APIView):
         return Response({}, status=status.HTTP_200_OK)
 
 
+class StoreCreateView(generics.CreateAPIView):
+    serializer_class = srs.StoreSerializer
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+
+
 class ItemCreateView(generics.CreateAPIView):
         serializer_class = srs.ItemSerializer
 
