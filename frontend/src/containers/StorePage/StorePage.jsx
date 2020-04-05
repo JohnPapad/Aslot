@@ -1,6 +1,7 @@
 import React, { Component }  from 'react';
 import { connect } from 'react-redux';
 import styles from './StorePage.module.scss';
+import produce from 'immer';
 
 import axios from '../../services/axiosConfig';
 import { withRouter } from 'react-router-dom';
@@ -28,13 +29,29 @@ class StorePage extends Component {
 
     }
 
-    setAmountValues = () => {
+    changeAmountValue = (itemId, itemQuantity) => {
+        this.setState(
+            produce(draft => {
+               
+                draft.amountValues[itemId] = itemQuantity;
 
+            })
+        );
+    }
+
+    getTotalPrice = (items) => {
+        let price = 0;
+        for (let [itemId, itemQuantity] of Object.entries(this.state.amountValues)) 
+        {
+            price += itemQuantity * items[itemId].price;
+        }
+
+        return price;
     }
 
     render (){
 
-        console.log("render state: ", this.props)
+        console.log("render state: ", this.state)
 
     // call specifActions get everything 
     //const dispatch = useDispatch(); // <- me higher order
@@ -157,7 +174,7 @@ class StorePage extends Component {
                     <InventoryItem 
                         selected={true} 
                         item={selectedItem} 
-                        
+                        itemQuantity={selectedItem.id in this.state.amountValues ? this.state.amountValues[selectedItem.id] : 1}
                         changeAmountValue={this.changeAmountValue}
                     />
                 ): (<></>)
@@ -171,33 +188,18 @@ class StorePage extends Component {
 
                     <div className="d-flex flex-column" >
                         <div className="d-flex flex-wrap align-items-center justify-content-start border p-2">
-                            <div className="mr-4">
-                                <span className={"mr-2 " + styles.item}>
-                                    κδκδκδκδκδκδ
-                                </span>
-                                <span className="">
-                                    3
-                                </span>
-                            </div>
-
-                            <div className="mr-4">
-                                <span className={"mr-2 " + styles.item}>
-                                    Χειρουργικη μασκα: 
-                                </span>
-                                <span className="">
-                                    3
-                                </span>
-                            </div>
-
-                            <div className="mr-4">
-                                <span className={"mr-2 " + styles.item}>
-                                    Χειρουργικη μασκα: 
-                                </span>
-                                <span className="">
-                                    3
-                                </span>
-                            </div>
-
+                            
+                            {Object.keys(this.state.amountValues).map((itemId, i) => (
+                                <div className="mr-4" key={i}>
+                                    <span className={"mr-2 " + styles.item}>
+                                        {items[itemId].name}
+                                    </span>
+                                    <span className="">
+                                        {this.state.amountValues[itemId]}
+                                    </span>
+                                </div>
+                            ))}
+                            
                         </div>
 
                         <div className="d-flex h-100 pl-2 pr-2 align-items-center justify-content-between border">
@@ -205,7 +207,7 @@ class StorePage extends Component {
                                 <span className="font-weight-bold mr-2">
                                     Συνολικό κόστος:
                                 </span>
-                                <Badge id={styles.icon_bg} className="p-2">13 €</Badge>
+                            <Badge id={styles.icon_bg} className="p-2">{this.getTotalPrice(items)} {' '} €</Badge>
                             </div>
 
                             <div>
@@ -231,7 +233,7 @@ class StorePage extends Component {
                         return (
                             <InventoryItem
                                 item={item} 
-                            
+                                itemQuantity={item.id in this.state.amountValues ? this.state.amountValues[item.id] : 1}
                                 changeAmountValue={this.changeAmountValue}
                             />
                         );
