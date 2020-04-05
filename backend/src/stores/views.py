@@ -141,24 +141,28 @@ class Booking(APIView):
         """Create an item booking (based on item id)
         
         Arguments:
-            request {[type]} -- [description]
-        
-        Keyword Arguments:
-            format {str} -- [description] (default: {'json'})
+            request {
+                "item": 3,
+                "reserved_quantity": 2,
+                "email": "customer@mail.ch",
+                "store": 1,
+                "start_time": "19:45:00",
+                "end_time": "19:50:00"
+            }
         """
-        item = get_object_or_404(mds.Item, id=request.data["item_id"])
+        item = get_object_or_404(mds.Item, id=request.data["item"])
         
         timeslot_srs = srs.TimeslotSerializer(data=request.data)
-        if timeslot_srs.is_valid():
-            timeslot_srs.save()
+        if not timeslot_srs.is_valid():
             return Response({"msg":"timeslot serializer failed"}, status=status.HTTP_406_NOT_ACCEPTABLE)
-        print("-----------------------------")
+        timeslot_srs.save()
         print(timeslot_srs.data)
-        request.data["timeslot_id"] = timeslot_srs.data["id"]
-        booking_srs = srs.BookingSerializer(data=request.data)
+        request.data["timeslot"] = timeslot_srs.data["id"]
 
+        booking_srs = srs.BookingSerializer(data=request.data)
         if not booking_srs.is_valid():
             return Response({"msg":"booking serializer failed"}, status=status.HTTP_406_NOT_ACCEPTABLE)
+        booking_srs.save()
         return Response({}, status=status.HTTP_200_OK)
 
 
