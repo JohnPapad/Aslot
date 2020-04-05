@@ -2,10 +2,10 @@ import produce from 'immer';
 
 // Action types
 const actionTypes = {
-    SET_QUERY: 'aslot/store/SET_QUERY',
-    SET_ADDRESS_INFO: 'aslot/store/SET_ADDRESS_INFO',
+    SET_QUERY: 'aslot/search/SET_QUERY',
+    SET_ADDRESS_INFO: 'aslot/search/SET_ADDRESS_INFO',
 
-    DELETE_ALL: 'aslot/store/DELETE_ALL'
+    DELETE_ALL: 'aslot/search/DELETE_ALL'
 }
 
 // Action creators

@@ -3,13 +3,14 @@ import { storesApi } from '../services/storesApi';
 
 // Action types
 const actionTypes = {
-    SET_CURR_STORE: 'aslot/store/SET_CURR_STORE',
-    SET_CURR_ITEMS: 'aslot/store/SET_CURR_ITEMS',
-    SET_CURR_TIMESLOTS: 'aslot/store/CURR_TIMESLOTS',
+    SET_CURR_STORE: 'aslot/specif/SET_CURR_STORE',
+    SET_CURR_ITEMS: 'aslot/specif/SET_CURR_ITEMS',
+    SET_CURR_TIMESLOTS: 'aslot/specif/CURR_TIMESLOTS',
+    SET_SELECTED_ITEM: 'aslot/specif/SET_SELECTED_ITEM',
 
-    DELETE_ALL: 'aslot/store/DELETE_ALL',
+    DELETE_ALL: 'aslot/specif/DELETE_ALL',
 
-    SET_FETCHING: 'aslot/store/SET_FETCHING'
+    SET_FETCHING: 'aslot/specif/SET_FETCHING'
 }
 
 // Action creators
@@ -34,9 +35,16 @@ const setCurrTimeslots = (timeslots) => {
     }
 }
 
+const setSelectedItem = (selectedItem) => {
+    return {
+        type: actionTypes.SET_SELECTED_ITEM,
+        selectedItem,
+    }
+}
+
 const deleteAll = () => {
     return {
-        type: actionTypes.DELETE_STORES,
+        type: actionTypes.DELETE_ALL,
     };
 }
 
@@ -47,23 +55,37 @@ const setFetching = (fetching) => {
     };
 }
 
-const redirectToStore = (axios, id, history) => {
+const redirectToStore = (axios, id, history, selectedItem) => {
     return function(dispatch) {
-        dispatch({type: actionTypes.DELETE_ALL});
-        dispatch({type: actionTypes.SET_FETCHING, fetching: true});
+        dispatch(deleteAll());
+        dispatch(setFetching(true));
 
-        const storePromise = storesApi.getStore(axios, id);
-        const invPromise = storesApi.getStoreInventory(axios, {storeID: id});
-        const timeslotPromise = storesApi.getTimeslots(axios, {storeID: id});
+        const storePromise = storesApi.getStore(axios, id)
+            .then(res =>{
+                dispatch(setFetching(false));
 
-        Promise.all([storePromise, invPromise, timeslotPromise])
-            .then(values => {
-                dispatch({type: actionTypes.SET_FETCHING, fetching: false});
+                dispatch(setCurrStore(res.store_info));
+                dispatch(setCurrItems(res.inventory));                
+                dispatch(setCurrTimeslots(res.timeslots));
 
-                console.log('PROMISE VALUES');
-                console.log(values);
-                history.push('./store/' + id);
-            });
+                // set selected item if defined
+                if (selectedItem) {
+                    dispatch(setSelectedItem(selectedItem));
+                }
+
+                // only push if history is defined
+                if (history) {
+                    history.push('./store/' + id);
+                }
+            })
+
+        // const invPromise = storesApi.getStoreInventory(axios, {storeID: id});
+        // const timeslotPromise = storesApi.getTimeslots(axios, {storeID: id});
+
+        // Promise.all([storePromise, invPromise, timeslotPromise])
+        //     .then(values => {
+                
+        //     });
     }
 }
 
@@ -71,6 +93,7 @@ export const specifActions = {
     setCurrStore,
     setCurrItems,
     setCurrTimeslots,
+    setSelectedItem,
     deleteAll,
     setFetching,
 
@@ -84,7 +107,8 @@ const initialState = {
     items: [],
     timeslots: [],
     fetching: false,
-    noData: true
+    noData: true,
+    selectedItem: null
 };
 
 // Reducer    
@@ -92,7 +116,7 @@ const reducer = ( state = initialState, action ) =>
     produce(state, draft => {
         switch ( action.type ) {
             case actionTypes.SET_CURR_STORE: 
-                draft.store = action.stores;
+                draft.store = action.store;
                 draft.noData  = false;
                 return;
             case actionTypes.SET_CURR_ITEMS: 
@@ -103,11 +127,16 @@ const reducer = ( state = initialState, action ) =>
                 draft.timeslots = action.timeslots;
                 draft.noData  = false;
                 return;
+            case actionTypes.SET_SELECTED_ITEM: 
+                draft.selectedItem = action.selectedItem;
+                return;
             case actionTypes.DELETE_ALL: 
-                draft.stores = [];
+                draft.store = null;
                 draft.items = [];
                 draft.timeslots = [];
+                draft.selectedItem = null;
                 draft.noData  = true;
+                draft.fetching = false;
                 return;
             case actionTypes.SET_FETCHING: 
                 draft.fetching = action.fetching;
