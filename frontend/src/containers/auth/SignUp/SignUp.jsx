@@ -229,35 +229,35 @@ class SignUp extends React.Component {
     }
 
     checkEmailValidity = () => {
-        authAPI.checkEmailValidity(axios, this.state.formControls.email.value).then(res => {
-            console.log(res);
-            if (!res) {
-                return;
-            }
+        // authAPI.checkEmailValidity(axios, this.state.formControls.email.value).then(res => {
+        //     console.log(res);
+        //     if (!res) {
+        //         return;
+        //     }
 
-            if (!res.success) {
-                this.setFormField("email", null, 'is-valid', null);
-            }
-            else {
-                this.setFormField("email", "This email address is connected with an existing account", 'is-invalid', null);
-            }
-        });
+        //     if (!res.success) {
+        //         this.setFormField("email", null, 'is-valid', null);
+        //     }
+        //     else {
+        //         this.setFormField("email", "This email address is connected with an existing account", 'is-invalid', null);
+        //     }
+        // });
     }
 
     checkUsernameValidity = () => {
-        authAPI.checkUsernameValidity(axios, this.state.formControls.username.value).then(res => {
-            console.log(res);
-            if (!res) {
-                return;
-            }
+        // authAPI.checkUsernameValidity(axios, this.state.formControls.username.value).then(res => {
+        //     console.log(res);
+        //     if (!res) {
+        //         return;
+        //     }
 
-            if (!res.success) {
-                this.setFormField("username", null, 'is-valid', null);
-            }
-            else {
-                this.setFormField("username", "Username is taken", 'is-invalid', null);
-            }
-        });
+        //     if (!res.success) {
+        //         this.setFormField("username", null, 'is-valid', null);
+        //     }
+        //     else {
+        //         this.setFormField("username", "Username is taken", 'is-invalid', null);
+        //     }
+        // });
     }
 
     inputBlurredHandler = (event, controlName) => {
