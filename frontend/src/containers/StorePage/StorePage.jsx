@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 
 import styles from './StorePage.module.scss';
 
+import axios from '../../services/axiosConfig';
+
 import { Container, Row, Col, Button, Input, Badge } from 'reactstrap';
 import TimeSlotModal from '../../components/TimeSlotModal/TimeSlotModal';
 
@@ -15,15 +17,34 @@ import { useDispatch, useSelector } from "react-redux";
 import { specifActions } from '../../stores/specifStore';
 
 export default function StorePage(props) {
-    console.log('STOREEEEEEPAGE');
-    console.log(props.match.params.id);
+    const [amountValues, setAmountValues] = useState({});
 
+    // call specifActions get everything 
+    const dispatch = useDispatch();
     const specifics = useSelector(state => state.specifReducer);
+    if (specifics.noData == true && specifics.fetching == false) {
+        const idFromUrl = props.match.params.id;
+        dispatch(specifActions.redirectToStore(axios, idFromUrl));
+        return null;
+    }
+    if (!specifics.store) {
+        return null;
+    }
+
     console.log(specifics);
 
+    const changeAmountValue = (id, val) => {
+        const newAmountValues = {...amountValues};
+        newAmountValues[id] = val;
+        setAmountValues(newAmountValues);
+    }
+
+    const store = specifics.store;
+    const items = specifics.items;
+    const timeslots = specifics.timeslots;
+    const selectedItem = specifics.selectedItem;
     return (
         <Container fluid id={styles.content}>
-
             <Row className="mb-5">
                 <Col xs="8" className="pr-5">
                     <Row  className={"p-2 " + styles.store_pres}>
@@ -34,7 +55,7 @@ export default function StorePage(props) {
                         <Col xs="8" className="p-0 m-0 pl-2 d-flex-column ">
                             <div className="d-flex align-items-center mb-2">
                                 <div className={styles.shop_name}>
-                                    Φαρμακείο Παπαδοπούλου
+                                    {store.name}
                                 </div>
                             </div>
 
@@ -45,7 +66,7 @@ export default function StorePage(props) {
                                 </div>
 
                                 <div>
-                                    Κωνισσοπούλου 12, Αθήνα
+                                    {store.address}
                                 </div>
                             </div>
 
@@ -56,7 +77,7 @@ export default function StorePage(props) {
                                 </div>
 
                                 <div>
-                                    2108736636
+                                    {store.telephone}
                                 </div>
                             </div>
 
@@ -67,7 +88,7 @@ export default function StorePage(props) {
                                 </div>
 
                                 <div>
-                                    example@example.com
+                                    {store.email}
                                 </div>
                             </div>
 
@@ -78,7 +99,7 @@ export default function StorePage(props) {
                                 </div>
 
                                 <div>
-                                    08:83-20:34
+                                    {store.opening_from_hour + '-' + store.opening_to_hour}
                                 </div>
                             </div>
 
@@ -89,7 +110,7 @@ export default function StorePage(props) {
                                 </div>
 
                                 <div>
-                                    10'
+                                    {store.time_slot_duration}
                                 </div>
                             </div>
 
@@ -100,24 +121,22 @@ export default function StorePage(props) {
                                 </div>
 
                                 <div>
-                                    5
+                                    {store.persons_per_slot}
                                 </div>
                             </div>
                             
                         </Col>
                     </Row>
-
-
                 </Col>
 
                 <Col xs="4" className="border p-0">
                     <LocationMap   
                         mapHeight={document.documentElement.clientHeight * 0.34}
         
-                        startingLat={38.075331037}
-                        startingLng={23.794199477}
-                        selectedLat={38.075331037}
-                        selectedLng={23.794199477}
+                        startingLat={store.lat}
+                        startingLng={store.lng}
+                        selectedLat={store.lat}
+                        selectedLng={store.lng}
                         hasLocation={true}
 
                         // handleMapClick={this.handleMapClick}
@@ -125,8 +144,14 @@ export default function StorePage(props) {
                 </Col>
             </Row>
 
-            <Row className="mb-5 d-flex align-items-stretch justify-content-start border-bottom pb-5">
-                    <InventoryItem selected={true}/>
+            { selectedItem ? (
+                <Row className="mb-5 d-flex align-items-stretch justify-content-start border-bottom pb-5">
+                    <InventoryItem 
+                        selected={true} 
+                        item={selectedItem} 
+                        
+                        changeAmountValue={changeAmountValue}
+                    />
 
                     <div className="d-flex align-items-stretch" id={styles.selected_items}>
 
@@ -138,7 +163,7 @@ export default function StorePage(props) {
                             <div className="d-flex flex-wrap align-items-center justify-content-start border p-2">
                                 <div className="mr-4">
                                     <span className={"mr-2 " + styles.item}>
-                                        Χειρουργικη μασκα: 
+                                        {selectedItem.name}
                                     </span>
                                     <span className="">
                                         3
@@ -181,27 +206,29 @@ export default function StorePage(props) {
                                     <Button size="md" id={styles.btn_bg}>
                                         Επιλέξτε χρονοθυρίδα
                                     </Button>
-
-                                    {/* <TimeSlotModal /> */}
                                 </div>
                                 
                             </div>
                         </div>
                     </div>
-            </Row>
+                </Row>) : (<></>)
+            }
 
             <Row className="mt-5">
-                <div class="d-flex align-items-stretch flex-wrap">
-                    <InventoryItem selected={true}/>
-                    <InventoryItem/>
-                    <InventoryItem/>
-                    <InventoryItem/>
-                    <InventoryItem/>
-
-                    <InventoryItem/>
-                    <InventoryItem/>
-                    <InventoryItem/>
-                </div>
+                {items.map(item => {
+                    if (!selectedItem || item.id != selectedItem.id) {
+                        return (
+                            <InventoryItem
+                                item={item} 
+                            
+                                changeAmountValue={changeAmountValue}
+                            />
+                        );
+                    }
+                    else {
+                        return null;
+                    }
+                })}
             </Row>
 
             <TimeSlotModal />
