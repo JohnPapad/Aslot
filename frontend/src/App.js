@@ -34,9 +34,11 @@ class App extends Component {
                     <Route exact path="/signup" component={SignUp} />
                     <Route exact path="/searchresults" component={SearchResults} />
                     <Route exact path="/logout" component={LogOut} />
-
-                    <Route exact path="/" component={LandingPage} />
                     <Route exact path="/store/:id" component={StorePage} />
+                    <Route exact path="/" component={LandingPage} />
+                    <Route render={() => <Redirect to="/" />} />
+
+
                     {/* <Route exact path="/register" component={Register} />
                     <Route exact path="/browse" component={BrowseAuctions} />
                     <Route exact path="/reportform" component={CreateReportPage} />
@@ -53,9 +55,9 @@ class App extends Component {
                     <UserRoute exact path="/messages" component={Messages} />
 
                     <AdminRoute path="/verify" component={AdminPage} />
-                    <AdminRoute path="/import-export" component={ImportExportPage} />
+                    <AdminRoute path="/import-export" component={ImportExportPage} /> */}
 
-                    <Route render={() => <Redirect to="/" />} /> */}
+                    <Route render={() => <Redirect to="/" />} />
                 </Switch>
 
                 </Layout>
