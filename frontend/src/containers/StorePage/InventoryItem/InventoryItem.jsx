@@ -10,6 +10,9 @@ export default function Inventory(props) {
 
     const { item } = props;
     const { changeAmountValue } = props;
+    const { itemQuantity } = props;
+
+    console.log("ivent item", item);
     return (
         <div className={!props.selected ? "pr-4 pb-4" : ""} >
             <Container fluid id={props.selected ? styles.item_hl : styles.item}>
@@ -43,7 +46,7 @@ export default function Inventory(props) {
 
                         <div className={"d-flex align-items-center justify-content-start"}>
                             <div className="flex-shrink">
-                                <Input bsSize="sm" value="1" type="number" min="1" max="5" id={styles.input_num} 
+                                <Input bsSize="sm" value={itemQuantity} type="number" min="1" max={item.max_to_buy} id={styles.input_num} 
                                     onChange={(e) => changeAmountValue(item.id, e.target.value)}
                                 /> 
                             </div>
