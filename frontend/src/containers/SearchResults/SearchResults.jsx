@@ -28,6 +28,8 @@ export default function SearchResults(props) {
         pins: null
     })
 
+    const [{address, addressValid}, setAddress] = useState({address: addressInfo.address, addressValid: true});
+
     // const [markerPos, setMarkerPos] = useState({
     //     selectedLat: addressInfo.lat,
     //     selectedLng: addressInfo.lng,
@@ -63,15 +65,15 @@ export default function SearchResults(props) {
         dispatch(searchActions.setAddressInfo(addressInfo));
     }
 
-    const [{address, addressValid}, setAddress] = useState({address: addressInfo.address, addressValid: true});
+    const createPins = () => {
+        
+    } 
     
-    if (!address)
-    {
+    if (!address) {
         return (
             <Redirect to="/"/>
         )
     }
-    
     return (
         <Container fluid id={styles.content}>
             <Row>
