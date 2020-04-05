@@ -48,7 +48,7 @@ class StorePage extends Component {
         let price = 0;
         for (let [itemId, itemQuantity] of Object.entries(this.state.amountValues)) 
         {
-            price += itemQuantity * items[itemId].price;
+            price += itemQuantity * items[Number(itemId)-1].price;
         }
 
         return price;
@@ -197,7 +197,7 @@ class StorePage extends Component {
                             {Object.keys(this.state.amountValues).map((itemId, i) => (
                                 <div className="mr-4" key={i}>
                                     <span className={"mr-2 " + styles.item}>
-                                        {items[itemId].name}
+                                        {items[Number(itemId)-1].name}
                                     </span>
                                     <span className="">
                                         {this.state.amountValues[itemId]}
