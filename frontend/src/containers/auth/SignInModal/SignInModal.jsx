@@ -177,6 +177,7 @@ class SignIn extends React.Component {
                 const { token, ...user } = res.data;
                 this.props.onSignInSuccess(token, user);
                 this.props.history.replace("/");
+                this.props.toggleSignInModalOpen();
             }
         });
     }

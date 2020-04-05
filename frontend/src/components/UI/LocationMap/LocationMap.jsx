@@ -21,7 +21,7 @@ export const redIcon = new L.Icon({
 
 export default function LocationMap(props) {
 
-    const { startingLat, startingLng, selectedLat, selectedLng, mapHeight, hasLocation, pins } = props;
+    const { startingLat, startingLng, selectedLat, selectedLng, mapHeight, hasLocation, pins, zoom } = props;
     const { handleMapClick, onRedMarkerClick } = props;
     const style = { height: mapHeight + 'px' };
 
@@ -55,7 +55,7 @@ export default function LocationMap(props) {
                     <div className={classes.map}>
                         <Map
                             center={{ lat: startingLat, lng: startingLng }}
-                            zoom={16}
+                            zoom={zoom ? zoom : 16}
                             onClick={handleMapClick}
                             // onLocationfound={this.handleLocationFound}
                             //ref={this.mapRef}

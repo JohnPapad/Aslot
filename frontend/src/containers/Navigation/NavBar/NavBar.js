@@ -39,12 +39,12 @@ class NavBar extends React.Component {
 		return(
 			<>
 				<NavigationButton isActive={this.props.isSignInModalOpen} toggle={this.props.toggleSignInModalOpen}>
-                    Sign In
+                    Είσοδος Φαρμακείου
                     <FontAwesomeIcon icon={faSignInAlt} className="ml-2"/>
                 </NavigationButton>
 
                 <NavigationItem link="/signup">
-                    Sign Up
+                    Εγγραφή Φαρμακείου
                     <FontAwesomeIcon icon={faUserEdit} className="ml-2"/>
                 </NavigationItem>								
 			</>
@@ -100,6 +100,7 @@ class NavBar extends React.Component {
               
                 <RouterNavLink to="/" exact>
                     {/* <img src={logo_path} id={classes.img} alt="Logo" className="img-fluid"/> */}
+                    <h3 className={classes.remFor}>ePharmacy</h3>
                 </RouterNavLink> 
 
                 <NavbarToggler onClick={this.toggle} />

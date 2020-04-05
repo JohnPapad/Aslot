@@ -65,8 +65,24 @@ export default function SearchResults(props) {
         dispatch(searchActions.setAddressInfo(addressInfo));
     }
 
+    // console.log('STORES');
+    // console.log(stores);
     const createPins = () => {
-        
+        const pins = [];
+        const storesVisited = {};
+
+        stores.map(store => {
+            if (!storesVisited[store.id]) {
+                pins.push({
+                    lat: store.lat,
+                    lng: store.lng,
+                    store_name: store.name,
+                    store_id: store.id
+                });
+                storesVisited[store.id] = true;
+            }
+        })
+        return pins;
     } 
     
     if (!address) {
@@ -125,6 +141,8 @@ export default function SearchResults(props) {
                         selectedLng={startingPosAndPins.startingLng}
                         hasLocation={true}
 
+                        pins={createPins()}
+                        zoom={15}
                         // handleMapClick={this.handleMapClick}
                     />
                 
