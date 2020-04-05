@@ -5,7 +5,8 @@ export const storesApi = {
     getPins,
     searchStores,
     getStoreInventory,
-    getTimeslots
+    getTimeslots,
+    createStore
 };
 
 
@@ -70,19 +71,13 @@ function getTimeslots(axios, searchParams) {
 //     submitRating
 // };
 
-// function createReport(axios, jsonRequest)
-// {
-//     // const formData = new FormData();
-//     // formData.append('img', img);
+function createStore(axios, jsonRequest)
+{
 
-//     return axios.post('/users/report', jsonRequest, {
-//         headers: {
-//             'Content-Type': 'multipart/form-data'
-//         }
-//     })
-//         .then( response =>  response ? response.data : null)
-//         .catch( err => err);
-// }
+    return axios.post('/stores/create_store', jsonRequest) 
+        .then( response =>  response ? response.data : null)
+        .catch( err => err);
+}
 
 
 // function getReports(axios, jsonRequest)

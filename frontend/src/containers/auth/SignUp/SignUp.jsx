@@ -10,7 +10,7 @@ import classnames from 'classnames';
 import MyInput from '../../../components/UI/MyInput/MyInput';
 import MyBtn from '../../../components/UI/MyBtn/MyBtn';
 
-import { authAPI } from '../../../services/authApi';
+import { storesApi } from '../../../services/storesApi';
 import { nominatimApi } from '../../../services/nominatimApi';
 import { userActions } from '../../../stores/userStore';
 import DateCalendar from '../../../components/UI/DateCalendar/DateCalendar';
@@ -362,7 +362,7 @@ class SignUp extends React.Component {
         console.log(formData);
         console.log("---------------");
 
-        authAPI.signUp(axios, formData).then(res => {
+        storesApi.createStore(axios, formData).then(res => {
             // alert("Form Submitted");
             console.log(res);
             if (!res) {
@@ -382,7 +382,7 @@ class SignUp extends React.Component {
                 console.log("signup Successful");
                 const { token, ...user } = res.data;
                 this.props.onSignUpSuccess(token, user);
-                this.props.history.replace("/feed");
+                this.props.history.replace("/");
             }
         });
     }
