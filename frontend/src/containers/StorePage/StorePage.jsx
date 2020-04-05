@@ -22,11 +22,16 @@ export default function StorePage(props) {
         console.log(day, timeSlot);
     }
 
+    state = {
+        amountValues // items poses fores ta exw dialeksei
+
+    }
+
     const [amountValues, setAmountValues] = useState({});
 
     // call specifActions get everything 
-    const dispatch = useDispatch();
-    const specifics = useSelector(state => state.specifReducer);
+    //const dispatch = useDispatch(); // <- me higher order
+    // const specifics = useSelector(state => state.specifReducer); 
     if (specifics.noData == true && specifics.fetching == false) {
         const idFromUrl = props.match.params.id;
         dispatch(specifActions.redirectToStore(axios, idFromUrl));
@@ -34,14 +39,6 @@ export default function StorePage(props) {
     }
     if (!specifics.store) {
         return null;
-    }
-
-    console.log(specifics);
-
-    const changeAmountValue = (id, val) => {
-        const newAmountValues = {...amountValues};
-        newAmountValues[id] = val;
-        setAmountValues(newAmountValues);
     }
 
     const store = specifics.store;
@@ -149,77 +146,78 @@ export default function StorePage(props) {
                 </Col>
             </Row>
 
+            <Row className="mb-5 d-flex align-items-stretch justify-content-start border-bottom pb-5">
             { selectedItem ? (
-                <Row className="mb-5 d-flex align-items-stretch justify-content-start border-bottom pb-5">
                     <InventoryItem 
                         selected={true} 
                         item={selectedItem} 
                         
                         changeAmountValue={changeAmountValue}
                     />
+                ): (<></>)
+            }
 
-                    <div className="d-flex align-items-stretch" id={styles.selected_items}>
+                <div className="d-flex align-items-stretch" id={styles.selected_items}>
 
-                        <div className="flex-shrink-1 p-1 border-right">
-                            <FontAwesomeIcon icon={faShoppingBasket} size="5x" className={styles.icon}/>
+                    <div className="flex-shrink-1 p-1 border-right">
+                        <FontAwesomeIcon icon={faShoppingBasket} size="5x" className={styles.icon}/>
+                    </div>
+
+                    <div className="d-flex flex-column" >
+                        <div className="d-flex flex-wrap align-items-center justify-content-start border p-2">
+                            <div className="mr-4">
+                                <span className={"mr-2 " + styles.item}>
+                                    {selectedItem.name}
+                                </span>
+                                <span className="">
+                                    3
+                                </span>
+                            </div>
+
+                            <div className="mr-4">
+                                <span className={"mr-2 " + styles.item}>
+                                    Χειρουργικη μασκα: 
+                                </span>
+                                <span className="">
+                                    3
+                                </span>
+                            </div>
+
+                            <div className="mr-4">
+                                <span className={"mr-2 " + styles.item}>
+                                    Χειρουργικη μασκα: 
+                                </span>
+                                <span className="">
+                                    3
+                                </span>
+                            </div>
+
                         </div>
 
-                        <div className="d-flex flex-column" >
-                            <div className="d-flex flex-wrap align-items-center justify-content-start border p-2">
-                                <div className="mr-4">
-                                    <span className={"mr-2 " + styles.item}>
-                                        {selectedItem.name}
-                                    </span>
-                                    <span className="">
-                                        3
-                                    </span>
-                                </div>
-
-                                <div className="mr-4">
-                                    <span className={"mr-2 " + styles.item}>
-                                        Χειρουργικη μασκα: 
-                                    </span>
-                                    <span className="">
-                                        3
-                                    </span>
-                                </div>
-
-                                <div className="mr-4">
-                                    <span className={"mr-2 " + styles.item}>
-                                        Χειρουργικη μασκα: 
-                                    </span>
-                                    <span className="">
-                                        3
-                                    </span>
-                                </div>
-
+                        <div className="d-flex h-100 pl-2 pr-2 align-items-center justify-content-between border">
+                            <div>
+                                <span className="font-weight-bold mr-2">
+                                    Συνολικό κόστος:
+                                </span>
+                                <Badge id={styles.icon_bg} className="p-2">13 €</Badge>
                             </div>
 
-                            <div className="d-flex h-100 pl-2 pr-2 align-items-center justify-content-between border">
-                                <div>
-                                    <span className="font-weight-bold mr-2">
-                                        Συνολικό κόστος:
-                                    </span>
-                                    <Badge id={styles.icon_bg} className="p-2">13 €</Badge>
-                                </div>
-
-                                <div>
-                                    <Input bsSize="md" type="text" placeholder="email" id={styles.input_email}/>
-                                </div>
-
-                                <div>
-                                    {/* <Button size="md" id={styles.btn_bg}>
-                                        Επιλέξτε χρονοθυρίδα
-                                    </Button> */}
-
-                                    <TimeSlotModal slotClickedHandler={slotClickedHandler}/>
-                                </div>
-                                
+                            <div>
+                                <Input bsSize="md" type="text" placeholder="email" id={styles.input_email}/>
                             </div>
+
+                            <div>
+                                {/* <Button size="md" id={styles.btn_bg}>
+                                    Επιλέξτε χρονοθυρίδα
+                                </Button> */}
+
+                                <TimeSlotModal slotClickedHandler={slotClickedHandler}/>
+                            </div>
+                            
                         </div>
                     </div>
-                </Row>) : (<></>)
-            }
+                </div>
+            </Row>
 
             <Row className="mt-5">
                 {items.map(item => {
