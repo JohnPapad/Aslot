@@ -41,3 +41,27 @@
 .icon {
     color: $primColor;
 }
+
+
+#selected_items{
+    margin-left: 8vw;
+    border: 2px solid $primColor;
+    border-radius: 5px;
+
+}
+
+#icon_bg {
+    background-color: $primColor;
+    font-size: $fontMD;
+}
+
+#input_email {
+    @include remove_hl;
+    border: 2px solid $primColor;
+}
+
+#btn_bg {
+    @include remove_hl;
+    background-color: $primColor;
+    font-weight: bold;
+}
