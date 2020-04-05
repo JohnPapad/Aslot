@@ -35,20 +35,22 @@ export default function SearchResults(props) {
     // })
 
     const onSubmit = () => {
-        // First set search store
-        updateSearchStore(query, addressInfo.address, startingPosAndPins.startingLat, startingPosAndPins.startingLng)
+        if (query != '') {
+            // First set search store
+            updateSearchStore(query, addressInfo.address, startingPosAndPins.startingLat, startingPosAndPins.startingLng)
 
-        const searchParams = {
-            searchTerm: query,
-            lat: startingPosAndPins.startingLat,
-            lng: startingPosAndPins.startingLng
+            const searchParams = {
+                searchTerm: query,
+                lat: startingPosAndPins.startingLat,
+                lng: startingPosAndPins.startingLng
+            }
+            storesApi.searchStores(axios, searchParams)
+                .then(res => {
+                    // console.log(res);
+                    dispatch(storeActions.setStores(res.stores));
+                    history.push('/searchresults');
+                });
         }
-        storesApi.searchStores(axios, searchParams)
-            .then(res => {
-                // console.log(res);
-                dispatch(storeActions.setStores(res.stores));
-                history.push('/searchresults');
-            });
     }
 
     const updateSearchStore = (query, address, lat, lng) => {

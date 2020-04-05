@@ -12,7 +12,6 @@ import { storeActions } from '../../stores/storeStore';
 import { searchActions } from '../../stores/searchStore';
 import { specifActions } from '../../stores/specifStore';
 
-
 import { nominatimApi } from '../../services/nominatimApi';
 import { storesApi } from '../../services/storesApi';
 import LocationMap from '../../components/UI/LocationMap/LocationMap';
@@ -49,44 +48,48 @@ export default function LandingPage() {
 
     const onSubmit = () => {
         if (markerPos.hasLocation == false) {
-            nominatimApi.getGeoLocation(axios, address.replace(/,/g, ' '))
-                .then(data => {
-                    if (data && data.features.length > 0) {
-                        const coords = data.features[0].geometry.coordinates;
-                        // Coordinates are given in reverse order from API
-                        
-                        // First set search store
-                        updateSearchStore(query, address, coords[1].toFixed(9), coords[0].toFixed(9))
-                        
-                        const searchParams = {
-                            searchTerm: query,
-                            lat: coords[1].toFixed(9),
-                            lng: coords[0].toFixed(9)
+            if (query != '' && address != '') {
+                nominatimApi.getGeoLocation(axios, address.replace(/,/g, ' '))
+                    .then(data => {
+                        if (data && data.features.length > 0) {
+                            const coords = data.features[0].geometry.coordinates;
+                            // Coordinates are given in reverse order from API
+                            
+                            // First set search store
+                            updateSearchStore(query, address, coords[1].toFixed(9), coords[0].toFixed(9))
+                            
+                            const searchParams = {
+                                searchTerm: query,
+                                lat: coords[1].toFixed(9),
+                                lng: coords[0].toFixed(9)
+                            }
+                            storesApi.searchStores(axios, searchParams)
+                                .then(res => {
+                                    // console.log(res);
+                                    dispatch(storeActions.setStores(res.stores));
+                                    history.push('/searchresults');
+                                });
                         }
-                        storesApi.searchStores(axios, searchParams)
-                            .then(res => {
-                                // console.log(res);
-                                dispatch(storeActions.setStores(res.stores));
-                                history.push('/searchresults');
-                            });
-                    }
-                });
+                    });
+            }
         }
         else {
-            // First set search store
-            updateSearchStore(query, address, markerPos.selectedLat, markerPos.selectedLng)
+            if (query != '') {
+                // First set search store
+                updateSearchStore(query, address, markerPos.selectedLat, markerPos.selectedLng)
 
-            const searchParams = {
-                searchTerm: query,
-                lat: markerPos.selectedLat,
-                lng: markerPos.selectedLng
+                const searchParams = {
+                    searchTerm: query,
+                    lat: markerPos.selectedLat,
+                    lng: markerPos.selectedLng
+                }
+                storesApi.searchStores(axios, searchParams)
+                    .then(res => {
+                        // console.log(res);
+                        dispatch(storeActions.setStores(res.stores));
+                        history.push('/searchresults');
+                    });
             }
-            storesApi.searchStores(axios, searchParams)
-                .then(res => {
-                    // console.log(res);
-                    dispatch(storeActions.setStores(res.stores));
-                    history.push('/searchresults');
-                });
         }
     }
 
