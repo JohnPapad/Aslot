@@ -50,11 +50,12 @@ export default function SearchResults(props) {
                         />
                     </Row>
 
-                    {stores.length > 0 ? stores.map((store, i) => {
+                    {stores.length > 0 ? stores.map(store => {
                         return (
                             <SearchResult 
-                                key={i}
+                                key={store.store_id}
 
+                                id={store.store_id}
                                 name={store.name}
                                 address={store.address}
                                 email={store.email}

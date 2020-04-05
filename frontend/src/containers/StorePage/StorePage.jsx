@@ -11,8 +11,15 @@ import LocationMap from '../../components/UI/LocationMap/LocationMap';
 import InventoryItem from './InventoryItem/InventoryItem';
 import MyBtn from '../../components/UI/MyBtn/MyBtn';
 
-export default function StorePage() {
+import { useDispatch, useSelector } from "react-redux";
+import { specifActions } from '../../stores/specifStore';
 
+export default function StorePage(props) {
+    console.log('STOREEEEEEPAGE');
+    console.log(props.match.params.id);
+
+    const specifics = useSelector(state => state.specifReducer);
+    console.log(specifics);
 
     return (
         <Container fluid id={styles.content}>
@@ -184,7 +191,8 @@ export default function StorePage() {
             </Row>
 
             <Row className="mt-5">
-                <div className="d-flex align-items-stretch flex-wrap">
+                <div class="d-flex align-items-stretch flex-wrap">
+                    <InventoryItem selected={true}/>
                     <InventoryItem/>
                     <InventoryItem/>
                     <InventoryItem/>
