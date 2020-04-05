@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {  useHistory } from 'react-router-dom';
+import {  useHistory,  Redirect} from 'react-router-dom';
 import { Spinner, Container, Row, Col } from 'reactstrap';
 
 import { useDispatch, useSelector } from "react-redux";
@@ -62,6 +62,14 @@ export default function SearchResults(props) {
     }
 
     const [{address, addressValid}, setAddress] = useState({address: addressInfo.address, addressValid: true});
+    
+    if (!address)
+    {
+        return (
+            <Redirect to="/"/>
+        )
+    }
+    
     return (
         <Container fluid id={styles.content}>
             <Row>
