@@ -174,8 +174,8 @@ class SignIn extends React.Component {
             {
                 console.log("login Successful");
                 //redux login action
-                const { token, ...user } = res.data;
-                this.props.onSignInSuccess(token, user);
+                const { token, id } = res.data;
+                this.props.onSignInSuccess(token, id);
                 this.props.history.replace("/");
             }
         });

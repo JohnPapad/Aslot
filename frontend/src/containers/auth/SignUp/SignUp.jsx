@@ -394,8 +394,8 @@ class SignUp extends React.Component {
             }
             else {
                 console.log("signup Successful");
-                const { token, ...user } = res.data;
-                this.props.onSignUpSuccess(token, user);
+                const { token, id } = res.data;
+                this.props.onSignUpSuccess(token, id);
                 this.props.history.replace("/");
             }
         });
