@@ -3,6 +3,8 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework_jwt.views import ObtainJSONWebToken
+from django.contrib.auth import authenticate
 from django.shortcuts import get_list_or_404, get_object_or_404
 
 import json
@@ -10,6 +12,30 @@ import json
 from . import serializers as srs
 from . import models as mds
 from . import utility
+from datetime import datetime
+
+
+class UserLogin(APIView):
+
+    permission_classes = (AllowAny,)
+
+    def post(self, request, *args, **kwargs):
+        uname = request.data["email"]
+        pwd = request.data["password"]
+        store = None
+        token = None
+        try:
+            store = mds.Store.objects.get(email=uname, password=pwd)
+        except mds.Store.DoesNotExist:
+            pass
+        # store = authenticate(request, username=uname, password=pwd)
+        if store is not None:
+            token = "9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b"
+        else:
+            return Response({"success":False}, status=status.HTTP_200_OK)
+        response = {"success":True, data={"token":token,"id":store.pk}}
+        return Response(response, status=status.HTTP_200_OK)
+
 
 class MapPinpoints(APIView):
    
@@ -127,7 +153,17 @@ class Timeslots(APIView):
             return Response(response_dict, status=status.HTTP_400_BAD_REQUEST)
         # find all timeslots of this store
         store = get_object_or_404(mds.Store, id=request.GET["storeID"])
-        response_dict["timeslots"] = srs.TimeslotSerializer(store.timeslots, many=True).data
+        days = {}
+        for slot in store.timeslots.all():
+            if slot.people_on_timeslot < store.persons_per_slot:
+                weekday = slot.start_time.weekday()
+                time_str = "{}:{}-{}:{}".format(slot.start_time.hour, slot.start_time.minute, slot.end_time.hour, slot.end_time.minute)
+                if utility.weekdays[weekday] in days.keys():
+                    days[utility.weekdays[weekday]].append(time_str)
+                else : 
+                    days[utility.weekdays[weekday]] = [time_str]
+
+        response_dict["timeslots"] = days
         return Response(response_dict, status=status.HTTP_200_OK)
 
 class Booking(APIView):
@@ -183,7 +219,3 @@ class ItemCreateView(generics.CreateAPIView):
 class ItemUpdateView(generics.RetrieveUpdateAPIView):
     serializer_class = srs.ItemSerializer
     # lookup_field = pk
-    
-    #update item
-    def put(self, request, *args, **kwargs):
-        return self.update(request, *args, **kwargs)

@@ -12,4 +12,5 @@ urlpatterns = [
     path('create_store', vs.StoreCreateView.as_view(), name='create-store'),
     path('create_item', vs.ItemCreateView.as_view(), name='create-item'),
     path('update_item', vs.ItemUpdateView.as_view(), name='update-item'),
+    path('users/signin', vs.UserLogin.as_view(), name='user-signin'),
 ]
