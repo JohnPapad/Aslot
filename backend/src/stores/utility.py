@@ -31,3 +31,6 @@ def get_stores_within_radius(stores, radius, ref_lat, ref_lng):
                                         "store_id": store.id})
         
         return pinpoint_list
+
+weekdays = ['monday', 'tuesday', 'wednesday', 'thursday',
+        'friday', 'saturday', 'sunday']

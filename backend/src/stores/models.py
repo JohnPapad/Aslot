@@ -40,6 +40,7 @@ class Item(models.Model):
 
 class Timeslot(models.Model):
     store = models.ForeignKey(Store, on_delete=models.CASCADE, related_name='timeslots')
+    people_on_timeslot = models.SmallIntegerField(default=0)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
 
