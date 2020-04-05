@@ -30,7 +30,7 @@ export default function SearchResults(props) {
     const [{address, addressValid}, setAddress] = useState({address: addressInfo.address, addressValid: true});
     const dispatch = useDispatch();
 
-    
+    // dispatch(specifActions.redirectToStore(axios, 3, history));
     
     return (
         <Container fluid id={styles.content}>
