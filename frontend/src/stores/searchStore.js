@@ -38,7 +38,7 @@ export const searchActions = {
 // Reducer Initialization
 const initialState = {
     query: '',
-    addressInfo: {}
+    addressInfo: {address: ''}
 };
 
 // Reducer    
