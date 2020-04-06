@@ -48,20 +48,20 @@ class StorePage extends Component {
         let price = 0;
         for (let [itemId, itemQuantity] of Object.entries(this.state.amountValues)) 
         {
-            price += itemQuantity * this.getItemWithId(items, itemId).price;
+            price += itemQuantity * items[itemId].price;
         }
 
         return price;
     }
 
-    getItemWithId = (items, id) => {
-        let retItem = null;
-        items.map(item => {
-            if (item.id == id)
-                retItem = item;
-        })
-        return retItem;
-    }
+    // getItemWithId = (items, id) => {
+    //     let retItem = null;
+    //     items.map(item => {
+    //         if (item.id == id)
+    //             retItem = item;
+    //     })
+    //     return retItem;
+    // }
 
     render (){
 
@@ -82,6 +82,8 @@ class StorePage extends Component {
     const items = this.props.specifics.items;
     const timeslots = this.props.specifics.timeslots;
     const selectedItem = this.props.specifics.selectedItem;
+
+    console.log("store: items: ", items)
     return (
         <Container fluid id={styles.content}>
             <Row className="mb-5">
@@ -203,13 +205,13 @@ class StorePage extends Component {
                     <div className="d-flex flex-column" >
                         <div className="d-flex flex-wrap align-items-center justify-content-start border p-2">
                             
-                            {Object.keys(this.state.amountValues).map((itemId, i) => (
-                                <div className="mr-4" key={i}>
+                            {Object.keys(this.state.amountValues).map((itemId) => (
+                                <div className="mr-4" key={itemId}>
                                     <span className={"mr-2 " + styles.item}>
-                                        {this.getItemWithId(items, itemId) ? this.getItemWithId(items, itemId).name : ''}
+                                        { items[itemId].name + ":"}
                                     </span>
                                     <span className="">
-                                        {this.state.amountValues[itemId]}
+                                        { this.state.amountValues[itemId] }
                                     </span>
                                 </div>
                             ))}
@@ -242,10 +244,11 @@ class StorePage extends Component {
             </Row>
 
             <Row className="mt-5">
-                {items.map(item => {
+                {Object.values(items).map(item => {
                     if (!selectedItem || item.id != selectedItem.id) {
                         return (
                             <InventoryItem
+                                key={item.id}
                                 item={item} 
                                 itemQuantity={item.id in this.state.amountValues ? this.state.amountValues[item.id] : 1}
                                 changeAmountValue={this.changeAmountValue}
