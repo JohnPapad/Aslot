@@ -48,10 +48,19 @@ class StorePage extends Component {
         let price = 0;
         for (let [itemId, itemQuantity] of Object.entries(this.state.amountValues)) 
         {
-            price += itemQuantity * items[Number(itemId)-1].price;
+            price += itemQuantity * this.getItemWithId(items, itemId).price;
         }
 
         return price;
+    }
+
+    getItemWithId = (items, id) => {
+        let retItem = null;
+        items.map(item => {
+            if (item.id == id)
+                retItem = item;
+        })
+        return retItem;
     }
 
     render (){
@@ -197,7 +206,7 @@ class StorePage extends Component {
                             {Object.keys(this.state.amountValues).map((itemId, i) => (
                                 <div className="mr-4" key={i}>
                                     <span className={"mr-2 " + styles.item}>
-                                        {items[Number(itemId)-1].name}
+                                        {this.getItemWithId(items, itemId) ? this.getItemWithId(items, itemId).name : ''}
                                     </span>
                                     <span className="">
                                         {this.state.amountValues[itemId]}

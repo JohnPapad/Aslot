@@ -50,7 +50,7 @@ export default function SearchResults(props) {
                 .then(res => {
                     // console.log(res);
                     dispatch(storeActions.setStores(res.stores));
-                    history.push('/searchresults');
+                    //history.push('/searchresults');
                 });
         }
     }
