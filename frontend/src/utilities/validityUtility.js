@@ -57,6 +57,16 @@ export const checkValidity = ( value, rules, name ) => {
         {
             return {report: false, msg: "It must only contain numbers"};
         }
+
+        if ( rules.maxValue && ( Number(value) > rules.maxValue ))
+        {
+            return {report: false, msg: "It must not be more than " + rules.maxValue};
+        }
+
+        if ( rules.minValue && ( Number(value) < rules.minValue ))
+        {
+            return {report: false, msg: "It must not be less than " + rules.minValue};
+        }
     }
 
     if ( rules.isTel ) {
