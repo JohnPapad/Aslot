@@ -1,5 +1,6 @@
 import produce from 'immer';
 import { storesApi } from '../services/storesApi';
+import { convertListToObjectById } from '../utilities/utilities';
 
 // Action types
 const actionTypes = {
@@ -24,7 +25,7 @@ const setCurrStore = (store) => {
 const setCurrItems = (items) => {
     return {
         type: actionTypes.SET_CURR_ITEMS,
-        items,
+        items: convertListToObjectById(items, "id")
     }
 }
 
@@ -106,7 +107,7 @@ export const specifActions = {
 // Reducer Initialization
 const initialState = {
     store: null,
-    items: [],
+    items: {},
     timeslots: [],
     fetching: false,
     noData: true,
@@ -134,7 +135,7 @@ const reducer = ( state = initialState, action ) =>
                 return;
             case actionTypes.DELETE_ALL: 
                 draft.store = null;
-                draft.items = [];
+                draft.items = {};
                 draft.timeslots = [];
                 draft.selectedItem = null;
                 draft.noData  = true;
