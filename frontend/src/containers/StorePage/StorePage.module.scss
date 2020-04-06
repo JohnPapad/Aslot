@@ -33,14 +33,19 @@
 .item {
     font: {
         size: $fontMD;
-        weight: bold;
+        // weight: bold;
     };
-    color: $primColor;
+    // color: $primColor;
 }
 
 .icon {
     color: $primColor;
 }
+
+#basket_color {
+    color: grey;
+}
+
 
 
 #selected_items{
@@ -52,7 +57,7 @@
 
 #icon_bg {
     background-color: $primColor;
-    font-size: $fontMD;
+    // font-size: $fontMD;
 }
 
 #input_email {
@@ -64,4 +69,35 @@
     @include remove_hl;
     background-color: $primColor;
     font-weight: bold;
+}
+
+
+#basket {
+    border-right: 2px solid $primColor;
+}
+
+#items_sum {
+    border-bottom: 2px solid $primColor;
+}
+
+#delete_item {
+    color: #333031;
+    font-weight: bold;
+    &:hover{
+        cursor: pointer;
+    }
+}
+
+.r_border{
+    border-right: 2px solid $primColor;
+}
+
+#all_items_tittle {
+    font-weight: bold;
+    font-size: $fontLG;
+    color: grey;
+}
+
+.b_border{
+    border-bottom: 1px solid $primColor;
 }

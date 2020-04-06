@@ -10,7 +10,7 @@ import { Container, Row, Col, Button, Input, Badge } from 'reactstrap';
 import TimeSlotModal from '../../components/TimeSlotModal/TimeSlotModal';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPhoneAlt, faClock, faMapMarkedAlt, faHourglassHalf, faUsers, faUserClock, faAt, faShoppingBasket } from '@fortawesome/free-solid-svg-icons';
+import { faPhoneAlt, faClock, faMapMarkedAlt, faHourglassHalf, faUsers, faTrashAlt, faAt, faShoppingBasket, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import LocationMap from '../../components/UI/LocationMap/LocationMap';
 import InventoryItem from './InventoryItem/InventoryItem';
 import MyBtn from '../../components/UI/MyBtn/MyBtn';
@@ -185,7 +185,7 @@ class StorePage extends Component {
                 </Col>
             </Row>
 
-            <Row className="mb-5 d-flex align-items-stretch justify-content-start border-bottom pb-5">
+            <Row className={"mb-3 d-flex align-items-stretch justify-content-start pb-5 " + styles.b_border}>
             { selectedItem ? (
                     <InventoryItem 
                         selected={true} 
@@ -198,32 +198,40 @@ class StorePage extends Component {
 
                 <div className="d-flex align-items-stretch" id={styles.selected_items}>
 
-                    <div className="flex-shrink-1 p-1 border-right">
-                        <FontAwesomeIcon icon={faShoppingBasket} size="5x" className={styles.icon}/>
+                    <div className="flex-shrink-1 p-1" id={styles.basket}>
+                        <FontAwesomeIcon icon={faShoppingBasket} size="5x" id={styles.basket_color}/>
                     </div>
 
                     <div className="d-flex flex-column" >
-                        <div className="d-flex flex-wrap align-items-center justify-content-start border p-2">
+                        <div id={ Object.keys(this.state.amountValues).length > 0 ? styles.items_sum : "" } className={"d-flex flex-wrap align-items-center justify-content-start " + (Object.keys(this.state.amountValues).length > 0 ? " pt-2 pb-2" : "")} >
                             
-                            {Object.keys(this.state.amountValues).map((itemId) => (
-                                <div className="mr-4" key={itemId}>
-                                    <span className={"mr-2 " + styles.item}>
-                                        { items[itemId].name + ":"}
-                                    </span>
-                                    <span className="">
-                                        { this.state.amountValues[itemId] }
-                                    </span>
+                            {Object.keys(this.state.amountValues).map((itemId, i) => (
+                                <div className={"d-flex align-items-center pr-3 pl-3 " + styles.r_border} key={itemId}>
+                                {/* <div className={"d-flex align-items-center pr-3 pl-3 " + (i !== Object.keys(this.state.amountValues).length - 1 ? styles.r_border : '') } key={itemId}> */}
+                                    <div>
+                                        <span className={"mr-2 " + styles.item}>
+                                            { items[itemId].name + ":"}
+                                        </span>
+                                    </div>
+
+                                    <div>
+                                        <Badge pill id={styles.icon_bg}> { this.state.amountValues[itemId] }</Badge>
+                                    </div>
+
+                                    <div>
+                                        <FontAwesomeIcon onClick={()=>this.deleteItem(itemId)}  className="mt-2 ml-3" icon={faTrashAlt} id={styles.delete_item}/>
+                                    </div>
                                 </div>
                             ))}
                             
                         </div>
 
-                        <div className="d-flex h-100 pl-2 pr-2 align-items-center justify-content-between border">
-                            <div>
+                        <div className="d-flex h-100 pl-2 pr-2 align-items-center justify-content-between">
+                            <div className="mr-4">
                                 <span className="font-weight-bold mr-2">
                                     Συνολικό κόστος:
                                 </span>
-                            <Badge id={styles.icon_bg} className="p-2">{this.getTotalPrice(items)} {' '} €</Badge>
+                                <Badge id={styles.icon_bg} className="p-2">{this.getTotalPrice(items)} {' '} €</Badge>
                             </div>
 
                             <div>
@@ -243,7 +251,15 @@ class StorePage extends Component {
                 </div>
             </Row>
 
-            <Row className="mt-5">
+            <Row className="">
+                <Col>
+                    <span id={styles.all_items_tittle}>
+                        'Ολα τα προϊόντα
+                    </span>
+                </Col>
+            </Row>
+
+            <Row className="mt-3">
                 {Object.values(items).map(item => {
                     if (!selectedItem || item.id != selectedItem.id) {
                         return (
