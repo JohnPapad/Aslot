@@ -92,7 +92,7 @@ export default function SearchResults(props) {
     }
     return (
         <Container fluid id={styles.content}>
-            <Row>
+            <Row className="mt-4">
                 <Col></Col>
                 <Col xs="6" className="">
                     <Row className="pb-5">

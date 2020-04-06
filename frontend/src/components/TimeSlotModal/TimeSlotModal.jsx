@@ -35,13 +35,13 @@ export default function TimeSlotModal(props) {
                     <DayTimeSlot day="Πέμπτη" slotClickedHandler={props.slotClickedHandler}/>
                     <DayTimeSlot day="Παρασκευή" slotClickedHandler={props.slotClickedHandler}/>
                     <DayTimeSlot day="Σάββατο" slotClickedHandler={props.slotClickedHandler}/>
-                    <DayTimeSlot day=" Κυριακή" slotClickedHandler={props.slotClickedHandler}/>
+                    <DayTimeSlot day="Κυριακή" slotClickedHandler={props.slotClickedHandler}/>
                 </Row>
                 </Container>
 
             </ModalBody>
             <ModalFooter>
-                <Button color="danger" className="font-weight-bold mr-4" onClick={() => setModal(!modal)}>Cancel</Button>
+                <Button color="danger" className="font-weight-bold mr-4" onClick={() => setModal(!modal)}>Ακύρωση</Button>
                 <Button size="md" id={classes.btn_bg} onClick={() => setModal(!modal)}>Κράτηση παραγγελίας</Button>
             </ModalFooter>
         </Modal>
