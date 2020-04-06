@@ -49,14 +49,14 @@ export default function SearchResult(props) {
                 <div className={"d-flex align-items-center text-muted small"}> 
                     <div className="pr-5">
                         <FontAwesomeIcon  icon={faPhoneAlt} />
-                        <span className="ml-2">
+                        <span className="ml-2 font-weight-bold">
                             {props.telephone}
                         </span>
                     </div>
 
                     <div  className="">
                         <FontAwesomeIcon icon={faClock} />
-                        <span className="ml-2">
+                        <span className="ml-2 font-weight-bold">
                             {props.openingFrom}-{props.openingTo}
                         </span>
                     </div>
@@ -68,15 +68,15 @@ export default function SearchResult(props) {
 
                 <div className={"d-flex align-items-center"}> 
                     <div className="pr-5">
-                        <span className="small mr-2">
+                        <span className="small mr-2 font-weight-bold">
                             Διαθέσιμα
                         </span>
                         <Badge pill id={styles.icon_bg}>{props.item.quantity}</Badge>
                     </div>
 
                     <div className="mr-auto">
-                        <span className="small mr-2">
-                            Τιμη
+                        <span className="small mr-2 font-weight-bold">
+                            Τιμή
                         </span>
                         <Badge id={styles.icon_bg}>{props.item.price}€</Badge>
                     </div>
