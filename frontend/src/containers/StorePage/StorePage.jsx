@@ -43,6 +43,24 @@ class StorePage extends Component {
     }
 
     submitHandler = () => {
+        const res = this.checkFormValidity();
+        if (res.report)
+        {
+            const formData = {
+                items: this.state.amountValues,
+                email: this.state.email.value,
+                timeSlot: this.state.selectedTimeSlot,
+            }
+
+            alert("form submited")
+            console.log("form data: ", formData);
+            //axios call
+        }
+        else 
+        {
+            alert("FORM INVALID")
+        }
+        
         
     }
 
@@ -70,7 +88,6 @@ class StorePage extends Component {
             }
         },
         selectedTimeSlot: null,
-        // formInvalidFeedback: ''
     }
 
 
