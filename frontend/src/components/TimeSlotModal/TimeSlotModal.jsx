@@ -9,42 +9,56 @@ export default function TimeSlotModal(props) {
 //     className
 //   } = props;
 
-  const [modal, setModal] = useState(false);
+    console.log("selected time slot: ", props.selectedTimeSlot)
 
-  // Create table
-  const table = () => {
-      
-  }
+    const [modal, setModal] = useState(false);
 
-  return (
-    <div>
+    // Create table
+    const cancelClickedHandler = () => {
+        props.deleteSlotClickedHandler();
+        setModal(!modal);
+    }
 
-        <Button size="md" onClick={() => setModal(!modal)} id={classes.btn_bg}>
-            Επιλέξτε χρονοθυρίδα
-        </Button>
-        <Modal isOpen={modal} toggle={() => setModal(!modal)} className="modal-lg">
-            <ModalHeader toggle={() => setModal(!modal)} id={classes.header_bg}>
-                <span  id={classes.header}> Επιλέξτε μια διαθέσιμη χρονοθυρίδα</span>
-            </ModalHeader>
-            <ModalBody>
-                <Container fluid  className="p-2">
-                <Row className={"border"}>
-                    <DayTimeSlot day="Δευτέρα" slotClickedHandler={props.slotClickedHandler}/>
-                    <DayTimeSlot day="Τρίτη" slotClickedHandler={props.slotClickedHandler}/>
-                    <DayTimeSlot day="Τετάρτη" slotClickedHandler={props.slotClickedHandler}/>
-                    <DayTimeSlot day="Πέμπτη" slotClickedHandler={props.slotClickedHandler}/>
-                    <DayTimeSlot day="Παρασκευή" slotClickedHandler={props.slotClickedHandler}/>
-                    <DayTimeSlot day="Σάββατο" slotClickedHandler={props.slotClickedHandler}/>
-                    <DayTimeSlot day="Κυριακή" slotClickedHandler={props.slotClickedHandler}/>
-                </Row>
-                </Container>
+    const submitOrderHandler = () => {
+        props.submitHandler();
+        // setModal(!modal);
+    }
 
-            </ModalBody>
-            <ModalFooter>
-                <Button color="danger" className="font-weight-bold mr-4" onClick={() => setModal(!modal)}>Ακύρωση</Button>
-                <Button size="md" id={classes.btn_bg} onClick={() => setModal(!modal)}>Κράτηση παραγγελίας</Button>
-            </ModalFooter>
-        </Modal>
-    </div>
-  );
+    return (
+        <div>
+
+            <Button size="md" onClick={() => setModal(!modal)} id={classes.btn_bg}>
+                Επιλέξτε χρονοθυρίδα
+            </Button>
+            <Modal isOpen={modal} toggle={() => setModal(!modal)} className="modal-lg">
+                <ModalHeader toggle={() => setModal(!modal)} id={classes.header_bg}>
+                    <span  id={classes.header}> Επιλέξτε μια διαθέσιμη χρονοθυρίδα</span>
+                </ModalHeader>
+                <ModalBody>
+                    <Container fluid  className="p-2">
+                        <Row className={"border"}>
+                            <DayTimeSlot selectedTimeSlot={props.selectedTimeSlot} day="Δευτέρα" slotClickedHandler={props.slotClickedHandler}/>
+                            <DayTimeSlot selectedTimeSlot={props.selectedTimeSlot} day="Τρίτη" slotClickedHandler={props.slotClickedHandler}/>
+                            <DayTimeSlot selectedTimeSlot={props.selectedTimeSlot} day="Τετάρτη" slotClickedHandler={props.slotClickedHandler}/>
+                            <DayTimeSlot selectedTimeSlot={props.selectedTimeSlot} day="Πέμπτη" slotClickedHandler={props.slotClickedHandler}/>
+                            <DayTimeSlot selectedTimeSlot={props.selectedTimeSlot} day="Παρασκευή" slotClickedHandler={props.slotClickedHandler}/>
+                            <DayTimeSlot selectedTimeSlot={props.selectedTimeSlot} day="Σάββατο" slotClickedHandler={props.slotClickedHandler}/>
+                            <DayTimeSlot selectedTimeSlot={props.selectedTimeSlot} day="Κυριακή" slotClickedHandler={props.slotClickedHandler}/>
+                        </Row>
+                    </Container>
+
+                </ModalBody>
+                <ModalFooter className="d-flex align-items-center justify-content-between pl-2 pr-2">
+                    <div className="text-small mr-auto font-weight-bold" style={{color: "red"}}>
+                        {props.formInvalidFeedback}
+                    </div>
+
+                    <div>
+                        <Button color="danger" className="font-weight-bold mr-3" onClick={cancelClickedHandler}> Ακύρωση </Button>
+                        <Button size="md" id={classes.btn_bg} onClick={submitOrderHandler}> Κράτηση παραγγελίας </Button>
+                    </div>
+                </ModalFooter>
+            </Modal>
+        </div>
+    );
 }
