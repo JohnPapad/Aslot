@@ -18,6 +18,7 @@ import MyBtn from '../../components/UI/MyBtn/MyBtn';
 import { useDispatch, useSelector } from "react-redux";
 import { specifActions } from '../../stores/specifStore';
 import { storesApi } from '../../services/storesApi';
+import { checkValidity } from '../../utilities/validityUtility';
 
 class StorePage extends Component {
 
@@ -34,12 +35,18 @@ class StorePage extends Component {
 
     }
 
-    changeAmountValue = (itemId, itemQuantity) => {
+    changeAmountValue = (itemId, itemQuantity, max_to_buy) => {
+
+        const res = checkValidity(itemQuantity, { isNumeric: true, required: true, maxValue: Number(max_to_buy), minValue: 1 })
+        if (!res.report)
+        {
+            console.log("validity check ERROR in item changeAmountValue")
+            return;
+        }
+
         this.setState(
             produce(draft => {
-               
                 draft.amountValues[itemId] = itemQuantity;
-
             })
         );
     }

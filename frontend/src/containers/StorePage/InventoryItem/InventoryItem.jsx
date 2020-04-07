@@ -47,7 +47,7 @@ export default function Inventory(props) {
                         <div className={"d-flex align-items-center justify-content-start"}>
                             <div className="flex-shrink">
                                 <Input bsSize="sm" value={itemQuantity} type="number" min="1" max={item.max_to_buy} id={styles.input_num} 
-                                    onChange={(e) => changeAmountValue(item.id, e.target.value)}
+                                    onChange={(e) => changeAmountValue(item.id, e.target.value, item.max_to_buy)}
                                 /> 
                             </div>
                         </div>
