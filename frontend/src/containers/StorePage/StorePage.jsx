@@ -58,6 +58,35 @@ class StorePage extends Component {
     }
 
 
+    checkFormValidity = () => {
+        if (!this.state.selectedTimeSlot) 
+        {
+            return {
+                report: false,
+                msg: "Επιλέξτε μια διαθέσιμη χρονοθυρίδα."
+            };
+        }
+
+        if (!this.state.email.isValid)
+        {
+            return {
+                report: false,
+                msg: "Εισάγετε μια σωστή διεύθυνση email."
+            };
+        }
+
+        if ((Object.keys(this.state.amountValues)).length === 0)
+        {
+            return {
+                report: false,
+                msg: "Το καλάθι αγορών σας είναι άδειο."
+            };
+        }
+
+        return {
+            report: true,
+            msg: ""
+        };
     }
 
 
