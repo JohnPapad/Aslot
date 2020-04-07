@@ -54,6 +54,7 @@ class StorePage extends Component {
 
             alert("form submited")
             console.log("form data: ", formData);
+            this.props.history.push('/');
             //axios call
         }
         else 
