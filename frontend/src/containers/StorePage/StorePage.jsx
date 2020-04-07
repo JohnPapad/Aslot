@@ -24,6 +24,22 @@ class StorePage extends Component {
 
     slotClickedHandler = (day, timeSlot) =>{
         console.log(day, timeSlot);
+        this.setState(
+            produce(draft => {
+                draft.selectedTimeSlot = {
+                    day,
+                    timeSlot
+                };
+            })
+        );
+    }
+
+    deleteSlotClickedHandler = () => {
+        this.setState(
+            produce(draft => {
+                draft.selectedTimeSlot = null;
+            })
+        );
     }
 
     submitHandler = () => {
@@ -327,11 +343,7 @@ class StorePage extends Component {
                             </div>
 
                             <div>
-                                {/* <Button size="md" id={styles.btn_bg}>
-                                    Επιλέξτε χρονοθυρίδα
-                                </Button> */}
-
-                                <TimeSlotModal slotClickedHandler={this.slotClickedHandler} submitHandler={this.submitHandler}/>
+                                <TimeSlotModal selectedTimeSlot={this.state.selectedTimeSlot} slotClickedHandler={this.slotClickedHandler} deleteSlotClickedHandler={this.deleteSlotClickedHandler} formInvalidFeedback={this.checkFormValidity().msg} submitHandler={this.submitHandler}/>
                             </div>
                             
                         </div>
