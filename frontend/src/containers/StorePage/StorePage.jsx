@@ -45,9 +45,34 @@ class StorePage extends Component {
 
     state = {
         amountValues: this.getInitialAmountValues(this.props.specifics.selectedItem),  // key: item_id, value: item_quantity 
-        email: '',
-        timeSlot: null
+        email: {
+            value: '',
+            isValid: false,
+            rules: {
+                required: true,
+                isEmail: true
+            }
+        },
+        selectedTimeSlot: null,
+        // formInvalidFeedback: ''
     }
+
+
+    }
+
+
+    emailInputChangedHandler = (e) => {
+        const emailVal = e.target.value;
+        const res = checkValidity(emailVal, this.state.email.rules);
+
+        this.setState(
+            produce(draft => {
+                draft.email.value = emailVal;
+                draft.email.isValid = res.report;
+            })
+        );
+    }
+
 
     deleteItem = (itemId) => {
         this.setState(
@@ -55,7 +80,6 @@ class StorePage extends Component {
                 delete draft.amountValues[itemId];
             })
         );
-
     }
 
     changeAmountValue = (itemId, itemQuantity, max_to_buy) => {
@@ -119,7 +143,7 @@ class StorePage extends Component {
     const timeslots = this.props.specifics.timeslots;
     const selectedItem = this.props.specifics.selectedItem;
 
-    console.log("store: items: ", items)
+    // console.log("store: items: ", items)
     return (
         <Container fluid id={styles.content}>
             <Row className="mb-5">
@@ -269,8 +293,8 @@ class StorePage extends Component {
                                 <Badge id={styles.icon_bg} className="p-2">{this.getTotalPrice(items)} {' '} €</Badge>
                             </div>
 
-                            <div>
-                                <Input bsSize="md" type="text" placeholder="email" id={styles.input_email}/>
+                            <div className="mr-4">
+                                <Input value={this.state.email.value} onChange={ (event) => this.emailInputChangedHandler(event) } bsSize="md" type="text" placeholder="email" id={styles.input_email} />
                             </div>
 
                             <div>

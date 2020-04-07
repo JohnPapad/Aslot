@@ -12,7 +12,7 @@ export default function Inventory(props) {
     const { changeAmountValue } = props;
     const { itemQuantity } = props;
 
-    console.log("ivent item", item);
+    // console.log("ivent item", item);
     return (
         <div className={!props.selected ? "pr-4 pb-4" : ""} >
             <Container fluid id={props.selected ? styles.item_hl : styles.item}>
