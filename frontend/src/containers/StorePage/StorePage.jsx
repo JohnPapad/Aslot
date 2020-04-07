@@ -30,23 +30,52 @@ class StorePage extends Component {
         
     }
 
+    getInitialAmountValues = (selectedItem) => {
+        if (selectedItem) 
+        {
+            let initialAmountValues = {};
+            initialAmountValues[selectedItem.id] = 1;
+            return initialAmountValues;
+        }
+        else 
+        {
+            return {};
+        }
+    }
+
     state = {
-        amountValues: {} // items poses fores ta exw dialeksei
+        amountValues: this.getInitialAmountValues(this.props.specifics.selectedItem),  // key: item_id, value: item_quantity 
+        email: '',
+        timeSlot: null
+    }
+
+    deleteItem = (itemId) => {
+        this.setState(
+            produce(draft => {
+                delete draft.amountValues[itemId];
+            })
+        );
 
     }
 
     changeAmountValue = (itemId, itemQuantity, max_to_buy) => {
 
-        const res = checkValidity(itemQuantity, { isNumeric: true, required: true, maxValue: Number(max_to_buy), minValue: 1 })
+        const res = checkValidity(itemQuantity, { isNumeric: true, required: true, maxValue: Number(max_to_buy), minValue: 0 })
         if (!res.report)
         {
             console.log("validity check ERROR in item changeAmountValue")
             return;
         }
 
+        if (Number(itemQuantity) === 0)
+        {
+            this.deleteItem(itemId);
+            return;
+        }
+
         this.setState(
             produce(draft => {
-                draft.amountValues[itemId] = itemQuantity;
+                draft.amountValues[itemId] = Number(itemQuantity);
             })
         );
     }
@@ -193,17 +222,16 @@ class StorePage extends Component {
             </Row>
 
             <Row className={"mb-3 d-flex align-items-stretch justify-content-start pb-5 " + styles.b_border}>
-            { selectedItem ? (
+                { selectedItem ? (
                     <InventoryItem 
                         selected={true} 
                         item={selectedItem} 
-                        itemQuantity={selectedItem.id in this.state.amountValues ? this.state.amountValues[selectedItem.id] : 1}
+                        itemQuantity={selectedItem.id in this.state.amountValues ? this.state.amountValues[selectedItem.id] : 0}
                         changeAmountValue={this.changeAmountValue}
-                    />
-                ): (<></>)
-            }
+                    />) : null
+                }
 
-                <div className="d-flex align-items-stretch" id={styles.selected_items}>
+                <div className="d-flex align-items-stretch" id={styles.selected_items} style={{marginLeft: selectedItem ? "8vh" : "0"}}>
 
                     <div className="flex-shrink-1 p-1" id={styles.basket}>
                         <FontAwesomeIcon icon={faShoppingBasket} size="5x" id={styles.basket_color}/>
@@ -273,7 +301,7 @@ class StorePage extends Component {
                             <InventoryItem
                                 key={item.id}
                                 item={item} 
-                                itemQuantity={item.id in this.state.amountValues ? this.state.amountValues[item.id] : 1}
+                                itemQuantity={item.id in this.state.amountValues ? this.state.amountValues[item.id] : 0}
                                 changeAmountValue={this.changeAmountValue}
                             />
                         );
