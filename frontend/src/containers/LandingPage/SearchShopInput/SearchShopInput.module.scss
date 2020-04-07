@@ -6,3 +6,13 @@
 #remHl {
     @include remove_hl;
 }
+
+
+#form {
+    border: 2px solid $primColor;
+}
+
+#r_border {
+    @include remove_hl;
+    border-right: 2px solid $primColor;
+}

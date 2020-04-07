@@ -24,9 +24,9 @@ export default function SearchShopMap(props) {
 
     return (
         <Col className="p-0">
-            <InputGroup className="p-0">
+            <InputGroup className="p-0" id={classes.form}>
                 <Input
-                    id={classes.remHl}
+                    id={classes.r_border}
                     value={props.query}
                     type={"text"}
                     placeholder={"Τι ψάχνεις;"}
@@ -45,10 +45,16 @@ export default function SearchShopMap(props) {
                     disabled = {props.addressDisabled}
                 />
                 <InputGroupAddon addonType="append">
-                    <Button className="font-weight-bold" id={classes.remHl} onClick={props.onSubmit}>
+                    <MyBtn size="SM" borderWidth='0' clickedHandler={props.onSubmit}>
+                        <FontAwesomeIcon icon={faSearch} className="mr-2"/>
+                        <span style={{letterSpacing: "1px"}}>
+                            Αναζήτηση
+                        </span>
+                    </MyBtn>
+                    {/* <Button className="font-weight-bold" id={classes.submit_btn} onClick={props.onSubmit}>
                         <FontAwesomeIcon icon={faSearch} className="mr-2"/>
                         Αναζήτηση
-                    </Button>
+                    </Button> */}
                 </InputGroupAddon>
                 <FormFeedback>Παρακαλώ εισάγετε διεύθυνση</FormFeedback>
             </InputGroup>
