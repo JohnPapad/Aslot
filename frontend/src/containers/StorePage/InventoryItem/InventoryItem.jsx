@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from './InventoryItem.module.scss';
 import { Container, Row, Col, Button, Card, CardBody, CardImg, Badge, Input, CardTitle,Media } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPhoneAlt, faClock, faMapMarkedAlt, faHourglassHalf, faUsers, faUserClock, faAt } from '@fortawesome/free-solid-svg-icons';
+import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
 import MyBtn from '../../../components/UI/MyBtn/MyBtn';
 
 
@@ -11,6 +11,7 @@ export default function Inventory(props) {
     const { item } = props;
     const { changeAmountValue } = props;
     const { itemQuantity } = props;
+    const { renderBtns } = props;
 
     // console.log("ivent item", item);
     return (
@@ -21,7 +22,7 @@ export default function Inventory(props) {
                         <img src="https://www.exclusivehomedesign.it/wp-content/uploads/2018/07/noPhoto.png" style={{width: "100%", height: "13vh"}} alt="Shop Photo" className="img-fluid rounded"/>
                     </Col>
 
-                    <Col xs="8" className="p-0 m-0 pl-2 pr-2 d-flex-column">
+                    <Col xs="8" className="p-0 m-0 pl-2 pr-2 pt-1 d-flex-column">
                         <div className={"d-flex align-items-center justify-content-start mb-0"}> 
                             <div className={styles.tittle}>
                                 {item.name}
@@ -44,7 +45,8 @@ export default function Inventory(props) {
                             </div>
                         </div>
 
-                        <div className={"d-flex align-items-center justify-content-start"}>
+                        { !renderBtns ? (
+                            <div className={"d-flex align-items-center justify-content-start"}>
                                 <div className="flex-shrink w-25">
                                     <Input bsSize="sm" value={itemQuantity} type="number" min="0" max={item.max_to_buy} id={styles.input_num} 
                                         onChange={(e) => changeAmountValue(item.id, e.target.value, item.max_to_buy)}
@@ -58,6 +60,16 @@ export default function Inventory(props) {
                                         {item.max_to_buy}
                                     </div>
                                 </div>
+                            </div> ) : (
+                            <div className={"d-flex align-items-center justify-content-end"}>
+                                <div>
+                                    <FontAwesomeIcon icon={faTrashAlt } className={"mr-2"}/>
+                                </div>
+                                <div>
+                                    <FontAwesomeIcon icon={faEdit } className={"mr-2"}/>
+                                </div>
+                            </div>    
+                        )}
                     </Col>
                 </Row>
             </Container>
