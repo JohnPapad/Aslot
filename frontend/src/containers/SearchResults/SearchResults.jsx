@@ -126,7 +126,13 @@ export default function SearchResults(props) {
 
                             />
                         )
-                    }) : "No results :("}
+                    }) : (
+                        <Row  className={"p-2 " + styles.store_pres}>
+                            <Col id={styles.no_results} className="p-0 m-0 text-muted d-flex justify-content-center">
+                                <i>No results found. Try again</i>
+                            </Col>
+                        </Row>
+                    )}
                 
                 </Col>
                 <Col></Col>
