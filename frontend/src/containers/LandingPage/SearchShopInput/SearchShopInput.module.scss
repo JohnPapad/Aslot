@@ -3,9 +3,6 @@
 @import "../../../styles/texts";
 @import "../../../styles/buttons";
 
-#remHl {
-    @include remove_hl;
-}
 
 
 #form {
@@ -14,5 +11,12 @@
 
 #r_border {
     @include remove_hl;
-    border-right: 2px solid $primColor;
+    border: none;
+    border-right: 1px solid $primColor;
+}
+
+#l_border {
+    @include remove_hl;
+    border: none;
+    border-left: 1px solid $primColor;
 }

@@ -33,7 +33,7 @@ export default function SearchShopMap(props) {
                     onChange={(e) => props.setQuery(e.target.value)}
                 />
                 <Input
-                    id={classes.remHl}
+                    id={classes.l_border}
                     // name={"Η διεύθυνσή σου"}
                     value={props.address}
                     type={"text"}
