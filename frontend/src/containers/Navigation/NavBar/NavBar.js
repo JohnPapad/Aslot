@@ -7,7 +7,7 @@ import NavigationItem from '../../../components/Navigation/NavigationItem';
 import NavigationButton from '../../../components/Navigation/NavigationButton';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSignInAlt, faSignOutAlt, faUserEdit, faListOl, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { faSignInAlt, faSignOutAlt, faUserEdit, faListOl, faUserCircle, faEdit } from '@fortawesome/free-solid-svg-icons';
 
 import {
     Collapse,
@@ -45,7 +45,7 @@ class NavBar extends React.Component {
 
                 <NavigationItem link="/signup">
                     Εγγραφή Φαρμακείου
-                    <FontAwesomeIcon icon={faUserEdit} className="ml-2"/>
+                    <FontAwesomeIcon icon={faEdit} className="ml-2"/>
                 </NavigationItem>								
 			</>
 		);
@@ -100,7 +100,7 @@ class NavBar extends React.Component {
               
                 <RouterNavLink to="/" exact id={classes.remFor}>
                     {/* <img src={logo_path} id={classes.img} alt="Logo" className="img-fluid"/> */}
-                   e-Pharmacy
+                   <i>e-Pharmacy</i>
                 </RouterNavLink> 
 
                 <NavbarToggler onClick={this.toggle} />
