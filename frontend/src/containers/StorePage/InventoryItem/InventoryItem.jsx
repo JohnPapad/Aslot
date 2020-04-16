@@ -17,11 +17,11 @@ export default function Inventory(props) {
         <div className={!props.selected ? "pr-4 pb-4" : ""} >
             <Container fluid id={props.selected ? styles.item_hl : styles.item}>
                 <Row>
-                    <Col xs="3" className="p-1 m-0">
-                        <img src="https://www.exclusivehomedesign.it/wp-content/uploads/2018/07/noPhoto.png" style={{width: "100%", height: "12vh"}} alt="Shop Photo" className="img-fluid rounded"/>
+                    <Col xs="4" className="p-1 m-0">
+                        <img src="https://www.exclusivehomedesign.it/wp-content/uploads/2018/07/noPhoto.png" style={{width: "100%", height: "13vh"}} alt="Shop Photo" className="img-fluid rounded"/>
                     </Col>
 
-                    <Col xs="9" className="p-0 m-0 pl-2 pr-2 d-flex-column">
+                    <Col xs="8" className="p-0 m-0 pl-2 pr-2 d-flex-column">
                         <div className={"d-flex align-items-center justify-content-start mb-0"}> 
                             <div className={styles.tittle}>
                                 {item.name}
@@ -45,12 +45,19 @@ export default function Inventory(props) {
                         </div>
 
                         <div className={"d-flex align-items-center justify-content-start"}>
-                            <div className="flex-shrink">
-                                <Input bsSize="sm" value={itemQuantity} type="number" min="0" max={item.max_to_buy} id={styles.input_num} 
-                                    onChange={(e) => changeAmountValue(item.id, e.target.value, item.max_to_buy)}
-                                /> 
-                            </div>
-                        </div>
+                                <div className="flex-shrink w-25">
+                                    <Input bsSize="sm" value={itemQuantity} type="number" min="0" max={item.max_to_buy} id={styles.input_num} 
+                                        onChange={(e) => changeAmountValue(item.id, e.target.value, item.max_to_buy)}
+                                    /> 
+                                </div>
+                                <div className="small ml-4 w-75 d-flex align-items-center">
+                                    <div>
+                                        max ποσότητα: 
+                                    </div>
+                                    <div className={"font-weight-bold ml-2 " + styles.color}>
+                                        {item.max_to_buy}
+                                    </div>
+                                </div>
                     </Col>
                 </Row>
             </Container>
