@@ -65,6 +65,11 @@ export default function SearchResults(props) {
         dispatch(searchActions.setAddressInfo(addressInfo));
     }
 
+    const onRedMarkerClick = (id) => {
+        // axios kai apothikeusi mono 1 store sto storeStore
+        dispatch(specifActions.redirectToStore(axios, id, history, stores[id].item));
+    }
+
     // console.log('STORES');
     // console.log(stores);
     const createPins = () => {
@@ -148,8 +153,9 @@ export default function SearchResults(props) {
                         hasLocation={true}
 
                         pins={createPins()}
-                        zoom={15}
+                        zoom={14}
                         // handleMapClick={this.handleMapClick}
+                        onRedMarkerClick={onRedMarkerClick}
                     />
                 
                 </Col >
@@ -158,6 +164,4 @@ export default function SearchResults(props) {
             
         </Container>
     )
-
-
 }
