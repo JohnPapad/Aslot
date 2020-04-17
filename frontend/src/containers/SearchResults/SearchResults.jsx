@@ -8,6 +8,7 @@ import axios from '../../services/axiosConfig';
 import { storeActions } from '../../stores/storeStore';
 import { searchActions } from '../../stores/searchStore';
 import { storesApi } from '../../services/storesApi';
+import { specifActions } from '../../stores/specifStore';
 
 import styles from './SearchResults.module.scss';
 import SearchResult from '../../components/SeachResult/SearchResult';
@@ -26,6 +27,10 @@ export default function SearchResults(props) {
         startingLat: addressInfo.lat,
         startingLng: addressInfo.lng,
         pins: null
+    })
+    const [mapFocusPos, setMapFocusPos] = useState({
+        lat: addressInfo.lat,
+        lng: addressInfo.lng,
     })
 
     const [{address, addressValid}, setAddress] = useState({address: addressInfo.address, addressValid: true});
@@ -153,8 +158,8 @@ export default function SearchResults(props) {
                     <LocationMap   
                         mapHeight={document.documentElement.clientHeight * 0.7}
         
-                        startingLat={startingPosAndPins.startingLat}
-                        startingLng={startingPosAndPins.startingLng}
+                        startingLat={mapFocusPos.lat}
+                        startingLng={mapFocusPos.lng}
                         selectedLat={startingPosAndPins.startingLat}
                         selectedLng={startingPosAndPins.startingLng}
                         hasLocation={true}
