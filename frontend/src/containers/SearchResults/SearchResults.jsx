@@ -36,6 +36,13 @@ export default function SearchResults(props) {
     //     hasLocation: addressInfo.lat ? true : false,
     // })
 
+    const addressClickedHandler = (storeId) => {
+        // alert(storeId)
+
+        const pins = startingPosAndPins.pins
+        setMapFocusPos({lat: stores[storeId].lat, lng: stores[storeId].lng})
+    }
+
     const onSubmit = () => {
         if (query != '') {
             // First set search store
@@ -126,7 +133,7 @@ export default function SearchResults(props) {
                                 openingFrom={store.opening_from_hour}
                                 openingTo={store.opening_to_hour}
                                 telephone={store.telephone}
-
+                                addressClickedHandler={addressClickedHandler}
                                 item={store.item}
 
                             />
