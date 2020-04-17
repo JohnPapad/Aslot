@@ -1,4 +1,5 @@
 import produce from 'immer';
+import { convertListToObjectById } from '../utilities/utilities';
 
 // Action types
 const actionTypes = {
@@ -27,7 +28,7 @@ export const storeActions = {
 
 // Reducer Initialization
 const initialState = {
-    stores: []
+    stores: {}
 };
 
 // Reducer    
@@ -35,10 +36,10 @@ const reducer = ( state = initialState, action ) =>
     produce(state, draft => {
         switch ( action.type ) {
             case actionTypes.SET_STORES: 
-                draft.stores = action.stores;
+                draft.stores = convertListToObjectById(action.stores, "id");
                 return;
             case actionTypes.DELETE_STORES: 
-                draft.stores = [];
+                draft.stores = {};
                 return;
         }
     });
