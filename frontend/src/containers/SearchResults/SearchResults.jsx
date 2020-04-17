@@ -88,7 +88,7 @@ export default function SearchResults(props) {
         const pins = [];
         const storesVisited = {};
 
-        stores.map(store => {
+        Object.values(stores).map(store => {
             if (!storesVisited[store.id]) {
                 pins.push({
                     lat: store.lat,
@@ -126,7 +126,7 @@ export default function SearchResults(props) {
                         />
                     </Row>
 
-                    {stores.length > 0 ? stores.map(store => {
+                    {Object.keys(stores).length > 0 ? Object.values(stores).map(store => {
                         return (
                             <SearchResult 
                                 key={store.id}
