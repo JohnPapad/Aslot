@@ -15,9 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { specifActions } from '../../stores/specifStore';
 
 
-const addressClickedHandler = (storeId) => {
-    alert("address handler")
-}
+
 
 
 export default function SearchResult(props) {
@@ -40,7 +38,7 @@ export default function SearchResult(props) {
                         {props.name}
                     </div>
 
-                    <div className={styles.address +" text-muted small font-weight-bold ml-4"} onClick={()=>addressClickedHandler("ID")}>
+                    <div className={styles.address +" text-muted small font-weight-bold ml-4"} onClick={()=>props.addressClickedHandler(props.id)}>
                         <FontAwesomeIcon icon={faMapMarkedAlt} className="mr-2"/>
                         {props.address}
                     </div>
