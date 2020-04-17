@@ -30,7 +30,7 @@ export default function LocationMap(props) {
     if (hasLocation) {
         marker = (
             <Marker position={{ lat: selectedLat, lng: selectedLng }} >
-                <Popup>Residence</Popup>
+                <Popup>Your Location</Popup>
             </Marker>
         );
     }
@@ -40,12 +40,16 @@ export default function LocationMap(props) {
         initPins = pins.map((pin, i) => {
                 return (
                     <Marker position={{ lat: pin.lat, lng: pin.lng }} key={i} icon={redIcon}> 
-                        <Popup onClick={() => onRedMarkerClick(pin.store_id)}>{pin.store_name}</Popup>
+                        <Popup>
+                        {/* onClick={props.clickedHandler ? props.clickedHandler : () => { return }} */}
+                            <span onClick={ onRedMarkerClick ? () => onRedMarkerClick(pin.store_id) : ()=>{return}} className={classes.popup}>
+                                {pin.store_name}
+                            </span>
+                        </Popup>
                     </Marker>
                 )
             })
     }
-    console.log(initPins);
 
 
     return (

@@ -16,3 +16,14 @@
     // marginTop: theme.spacing(2),
     // marginBottom: theme.spacing(2),
 }
+
+
+
+
+.popup {
+    &:hover{
+        cursor: pointer;
+        // font-weight: bold;
+        color: $primColor;
+    }
+}
