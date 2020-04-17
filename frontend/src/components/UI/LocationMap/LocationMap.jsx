@@ -21,13 +21,20 @@ export const redIcon = new L.Icon({
 
 export default function LocationMap(props) {
 
-    const { startingLat, startingLng, selectedLat, selectedLng, mapHeight, hasLocation, pins, zoom } = props;
+    const { startingLat, startingLng, selectedLat, selectedLng, mapHeight, hasLocation, pins, zoom, msg } = props;
     const { handleMapClick, onRedMarkerClick } = props;
     const style = { height: mapHeight + 'px' };
 
     // If the user has clicked on the map, place a marker
     let marker = null
-    if (hasLocation) {
+    if (msg && hasLocation) {
+        marker = (
+            <Marker position={{ lat: selectedLat, lng: selectedLng }} icon={redIcon}>
+                <Popup>{msg}</Popup>
+            </Marker>
+        );
+    }
+    else if (hasLocation) {
         marker = (
             <Marker position={{ lat: selectedLat, lng: selectedLng }} >
                 <Popup>Your Location</Popup>

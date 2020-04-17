@@ -304,6 +304,7 @@ class StorePage extends Component {
                         selectedLat={store.lat}
                         selectedLng={store.lng}
                         hasLocation={true}
+                        msg={store.name}
 
                         // handleMapClick={this.handleMapClick}
                     />
