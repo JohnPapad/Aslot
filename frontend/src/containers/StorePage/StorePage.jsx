@@ -215,7 +215,7 @@ class StorePage extends Component {
                 <Col xs="8" className="pr-5">
                     <Row  className={"p-2 " + styles.store_pres}>
                         <Col xs="4" className="p-0 m-0 border">
-                            <img src={"https://kdi.gr/wp-content/uploads/2017/01/KDICONTRACT_Katsaris_Pharmacy1.jpg"} style={{height: "100%", width: "100%", height: "32vh"}} alt="Shop Photo" className="img-fluid rounded"/>
+                            <img src={"https://kdi.gr/wp-content/uploads/2017/01/KDICONTRACT_Katsaris_Pharmacy1.jpg"} style={{height: "100%", width: "100%", height: "30vh"}} alt="Shop Photo" className="img-fluid rounded"/>
                         </Col>
 
                         <Col xs="8" className="p-0 m-0 pl-2 d-flex-column ">
@@ -297,7 +297,7 @@ class StorePage extends Component {
 
                 <Col xs="4" className="border p-0">
                     <LocationMap   
-                        mapHeight={document.documentElement.clientHeight * 0.34}
+                        mapHeight={document.documentElement.clientHeight * 0.32}
         
                         startingLat={store.lat}
                         startingLng={store.lng}
